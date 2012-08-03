@@ -5,14 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - programmer@work</title>
+  <title>Colori nella shell - programmer@work</title>
   <meta name="author" content="Pioz">
 
   
-  <meta name="description" content="Blog Archive 2012 Chiamate ricorsive Ruby vs Python
-Aug 03 2012 posted in c, python, ruby Autoclick
-Aug 02 2012 posted in c Colori nella shell
-Jul &hellip;">
+  <meta name="description" content="Per colorare una string nella shell possiamo usare questo template: \033[CODE1;CODE2;CODE3mTESTO\033[0m CODE1 possono essere una serie di valori che &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +18,7 @@ Jul &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://pioz.github.com/blog/archives/">
+  <link rel="canonical" href="http://pioz.github.com/blog/2012/07/27/colori-nella-shell/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -67,142 +64,139 @@ Jul &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      <h1 class="entry-title">Colori nella shell</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-27T21:43:00+02:00" pubdate data-updated="true">27/07/2012</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<div class="entry-content"><p>Per colorare una string nella shell possiamo usare questo template:</p>
 
-  
-  <h2>2012</h2>
+<pre><code>\033[CODE1;CODE2;CODE3mTESTO\033[0m
+</code></pre>
 
-<article>
-  
-<h1><a href="/blog/2012/08/03/chiamate-ricorsive-ruby-vs-python/">Chiamate ricorsive Ruby vs Python</a></h1>
-<time datetime="2012-08-03T21:27:00+02:00" pubdate><span class='month'>Aug</span> <span class='day'>03</span> <span class='year'>2012</span></time>
+<p>CODE1 possono essere una serie di valori che alterano lo stile del testo, di seguito una tabella:</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/c/'>c</a>, <a class='category' href='/blog/categories/python/'>python</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a></span>
-</footer>
-
-
-</article>
-
+<ul>
+<li><code>0</code> Normal Characters</li>
+<li><code>1</code> Bold Characters</li>
+<li><code>4</code> Underlined Characters</li>
+<li><code>5</code> Blinking Characters</li>
+<li><code>7</code> Reverse video Characters</li>
+</ul>
 
 
-<article>
-  
-<h1><a href="/blog/2012/08/02/autoclick/">Autoclick</a></h1>
-<time datetime="2012-08-02T21:48:00+02:00" pubdate><span class='month'>Aug</span> <span class='day'>02</span> <span class='year'>2012</span></time>
+<p>CODE2 invece rappresenta il colore, di seguito una tabella:</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/c/'>c</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2012/07/27/colori-nella-shell/">Colori nella shell</a></h1>
-<time datetime="2012-07-27T21:43:00+02:00" pubdate><span class='month'>Jul</span> <span class='day'>27</span> <span class='year'>2012</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/shell/'>shell</a></span>
-</footer>
+<ul>
+<li><code>30</code> Black</li>
+<li><code>31</code> Red</li>
+<li><code>32</code> Green</li>
+<li><code>33</code> Yellow</li>
+<li><code>34</code> Blue</li>
+<li><code>35</code> Magenta</li>
+<li><code>36</code> Cyan</li>
+<li><code>37</code> White</li>
+</ul>
 
 
-</article>
+<p>CODE3 rappresenta il colore di sfondo del testo, di seguito una tabella:</p>
+
+<ul>
+<li><code>40</code> Black</li>
+<li><code>41</code> Red</li>
+<li><code>42</code> Green</li>
+<li><code>43</code> Yellow</li>
+<li><code>44</code> Blue</li>
+<li><code>45</code> Magenta</li>
+<li><code>46</code> Cyan</li>
+<li><code>47</code> White</li>
+</ul>
 
 
+<p>Per resettare il testo allo stile di default usare il carattere <code>\033[0m</code>.</p>
 
-  
-  <h2>2011</h2>
+<p>Alcuni esempi:</p>
 
-<article>
-  
-<h1><a href="/blog/2011/02/25/script-run-apache-solr/">init.d script to run Apache SOLR</a></h1>
-<time datetime="2011-02-25T21:40:00+01:00" pubdate><span class='month'>Feb</span> <span class='day'>25</span> <span class='year'>2011</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/apache/'>apache</a>, <a class='category' href='/blog/categories/daemon/'>daemon</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/solr/'>solr</a></span>
-</footer>
-
-
-</article>
-
-
-
-  
-  <h2>2010</h2>
-
-<article>
-  
-<h1><a href="/blog/2010/07/21/tasti-home-end-terminale-osx/">Configurare i tasti HOME e END nel terminale di OSX</a></h1>
-<time datetime="2010-07-21T21:35:00+02:00" pubdate><span class='month'>Jul</span> <span class='day'>21</span> <span class='year'>2010</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/osx/'>osx</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2010/06/08/youtube2flv/">Youtube flv 2 mp3</a></h1>
-<time datetime="2010-06-08T21:24:00+02:00" pubdate><span class='month'>Jun</span> <span class='day'>08</span> <span class='year'>2010</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/convert/'>convert</a>, <a class='category' href='/blog/categories/flv/'>flv</a>, <a class='category' href='/blog/categories/youtube/'>youtube</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2010/02/24/streaming-radio-105-virgin-radio/">Streaming di Radio 105 e Virgin radio</a></h1>
-<time datetime="2010-02-24T21:22:00+01:00" pubdate><span class='month'>Feb</span> <span class='day'>24</span> <span class='year'>2010</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/streaming/'>streaming</a></span>
-</footer>
-
-
-</article>
-
-
-
-  
-  <h2>2009</h2>
-
-<article>
-  
-<h1><a href="/blog/2009/12/11/configurare-multi-domain-mail-server-postfix-dovecot/">Configurare un multi domain mail server con Postfix, Dovecot e autenticazione sicura</a></h1>
-<time datetime="2009-12-11T10:22:00+01:00" pubdate><span class='month'>Dec</span> <span class='day'>11</span> <span class='year'>2009</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/debian/'>debian</a>, <a class='category' href='/blog/categories/dovecot/'>dovecot</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/mail/'>mail</a>, <a class='category' href='/blog/categories/mailserver/'>mailserver</a>, <a class='category' href='/blog/categories/mysql/'>mysql</a>, <a class='category' href='/blog/categories/postfix/'>postfix</a></span>
-</footer>
-
-
-</article>
-
+<pre><code>echo -e "\033[31mQUESTO TESTO SARA STAMPATO IN ROSSO\033[0m"
+echo -e "\033[1;36mQUESTO TESTO SARA STAMPATO IN GROSSETTO E COLOR CIANO\033[0m"
+echo -e "\033[1;35;47mQUESTO TESTO SARA STAMPATO IN GROSSETTO E COLOR MAGENTA SU SFONDO BIANCO\033[0m"
+</code></pre>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Creato da <span class="fn">Pioz</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-07-27T21:43:00+02:00" pubdate data-updated="true">27/07/2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/shell/'>shell</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://pioz.github.com/blog/2012/07/27/colori-nella-shell/" data-via="pioz" data-counturl="http://pioz.github.com/blog/2012/07/27/colori-nella-shell/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2011/02/25/script-run-apache-solr/" title="Previous Post: init.d script to run Apache SOLR">&laquo; init.d script to run Apache SOLR</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/08/02/autoclick/" title="Next Post: Autoclick">Autoclick &raquo;</a>
+      
+    </p>
+  </footer>
 </article>
 
 </div>

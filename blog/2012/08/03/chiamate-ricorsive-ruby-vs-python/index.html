@@ -5,14 +5,11 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>Blog Archive - programmer@work</title>
+  <title>Chiamate ricorsive Ruby vs Python - programmer@work</title>
   <meta name="author" content="Pioz">
 
   
-  <meta name="description" content="Blog Archive 2012 Chiamate ricorsive Ruby vs Python
-Aug 03 2012 posted in c, python, ruby Autoclick
-Aug 02 2012 posted in c Colori nella shell
-Jul &hellip;">
+  <meta name="description" content="Facciamo un piccolo test: calcoliamo Fibonacci ricorsivamente in Ruby (v1.9.3) e in Python (v2.7.2) e vediamo chi vince Ruby Fibonacci code (f.rb) &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -21,7 +18,7 @@ Jul &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://pioz.github.com/blog/archives/">
+  <link rel="canonical" href="http://pioz.github.com/blog/2012/08/03/chiamate-ricorsive-ruby-vs-python/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -67,142 +64,163 @@ Jul &hellip;">
   <div id="main">
     <div id="content">
       <div>
-<article role="article">
+<article class="hentry" role="article">
   
   <header>
-    <h1 class="entry-title">Blog Archive</h1>
+    
+      <h1 class="entry-title">Chiamate ricorsive Ruby vs Python</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-03T21:27:00+02:00" pubdate data-updated="true">03/08/2012</time>
+        
+      </p>
     
   </header>
-  
-  <div id="blog-archives">
 
 
+<div class="entry-content"><p>Facciamo un piccolo test: calcoliamo Fibonacci ricorsivamente in Ruby (v1.9.3) e in Python (v2.7.2) e vediamo chi vince</p>
 
-  
-  <h2>2012</h2>
+<p>Ruby Fibonacci code (<code>f.rb</code>)</p>
 
-<article>
-  
-<h1><a href="/blog/2012/08/03/chiamate-ricorsive-ruby-vs-python/">Chiamate ricorsive Ruby vs Python</a></h1>
-<time datetime="2012-08-03T21:27:00+02:00" pubdate><span class='month'>Aug</span> <span class='day'>03</span> <span class='year'>2012</span></time>
+<pre><code>def fib(n)
+  if n == 0 || n == 1
+    n
+  else
+    fib(n-1) + fib(n-2)
+  end
+end
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/c/'>c</a>, <a class='category' href='/blog/categories/python/'>python</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a></span>
-</footer>
+36.times { |i| fib(i) }
+</code></pre>
 
+<p>Python Fibonacci code (<code>f.py</code>)</p>
 
-</article>
+<pre><code>def fib(n):
+  if n == 0 or n == 1:
+    return n
+  else:
+    return fib(n-1) + fib(n-2)
 
+for i in range(36):
+  fib(i)
+</code></pre>
 
+<p>Ora lanciamo i due programmi nel seguente modo:</p>
 
-<article>
-  
-<h1><a href="/blog/2012/08/02/autoclick/">Autoclick</a></h1>
-<time datetime="2012-08-02T21:48:00+02:00" pubdate><span class='month'>Aug</span> <span class='day'>02</span> <span class='year'>2012</span></time>
+<pre><code>time ruby f.rb &amp;&amp; time python f.py
+</code></pre>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/c/'>c</a></span>
-</footer>
+<p>E vediamo l&#8217;output:</p>
 
+<pre><code>real  0m6.417s
+user  0m6.411s
+sys   0m0.005s
 
-</article>
+real  0m12.951s
+user  0m12.925s
+sys   0m0.023s
+</code></pre>
 
+<p>Ecco Ruby impiega <strong>6.471</strong> secondi mentre Python <strong>12.951</strong> secondi!</p>
 
+<p><strong>Ruby vince nettamente su Python!!</strong></p>
 
-<article>
-  
-<h1><a href="/blog/2012/07/27/colori-nella-shell/">Colori nella shell</a></h1>
-<time datetime="2012-07-27T21:43:00+02:00" pubdate><span class='month'>Jul</span> <span class='day'>27</span> <span class='year'>2012</span></time>
+<p>Oh beh provate però questo codice in C (<code>f.c</code>):</p>
 
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/shell/'>shell</a></span>
-</footer>
+<pre><code>int
+fib(int n)
+{
+  if(n == 0 || n == 1)
+    return n;
+  else
+    return fib(n-1) + fib(n-2);
+}
 
+int
+main()
+{
+  int i;
+  for(i = 0; i &lt; 36; i++)
+    fib(i);
+}
+</code></pre>
 
-</article>
+<p>Compiliamo:</p>
 
+<pre><code> gcc f.c
+</code></pre>
 
+<p>Ed eseguiamo:</p>
 
-  
-  <h2>2011</h2>
+<pre><code>time ./a.out
+</code></pre>
 
-<article>
-  
-<h1><a href="/blog/2011/02/25/script-run-apache-solr/">init.d script to run Apache SOLR</a></h1>
-<time datetime="2011-02-25T21:40:00+01:00" pubdate><span class='month'>Feb</span> <span class='day'>25</span> <span class='year'>2011</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/apache/'>apache</a>, <a class='category' href='/blog/categories/daemon/'>daemon</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/solr/'>solr</a></span>
-</footer>
-
-
-</article>
-
-
-
-  
-  <h2>2010</h2>
-
-<article>
-  
-<h1><a href="/blog/2010/07/21/tasti-home-end-terminale-osx/">Configurare i tasti HOME e END nel terminale di OSX</a></h1>
-<time datetime="2010-07-21T21:35:00+02:00" pubdate><span class='month'>Jul</span> <span class='day'>21</span> <span class='year'>2010</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/osx/'>osx</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2010/06/08/youtube2flv/">Youtube flv 2 mp3</a></h1>
-<time datetime="2010-06-08T21:24:00+02:00" pubdate><span class='month'>Jun</span> <span class='day'>08</span> <span class='year'>2010</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/convert/'>convert</a>, <a class='category' href='/blog/categories/flv/'>flv</a>, <a class='category' href='/blog/categories/youtube/'>youtube</a></span>
-</footer>
-
-
-</article>
-
-
-
-<article>
-  
-<h1><a href="/blog/2010/02/24/streaming-radio-105-virgin-radio/">Streaming di Radio 105 e Virgin radio</a></h1>
-<time datetime="2010-02-24T21:22:00+01:00" pubdate><span class='month'>Feb</span> <span class='day'>24</span> <span class='year'>2010</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/streaming/'>streaming</a></span>
-</footer>
-
-
-</article>
-
-
-
-  
-  <h2>2009</h2>
-
-<article>
-  
-<h1><a href="/blog/2009/12/11/configurare-multi-domain-mail-server-postfix-dovecot/">Configurare un multi domain mail server con Postfix, Dovecot e autenticazione sicura</a></h1>
-<time datetime="2009-12-11T10:22:00+01:00" pubdate><span class='month'>Dec</span> <span class='day'>11</span> <span class='year'>2009</span></time>
-
-<footer>
-  <span class="categories">posted in <a class='category' href='/blog/categories/debian/'>debian</a>, <a class='category' href='/blog/categories/dovecot/'>dovecot</a>, <a class='category' href='/blog/categories/linux/'>linux</a>, <a class='category' href='/blog/categories/mail/'>mail</a>, <a class='category' href='/blog/categories/mailserver/'>mailserver</a>, <a class='category' href='/blog/categories/mysql/'>mysql</a>, <a class='category' href='/blog/categories/postfix/'>postfix</a></span>
-</footer>
-
-
-</article>
-
+<p>0.002 secondi!</p>
 </div>
 
+
+  <footer>
+    <p class="meta">
+      
   
+
+<span class="byline author vcard">Creato da <span class="fn">Pioz</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2012-08-03T21:27:00+02:00" pubdate data-updated="true">03/08/2012</time>
+      
+
+<span class="categories">
+  
+    <a class='category' href='/blog/categories/c/'>c</a>, <a class='category' href='/blog/categories/python/'>python</a>, <a class='category' href='/blog/categories/ruby/'>ruby</a>
+  
+</span>
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://pioz.github.com/blog/2012/08/03/chiamate-ricorsive-ruby-vs-python/" data-via="pioz" data-counturl="http://pioz.github.com/blog/2012/08/03/chiamate-ricorsive-ruby-vs-python/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/08/02/autoclick/" title="Previous Post: Autoclick">&laquo; Autoclick</a>
+      
+      
+    </p>
+  </footer>
 </article>
 
 </div>
