@@ -1,103 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
 
-<!DOCTYPE html>
-<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
-<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
-<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
-<head>
-  <meta charset="utf-8">
-  <title>programmer@work</title>
-  <meta name="author" content="Pioz">
-
-  
-  <meta name="description" content="Facciamo un piccolo test: calcoliamo Fibonacci ricorsivamente in Ruby (v1.9.3) e in Python (v2.7.2) e vediamo chi vince in termini di tempo Ruby &hellip;">
-  
-
-  <!-- http://t.co/dKP3o1e -->
-  <meta name="HandheldFriendly" content="True">
-  <meta name="MobileOptimized" content="320">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-
-  
-  <link rel="canonical" href="http://pioz.github.com/">
-  <link href="/favicon.png" rel="icon">
-  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
-  <script src="/javascripts/modernizr-2.0.js"></script>
-  <script src="/javascripts/ender.js"></script>
-  <script src="/javascripts/octopress.js" type="text/javascript"></script>
-  <link href="/atom.xml" rel="alternate" title="programmer@work" type="application/atom+xml">
-  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
-<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
-
-  
-
-</head>
-
-<body   >
-  <header role="banner"><hgroup>
-  <h1><a href="/">programmer@work</a></h1>
-  
-    <h2>robe da informatici</h2>
-  
-</hgroup>
-
-</header>
-  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
-  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
-  
-    <li><a href="mailto:pioz@pioz.it" rel="subscribe-email" title="subscribe via email">Email</a></li>
-  
-</ul>
-  
-<form action="http://google.com/search" method="get">
-  <fieldset role="search">
-    <input type="hidden" name="q" value="site:pioz.github.com" />
-    <input class="search" type="text" name="q" results="0" placeholder="Ricerca"/>
-  </fieldset>
-</form>
-  
-<ul class="main-navigation">
-  <li><a href="/">Blog</a></li>
-  <li><a href="/blog/archives">Archivi</a></li>
-  <li><a href="/about">Su di me</a></li>
-  <li><a href="http://www.pioz.it/">Website</a></li>
-</ul>
-
-</nav>
-  <div id="main">
-    <div id="content">
-      <div class="blog-index">
-  
-  
-  
-    <article>
-      
-  <header>
+  <title><![CDATA[Category: c | programmer@work]]></title>
+  <link href="http://pioz.github.com/blog/categories/c/atom.xml" rel="self"/>
+  <link href="http://pioz.github.com/"/>
+  <updated>2013-03-22T13:48:28+01:00</updated>
+  <id>http://pioz.github.com/</id>
+  <author>
+    <name><![CDATA[Pioz]]></name>
     
-      <h1 class="entry-title"><a href="/blog/2012/08/03/chiamate-ricorsive-ruby-vs-python/">Chiamate ricorsive Ruby vs Python</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
 
   
-
-
-<time datetime="2012-08-03T21:27:00+02:00" pubdate data-updated="true">03/08/2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Facciamo un piccolo test: calcoliamo Fibonacci ricorsivamente in Ruby (v1.9.3) e in Python (v2.7.2) e vediamo chi vince in termini di tempo</p>
+  <entry>
+    <title type="html"><![CDATA[Chiamate ricorsive Ruby vs Python]]></title>
+    <link href="http://pioz.github.com/blog/2012/08/03/chiamate-ricorsive-ruby-vs-python/"/>
+    <updated>2012-08-03T21:27:00+02:00</updated>
+    <id>http://pioz.github.com/blog/2012/08/03/chiamate-ricorsive-ruby-vs-python</id>
+    <content type="html"><![CDATA[<p>Facciamo un piccolo test: calcoliamo Fibonacci ricorsivamente in Ruby (v1.9.3) e in Python (v2.7.2) e vediamo chi vince in termini di tempo</p>
 
 <p>Ruby Fibonacci code (<code>f.rb</code>)</p>
 
@@ -129,7 +50,7 @@ for i in range(36):
 <pre><code>time ruby f.rb &amp;&amp; time python f.py
 </code></pre>
 
-<p>E vediamo l&#8217;output:</p>
+<p>E vediamo l'output:</p>
 
 <pre><code>real  0m6.417s
 user  0m6.411s
@@ -175,42 +96,15 @@ main()
 </code></pre>
 
 <p>0.002 secondi!</p>
-</div>
+]]></content>
+  </entry>
   
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/02/autoclick/">Autoclick</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-02T21:48:00+02:00" pubdate data-updated="true">02/08/2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><div><script src='https://gist.github.com/726474.js?file=autoclick.c'></script>
+  <entry>
+    <title type="html"><![CDATA[Autoclick]]></title>
+    <link href="http://pioz.github.com/blog/2012/08/02/autoclick/"/>
+    <updated>2012-08-02T21:48:00+02:00</updated>
+    <id>http://pioz.github.com/blog/2012/08/02/autoclick</id>
+    <content type="html"><![CDATA[<p><div><script src='https://gist.github.com/726474.js?file=autoclick.c'></script>
 <noscript><pre><code>&lt;!DOCTYPE html&gt;
 &lt;!--
 
@@ -515,358 +409,8 @@ Please, don't. https://github.com/styleguide/templates/2.0
   &lt;/body&gt;
 &lt;/html&gt;
 </code></pre></noscript></div>
-
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/27/colori-nella-shell/">Colori nella shell</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-07-27T21:43:00+02:00" pubdate data-updated="true">27/07/2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Per colorare una string nella shell possiamo usare questo template:</p>
-
-<pre><code>\033[CODE1;CODE2;CODE3mTESTO\033[0m
-</code></pre>
-
-<p>CODE1 possono essere una serie di valori che alterano lo stile del testo, di seguito una tabella:</p>
-
-<ul>
-<li><code>0</code> Normal Characters</li>
-<li><code>1</code> Bold Characters</li>
-<li><code>4</code> Underlined Characters</li>
-<li><code>5</code> Blinking Characters</li>
-<li><code>7</code> Reverse video Characters</li>
-</ul>
-
-
-<p>CODE2 invece rappresenta il colore, di seguito una tabella:</p>
-
-<ul>
-<li><code>30</code> Black</li>
-<li><code>31</code> Red</li>
-<li><code>32</code> Green</li>
-<li><code>33</code> Yellow</li>
-<li><code>34</code> Blue</li>
-<li><code>35</code> Magenta</li>
-<li><code>36</code> Cyan</li>
-<li><code>37</code> White</li>
-</ul>
-
-
-<p>CODE3 rappresenta il colore di sfondo del testo, di seguito una tabella:</p>
-
-<ul>
-<li><code>40</code> Black</li>
-<li><code>41</code> Red</li>
-<li><code>42</code> Green</li>
-<li><code>43</code> Yellow</li>
-<li><code>44</code> Blue</li>
-<li><code>45</code> Magenta</li>
-<li><code>46</code> Cyan</li>
-<li><code>47</code> White</li>
-</ul>
-
-
-<p>Per resettare il testo allo stile di default usare il carattere <code>\033[0m</code>.</p>
-
-<p>Alcuni esempi:</p>
-
-<pre><code>echo -e "\033[31mQUESTO TESTO SARA STAMPATO IN ROSSO\033[0m"
-echo -e "\033[1;36mQUESTO TESTO SARA STAMPATO IN GROSSETTO E COLOR CIANO\033[0m"
-echo -e "\033[1;35;47mQUESTO TESTO SARA STAMPATO IN GROSSETTO E COLOR MAGENTA SU SFONDO BIANCO\033[0m"
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/02/25/script-run-apache-solr/">init.d script to run Apache SOLR</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2011-02-25T21:40:00+01:00" pubdate data-updated="true">25/02/2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Copiate il seguente script in <code>/etc/init.d/solr</code></p>
-
-<pre><code>#!/bin/sh
-
-PATH=/opt/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-NAME=solr
-DESC=apache-solr
-VERSION=1.4.1
-SOLR_PATH=/opt/solr-$VERSION
-COMMAND=/usr/bin/java
-OPTIONS="-Dsolr.solr.home=$SOLR_PATH/solr -Djetty.home=$SOLR_PATH -jar $SOLR_PATH/start.jar"    
-PIDFILE=/var/run/$NAME.pid
-
-test -x $COMMAND || exit 0
-test -f $SOLR_PATH/start.jar || exit 0
-
-set -e
-
-case "$1" in
-  start)
-        if [ -f $PIDFILE ]; then
-          echo "$PIDFILE exists. $NAME may be running."
-        else
-          echo -n "Starting $DESC: "
-          start-stop-daemon -b -p$PIDFILE -d$SOLR_PATH --start --quiet --exec $COMMAND -- $OPTIONS
-          sleep 3
-          echo `ps -ef | grep -v grep | grep "$COMMAND $OPTIONS" | awk '{print $2}'` &gt; $PIDFILE
-          echo "$NAME."
-        fi
-        ;;
-  stop)
-        if [ -f $PIDFILE ]; then
-          echo -n "Stopping $DESC: "
-          kill `cat $PIDFILE`
-          rm -f $PIDFILE
-          echo "$NAME."
-        else
-          echo "$PIDFILE does not exist. $NAME may be not running."
-        fi
-        ;;
-  restart)
-        /etc/init.d/$NAME stop
-        sleep 1
-        /etc/init.d/$NAME start
-        ;;
-  *)
-        echo "Usage: /etc/init.d/$NAME {start|stop|restart}" &gt;&amp;2
-        exit 1
-        ;;
-esac
-
-exit 0
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/07/21/tasti-home-end-terminale-osx/">Configurare i tasti HOME e END nel terminale di OSX</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2010-07-21T21:35:00+02:00" pubdate data-updated="true">21/07/2010</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Per usare i tasti HOME ed END nel modo classico (HOME va all&#8217;inizio della riga, END alla fine) guardate l&#8217;immagine qua sotto:</p>
-
-<p><img src="http://i.imgur.com/Bdged.png" alt="image" /></p>
-
-<p>Per generare la string <code>\005</code> premere ctrl+e, mentre per la string <code>\001</code> ctrl+a.<br/>
-A questo punto usando option+RIGHT e option+LEFT ci muoviamo all&#8217;inizio o alla fine della riga.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2/">&larr; Indietro</a>
-    
-    <a href="/blog/archives">Archivio</a>
-    
-  </div>
-</div>
-<aside class="sidebar">
-  
-    <section>
-  <h1>Post recenti</h1>
-  <ul id="recent_posts">
-    
-      <li class="post">
-        <a href="/blog/2012/08/03/chiamate-ricorsive-ruby-vs-python/">Chiamate ricorsive Ruby vs Python</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/08/02/autoclick/">Autoclick</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2012/07/27/colori-nella-shell/">Colori nella shell</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2011/02/25/script-run-apache-solr/">init.d script to run Apache SOLR</a>
-      </li>
-    
-      <li class="post">
-        <a href="/blog/2010/07/21/tasti-home-end-terminale-osx/">Configurare i tasti HOME e END nel terminale di OSX</a>
-      </li>
-    
-  </ul>
-</section>
-
-<section>
-  <h1>GitHub repos</h1>
-  <ul id="gh_repos">
-    <li class="loading">Caricamento&#8230;</li>
-  </ul>
-  
-  <a href="https://github.com/pioz">@pioz</a> on GitHub
-  
-  <script type="text/javascript">
-    $.domReady(function(){
-        if (!window.jXHR){
-            var jxhr = document.createElement('script');
-            jxhr.type = 'text/javascript';
-            jxhr.src = '/javascripts/libs/jXHR.js';
-            var s = document.getElementsByTagName('script')[0];
-            s.parentNode.insertBefore(jxhr, s);
-        }
-
-        github.showRepos({
-            user: 'pioz',
-            count: 3,
-            skip_forks: true,
-            target: '#gh_repos'
-        });
-    });
-  </script>
-  <script src="/javascripts/github.js" type="text/javascript"> </script>
-</section>
-
-
-<section>
-  <h1>Ultimi tweet</h1>
-  <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
-  </ul>
-  <script type="text/javascript">
-    $.domReady(function(){
-      getTwitterFeed("pioz", 5, false);
-    });
-  </script>
-  <script src="/javascripts/twitter.js" type="text/javascript"> </script>
-  
-    <a href="http://twitter.com/pioz" class="twitter-follow-button" data-show-count="false">Follow @pioz</a>
-  
-</section>
-
-
-
-
-
-  
-</aside>
-
-    </div>
-  </div>
-  <footer role="contentinfo"><p>
-  Copyright &copy; 2013 - Pioz -
-  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
-
-</footer>
+]]></content>
+  </entry>
   
-
-
-
-<div id="fb-root"></div>
-<script>(function(d, s, id) {
-  var js, fjs = d.getElementsByTagName(s)[0];
-  if (d.getElementById(id)) {return;}
-  js = d.createElement(s); js.id = id;
-  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
-  fjs.parentNode.insertBefore(js, fjs);
-}(document, 'script', 'facebook-jssdk'));</script>
-
-
-
-
-
-  <script type="text/javascript">
-    (function(){
-      var twitterWidgets = document.createElement('script');
-      twitterWidgets.type = 'text/javascript';
-      twitterWidgets.async = true;
-      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
-      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
-    })();
-  </script>
-
-
-
-
-
-</body>
-</html>
+</feed>

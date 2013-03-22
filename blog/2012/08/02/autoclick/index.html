@@ -5,11 +5,13 @@
 <!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  <title>programmer@work</title>
+  <title>Autoclick - programmer@work</title>
   <meta name="author" content="Pioz">
 
   
-  <meta name="description" content="Facciamo un piccolo test: calcoliamo Fibonacci ricorsivamente in Ruby (v1.9.3) e in Python (v2.7.2) e vediamo chi vince in termini di tempo Ruby &hellip;">
+  <meta name="description" content="&lt;!DOCTYPE html&gt;
+&lt;!-- Hello future GitHubber! I bet you're here to remove those nasty inline styles,
+DRY up these templates and make 'em &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +20,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://pioz.github.com/">
+  <link rel="canonical" href="http://pioz.github.com/blog/2012/08/02/autoclick/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <script src="/javascripts/modernizr-2.0.js"></script>
@@ -66,128 +68,12 @@
 </nav>
   <div id="main">
     <div id="content">
-      <div class="blog-index">
+      <div>
+<article class="hentry" role="article">
   
-  
-  
-    <article>
-      
   <header>
     
-      <h1 class="entry-title"><a href="/blog/2012/08/03/chiamate-ricorsive-ruby-vs-python/">Chiamate ricorsive Ruby vs Python</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
-  
-
-
-<time datetime="2012-08-03T21:27:00+02:00" pubdate data-updated="true">03/08/2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Facciamo un piccolo test: calcoliamo Fibonacci ricorsivamente in Ruby (v1.9.3) e in Python (v2.7.2) e vediamo chi vince in termini di tempo</p>
-
-<p>Ruby Fibonacci code (<code>f.rb</code>)</p>
-
-<pre><code>def fib(n)
-  if n == 0 || n == 1
-    n
-  else
-    fib(n-1) + fib(n-2)
-  end
-end
-
-36.times { |i| fib(i) }
-</code></pre>
-
-<p>Python Fibonacci code (<code>f.py</code>)</p>
-
-<pre><code>def fib(n):
-  if n == 0 or n == 1:
-    return n
-  else:
-    return fib(n-1) + fib(n-2)
-
-for i in range(36):
-  fib(i)
-</code></pre>
-
-<p>Ora lanciamo i due programmi nel seguente modo:</p>
-
-<pre><code>time ruby f.rb &amp;&amp; time python f.py
-</code></pre>
-
-<p>E vediamo l&#8217;output:</p>
-
-<pre><code>real  0m6.417s
-user  0m6.411s
-sys   0m0.005s
-
-real  0m12.951s
-user  0m12.925s
-sys   0m0.023s
-</code></pre>
-
-<p>Ecco Ruby impiega <strong>6.471</strong> secondi mentre Python <strong>12.951</strong> secondi!</p>
-
-<p><strong>Ruby vince nettamente su Python!!</strong></p>
-
-<p>Oh beh provate però questo codice in C (<code>f.c</code>):</p>
-
-<pre><code>int
-fib(int n)
-{
-  if(n == 0 || n == 1)
-    return n;
-  else
-    return fib(n-1) + fib(n-2);
-}
-
-int
-main()
-{
-  int i;
-  for(i = 0; i &lt; 36; i++)
-    fib(i);
-}
-</code></pre>
-
-<p>Compiliamo:</p>
-
-<pre><code> gcc f.c
-</code></pre>
-
-<p>Ed eseguiamo:</p>
-
-<pre><code>time ./a.out
-</code></pre>
-
-<p>0.002 secondi!</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/08/02/autoclick/">Autoclick</a></h1>
+      <h1 class="entry-title">Autoclick</h1>
     
     
       <p class="meta">
@@ -210,7 +96,7 @@ main()
   </header>
 
 
-  <div class="entry-content"><div><script src='https://gist.github.com/726474.js?file=autoclick.c'></script>
+<div class="entry-content"><div><script src='https://gist.github.com/726474.js?file=autoclick.c'></script>
 <noscript><pre><code>&lt;!DOCTYPE html&gt;
 &lt;!--
 
@@ -517,109 +403,16 @@ Please, don't. https://github.com/styleguide/templates/2.0
 </code></pre></noscript></div>
 
 </div>
-  
-  
 
 
-    </article>
-  
-  
-    <article>
+  <footer>
+    <p class="meta">
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2012/07/27/colori-nella-shell/">Colori nella shell</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-
-
-
-
   
 
+<span class="byline author vcard">Creato da <span class="fn">Pioz</span></span>
 
-<time datetime="2012-07-27T21:43:00+02:00" pubdate data-updated="true">27/07/2012</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Per colorare una string nella shell possiamo usare questo template:</p>
-
-<pre><code>\033[CODE1;CODE2;CODE3mTESTO\033[0m
-</code></pre>
-
-<p>CODE1 possono essere una serie di valori che alterano lo stile del testo, di seguito una tabella:</p>
-
-<ul>
-<li><code>0</code> Normal Characters</li>
-<li><code>1</code> Bold Characters</li>
-<li><code>4</code> Underlined Characters</li>
-<li><code>5</code> Blinking Characters</li>
-<li><code>7</code> Reverse video Characters</li>
-</ul>
-
-
-<p>CODE2 invece rappresenta il colore, di seguito una tabella:</p>
-
-<ul>
-<li><code>30</code> Black</li>
-<li><code>31</code> Red</li>
-<li><code>32</code> Green</li>
-<li><code>33</code> Yellow</li>
-<li><code>34</code> Blue</li>
-<li><code>35</code> Magenta</li>
-<li><code>36</code> Cyan</li>
-<li><code>37</code> White</li>
-</ul>
-
-
-<p>CODE3 rappresenta il colore di sfondo del testo, di seguito una tabella:</p>
-
-<ul>
-<li><code>40</code> Black</li>
-<li><code>41</code> Red</li>
-<li><code>42</code> Green</li>
-<li><code>43</code> Yellow</li>
-<li><code>44</code> Blue</li>
-<li><code>45</code> Magenta</li>
-<li><code>46</code> Cyan</li>
-<li><code>47</code> White</li>
-</ul>
-
-
-<p>Per resettare il testo allo stile di default usare il carattere <code>\033[0m</code>.</p>
-
-<p>Alcuni esempi:</p>
-
-<pre><code>echo -e "\033[31mQUESTO TESTO SARA STAMPATO IN ROSSO\033[0m"
-echo -e "\033[1;36mQUESTO TESTO SARA STAMPATO IN GROSSETTO E COLOR CIANO\033[0m"
-echo -e "\033[1;35;47mQUESTO TESTO SARA STAMPATO IN GROSSETTO E COLOR MAGENTA SU SFONDO BIANCO\033[0m"
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2011/02/25/script-run-apache-solr/">init.d script to run Apache SOLR</a></h1>
-    
-    
-      <p class="meta">
-        
 
 
 
@@ -631,122 +424,42 @@ echo -e "\033[1;35;47mQUESTO TESTO SARA STAMPATO IN GROSSETTO E COLOR MAGENTA SU
   
 
 
-<time datetime="2011-02-25T21:40:00+01:00" pubdate data-updated="true">25/02/2011</time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Copiate il seguente script in <code>/etc/init.d/solr</code></p>
-
-<pre><code>#!/bin/sh
-
-PATH=/opt/usr/local/sbin:/usr/local/bin:/sbin:/bin:/usr/sbin:/usr/bin
-NAME=solr
-DESC=apache-solr
-VERSION=1.4.1
-SOLR_PATH=/opt/solr-$VERSION
-COMMAND=/usr/bin/java
-OPTIONS="-Dsolr.solr.home=$SOLR_PATH/solr -Djetty.home=$SOLR_PATH -jar $SOLR_PATH/start.jar"    
-PIDFILE=/var/run/$NAME.pid
-
-test -x $COMMAND || exit 0
-test -f $SOLR_PATH/start.jar || exit 0
-
-set -e
-
-case "$1" in
-  start)
-        if [ -f $PIDFILE ]; then
-          echo "$PIDFILE exists. $NAME may be running."
-        else
-          echo -n "Starting $DESC: "
-          start-stop-daemon -b -p$PIDFILE -d$SOLR_PATH --start --quiet --exec $COMMAND -- $OPTIONS
-          sleep 3
-          echo `ps -ef | grep -v grep | grep "$COMMAND $OPTIONS" | awk '{print $2}'` &gt; $PIDFILE
-          echo "$NAME."
-        fi
-        ;;
-  stop)
-        if [ -f $PIDFILE ]; then
-          echo -n "Stopping $DESC: "
-          kill `cat $PIDFILE`
-          rm -f $PIDFILE
-          echo "$NAME."
-        else
-          echo "$PIDFILE does not exist. $NAME may be not running."
-        fi
-        ;;
-  restart)
-        /etc/init.d/$NAME stop
-        sleep 1
-        /etc/init.d/$NAME start
-        ;;
-  *)
-        echo "Usage: /etc/init.d/$NAME {start|stop|restart}" &gt;&amp;2
-        exit 1
-        ;;
-esac
-
-exit 0
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
+<time datetime="2012-08-02T21:48:00+02:00" pubdate data-updated="true">02/08/2012</time>
       
-  <header>
-    
-      <h1 class="entry-title"><a href="/blog/2010/07/21/tasti-home-end-terminale-osx/">Configurare i tasti HOME e END nel terminale di OSX</a></h1>
-    
-    
-      <p class="meta">
-        
 
-
-
-
-
-
-
-
+<span class="categories">
   
+    <a class='category' href='/blog/categories/c/'>c</a>
+  
+</span>
 
 
-<time datetime="2010-07-21T21:35:00+02:00" pubdate data-updated="true">21/07/2010</time>
-        
-      </p>
+    </p>
     
-  </header>
-
-
-  <div class="entry-content"><p>Per usare i tasti HOME ed END nel modo classico (HOME va all&#8217;inizio della riga, END alla fine) guardate l&#8217;immagine qua sotto:</p>
-
-<p><img src="http://i.imgur.com/Bdged.png" alt="image" /></p>
-
-<p>Per generare la string <code>\005</code> premere ctrl+e, mentre per la string <code>\001</code> ctrl+a.<br/>
-A questo punto usando option+RIGHT e option+LEFT ci muoviamo all&#8217;inizio o alla fine della riga.</p>
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://pioz.github.com/blog/2012/08/02/autoclick/" data-via="pioz" data-counturl="http://pioz.github.com/blog/2012/08/02/autoclick/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
 </div>
-  
-  
 
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2012/07/27/colori-nella-shell/" title="Previous Post: Colori nella shell">&laquo; Colori nella shell</a>
+      
+      
+        <a class="basic-alignment right" href="/blog/2012/08/03/chiamate-ricorsive-ruby-vs-python/" title="Next Post: Chiamate ricorsive Ruby vs Python">Chiamate ricorsive Ruby vs Python &raquo;</a>
+      
+    </p>
+  </footer>
+</article>
 
-    </article>
-  
-  <div class="pagination">
-    
-      <a class="prev" href="/blog/page/2/">&larr; Indietro</a>
-    
-    <a href="/blog/archives">Archivio</a>
-    
-  </div>
 </div>
+
 <aside class="sidebar">
   
     <section>
@@ -779,7 +492,7 @@ A questo punto usando option+RIGHT e option+LEFT ci muoviamo all&#8217;inizio o 
 <section>
   <h1>GitHub repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Caricamento&#8230;</li>
+    <li class="loading">Caricamento...</li>
   </ul>
   
   <a href="https://github.com/pioz">@pioz</a> on GitHub
@@ -809,7 +522,7 @@ A questo punto usando option+RIGHT e option+LEFT ci muoviamo all&#8217;inizio o 
 <section>
   <h1>Ultimi tweet</h1>
   <ul id="tweets">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   <script type="text/javascript">
     $.domReady(function(){
@@ -828,6 +541,7 @@ A questo punto usando option+RIGHT e option+LEFT ci muoviamo all&#8217;inizio o 
 
   
 </aside>
+
 
     </div>
   </div>
