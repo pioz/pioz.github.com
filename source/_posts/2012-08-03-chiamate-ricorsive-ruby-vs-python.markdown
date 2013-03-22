@@ -6,7 +6,7 @@ comments: true
 categories: [ruby, python, c]
 ---
 
-Facciamo un piccolo test: calcoliamo Fibonacci ricorsivamente in Ruby (v1.9.3) e in Python (v2.7.2) e vediamo chi vince
+Facciamo un piccolo test: calcoliamo Fibonacci ricorsivamente in Ruby (v1.9.3) e in Python (v2.7.2) e vediamo chi vince in termini di tempo
 
 Ruby Fibonacci code (`f.rb`)
 
