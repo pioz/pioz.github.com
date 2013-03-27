@@ -22,7 +22,6 @@ sistema operativo con il comando:
     	none
     	
 In questo esempio il gcc che viene usato è il gcc 4.7 installato con port.
-Inoltre faccio notare che `none` si riferisce al gcc che si installa con xcode.
 
 Per switchare versione possiamo dare il comando:
 
