@@ -6,6 +6,7 @@ comments: true
 categories: [xen, debian, vm, macchine virtuali, os]
 ---
 
+![image](http://www.debian.org/Pics/openlogo-50.png)
 Su questo post vedremo una mini guida su come installare una macchina virtuale con Xen
 in ambiente GNU/Linux Debian.
 
