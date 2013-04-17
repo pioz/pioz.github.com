@@ -243,7 +243,7 @@ Per accedere alla vostra macchina virtuale potete o connettervi via ssh oppure u
 
     $ xm console vm1
   
-che vi apre una console alla vostra macchina.
+che vi apre una console alla vostra macchina. Per uscire dalla console usare la combinazione `ctrl+]`.
 
 Per spegnere la macchina:
 
@@ -260,3 +260,11 @@ Per riattivarla:
 Per eliminare la macchina:
 
     $ xm delete vm1
+
+Infine se un dì avrete bisogno di aumentare lo spazio degli "HD" delle vostre macchine virtuali dovrete aumentare i file immagini.
+Ciò è possibile con i comandi `dd` e `resize2fs`:
+
+    $ dd if=/dev/zero bs=1M count=2000 >> /etc/xen/domains/vm1/disk.img
+    $ resize2fs -f /etc/xen/domains/vm1/disk.img
+    
+Con questo comando abbiamo aggiunto 2 Gigabyte all'"HD" della macchina virtuale vm1.
