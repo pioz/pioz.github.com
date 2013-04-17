@@ -22,7 +22,7 @@ Detto ciò iniziamo.
 ## dom0
 
 Per prima cosa configuriamo alcune opzioni di rete per permettere alle varie domU di
-usare la rete di dom0. Nel file `/etc/sysctl.conf` la linea:
+usare la rete di dom0. Nel file `/etc/sysctl.conf` aggiungiamo la linea:
 
     net.ipv4.ip_forward=1
 
@@ -30,10 +30,12 @@ e applichiamo la configurazione con il comando:
 
     sysctl -p
 
+<!--
 Nel famoso file `/etc/network/interfaces` aggiungiamo alla fine:
 
     # Routing for VMs
     up route add -host IP_STATICO_MACCHINA_VIRTUALE gw IP_STATICO_MACCHINA_VIRTUALE
+-->
 
 Fatto questo installiamo il necessario:
 
@@ -72,7 +74,7 @@ Ora abbiamo un paio di file di configurazione su cui mettere le mani
 
 Il primo file `/etc/xen/xend-config.sxp` gestisce la configurazione del demone xend.
 I valori di default vanno bene, anche se dobbiamo fare alcune modifiche per abilitare
-un network bridge tra la la dom0 e le nostre domU decommentando le seguenti righe:
+il network routing tra la la dom0 e le nostre domU commentando le seguenti righe:
 
     ##
     # To bridge network traffic, like this:
@@ -83,17 +85,21 @@ un network bridge tra la la dom0 e le nostre domU decommentando le seguenti righ
     #
     # use
     #
-    (network-script network-bridge)
+    #(network-script network-bridge)
     #
     ...
     #
     # If you are using only one bridge, the vif-bridge script will discover that,
     # so there is no need to specify it explicitly.
     #
-    (vif-script vif-bridge)
-    
-In questo modo la rete di dom0 tramite un ponte diventa disponibile anche per le varie
-macchine virtuali domU.  
+    #(vif-script vif-bridge)
+
+e decommentando
+
+    ## Use the following if network traffic is routed, as an alternative to the
+    # settings for bridged networking given above.
+    (network-script network-route)
+    (vif-script     vif-route)
 
 Le altre opzioni vanno bene così come sono, ma se volte approfondire c'è sempre la doc.
 
@@ -260,6 +266,23 @@ Per riattivarla:
 Per eliminare la macchina:
 
     $ xm delete vm1
+
+Ora per abilitare la connessione sulla macchina virtuale domU `vm1` dobbiamo editare
+il file `/etc/network/interfaces` nel seguente modo:
+
+    # The primary network interface
+    auto eth0
+    iface eth0 inet static
+     address IP.DI.DOMU
+     gateway IP.DI.DOM0
+     netmask NETMASK.DI.DOM0
+     broadcast BROADCAST.DI.DOM0
+     pointopoint IP.DI.DOM0
+
+Se volete che al boot di dom0 partano anche le vostre macchine virtuali allora
+dovete fare un link simbolico del file di configurazione delle vm nella cartella `/etc/xen/auto`
+
+    $ ln -s /etc/xen/vm1.cfg /etc/xen/auto
 
 Infine se un dì avrete bisogno di aumentare lo spazio degli "HD" delle vostre macchine virtuali dovrete aumentare i file immagini.
 Ciò è possibile con i comandi `dd` e `resize2fs`:
