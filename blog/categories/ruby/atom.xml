@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Categoria: ruby | programmer@work]]></title>
+  <link href="http://pioz.github.com/blog/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://pioz.github.com/"/>
+  <updated>2014-01-25T13:55:42+01:00</updated>
+  <id>http://pioz.github.com/</id>
+  <author>
+    <name><![CDATA[Pioz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Chiamate ricorsive Ruby vs Python]]></title>
+    <link href="http://pioz.github.com/blog/2012/08/03/chiamate-ricorsive-ruby-vs-python/"/>
+    <updated>2012-08-03T21:27:00+02:00</updated>
+    <id>http://pioz.github.com/blog/2012/08/03/chiamate-ricorsive-ruby-vs-python</id>
+    <content type="html"><![CDATA[<p>Facciamo un piccolo test: calcoliamo Fibonacci ricorsivamente in Ruby (v2.0.0) e in Python (v2.7.2) e vediamo chi vince in termini di tempo</p>
+
+<p>Ruby Fibonacci code (<code>f.rb</code>)</p>
+
+<pre><code>def fib(n)
+  if n == 0 || n == 1
+    n
+  else
+    fib(n-1) + fib(n-2)
+  end
+end
+
+36.times { |i| fib(i) }
+</code></pre>
+
+<p>Python Fibonacci code (<code>f.py</code>)</p>
+
+<pre><code>def fib(n):
+  if n == 0 or n == 1:
+    return n
+  else:
+    return fib(n-1) + fib(n-2)
+
+for i in range(36):
+  fib(i)
+</code></pre>
+
+<p>Ora lanciamo i due programmi nel seguente modo:</p>
+
+<pre><code>$ time ruby f.rb &amp;&amp; time python f.py
+real  0m4.795s
+user  0m4.787s
+sys   0m0.007s
+
+real  0m12.935s
+user  0m12.849s
+sys   0m0.049s
+</code></pre>
+
+<p>Ecco Ruby impiega <strong>4.795</strong> secondi mentre Python <strong>12.935</strong> secondi!</p>
+
+<p><strong>Ruby vince nettamente su Python!!</strong></p>
+
+<p>Oh beh provate però questo codice in C (<code>f.c</code>):</p>
+
+<pre><code>int
+fib (int n)
+{
+  if (n == 0 || n == 1)
+    return n;
+  else
+    return fib (n-1) + fib (n-2);
+}
+
+int
+main ()
+{
+  int i;
+  for (i = 0; i &lt; 36; i++)
+    fib (i);
+}
+</code></pre>
+
+<p>Compiliamo:</p>
+
+<pre><code> gcc f.c
+</code></pre>
+
+<p>Ed eseguiamo:</p>
+
+<pre><code>$ time ./a.out
+real  0m0.232s
+user  0m0.229s
+sys   0m0.003s
+</code></pre>
+
+<p>0.232 secondi!</p>
+]]></content>
+  </entry>
+  
+</feed>

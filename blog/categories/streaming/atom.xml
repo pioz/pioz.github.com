@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Categoria: streaming | programmer@work]]></title>
+  <link href="http://pioz.github.com/blog/categories/streaming/atom.xml" rel="self"/>
+  <link href="http://pioz.github.com/"/>
+  <updated>2014-01-25T13:55:42+01:00</updated>
+  <id>http://pioz.github.com/</id>
+  <author>
+    <name><![CDATA[Pioz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Streaming di Radio 105 e Virgin radio]]></title>
+    <link href="http://pioz.github.com/blog/2010/02/24/streaming-radio-105-virgin-radio/"/>
+    <updated>2010-02-24T21:22:00+01:00</updated>
+    <id>http://pioz.github.com/blog/2010/02/24/streaming-radio-105-virgin-radio</id>
+    <content type="html"><![CDATA[<p>L'URL per ascoltare in streaming Radio 105 è</p>
+
+<pre><code>http://shoutcast.unitedradio.it:1101
+</code></pre>
+
+<p>Mentre per Virgin Radio</p>
+
+<pre><code>http://shoutcast.unitedradio.it:1301
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

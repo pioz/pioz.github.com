@@ -1,0 +1,397 @@
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>Configurare più monitor con scheda video NVidia e Xorg - programmer@work</title>
+  <meta name="author" content="Pioz">
+
+  
+  <meta name="description" content="L&#8217;altro giorno mi sono trovato a configurare un dual monitor più connessione alla TV sul mio
+pc fisso che monta una Debian con una scheda video &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://pioz.github.com/blog/2014/01/25/configurare-piu-monitor-con-scheda-video-nvidia-e-xorg">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="programmer@work" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="./javascripts/lib/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11903383-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">programmer@work</a></h1>
+  
+    <h2>robe da informatici</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="iscriviti via RSS">RSS</a></li>
+  
+    <li><a href="mailto:pioz@pioz.it" rel="subscribe-email" title="scrivimi una email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="q" value="site:pioz.github.com" />
+    <input class="search" type="text" name="q" results="0" placeholder="Cerca"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/blog/archives">Archivio</a></li>
+  <li><a href="/about">Su di me</a></li>
+  <li><a href="http://www.pioz.it/">Website</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <div>
+<article class="hentry" role="article">
+  
+  <header>
+    
+      <h1 class="entry-title">Configurare più monitor con scheda video NVidia e Xorg</h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-25T13:04:00+01:00" pubdate data-updated="true">25/01/2014</time>
+        
+      </p>
+    
+  </header>
+
+
+<div class="entry-content"><p>L&#8217;altro giorno mi sono trovato a configurare un dual monitor più connessione alla TV sul mio
+pc fisso che monta una Debian con una scheda video NVidia GeForce GTX 650.</p>
+
+<p>La configurazione che ho fatto è questa:</p>
+
+<ul>
+<li>monitor Samsung 24&#8221; come principale</li>
+<li>monitor QBel 19&#8221; a destra del monitor principale</li>
+<li>TV che clona il monitor principale</li>
+</ul>
+
+
+<p>Dato che il il monitor principale ha una risoluzione massima di 1920x1080,
+mentre la TV soltanto 720x480 (si è una di quelle ancora col tubo catodico) non si riesce a fare un clone pieno, ovvero proiettare i 1920x1080 pixel del monitor principale sui 720x480 pixel della TV. Quindi mi sono accontentato di proiettare i 720x480 pixel della parte centrale del monitor principale sulla TV. In questo modo se apro un film con VLC basta che ridimensioni la finestra a 720x480 al centro del monitor per vedere il film in full screen sulla TV (ho uno scriptino che me lo fa, ma questo magari lo vedremo un altro giorno).</p>
+
+<p>Quindi vediamo come fare sta roba.
+Apriamo il nostro file <code>/etc/X11/xorg.conf</code>, il file di configurazione principale per Xorg (open source implementation of the X Window System). Il mio si presenta più o meno così:</p>
+
+<pre><code>Section "ServerLayout"
+    Identifier     "Layout0"
+    Screen      0  "Screen0" 0 0
+    InputDevice    "Keyboard0" "CoreKeyboard"
+    InputDevice    "Mouse0" "CorePointer"
+    Option         "Xinerama" "0"
+EndSection
+
+Section "Files"
+EndSection
+
+Section "InputDevice"
+    # generated from default
+    Identifier     "Mouse0"
+    Driver         "mouse"
+    Option         "Protocol" "auto"
+    Option         "Device" "/dev/psaux"
+    Option         "Emulate3Buttons" "no"
+    Option         "ZAxisMapping" "4 5"
+EndSection
+
+Section "InputDevice"
+    # generated from default
+    Identifier     "Keyboard0"
+    Driver         "kbd"
+EndSection
+
+Section "Device"
+    Identifier     "Device0"
+    Driver         "nvidia"
+    VendorName     "NVIDIA Corporation"
+    BoardName      "GeForce GTX 650"
+EndSection
+
+Section "Screen"
+    Identifier     "Screen0"
+    Device         "Device0"
+    DefaultDepth    24
+    Option         "Stereo" "0"
+    SubSection     "Display"
+        Depth       24
+    EndSubSection
+EndSection
+</code></pre>
+
+<p>Quello che dobbiamo fare è andare a modificare la sezione <code>Screen</code> che permette di configurare la disposizione dei monitor. Ma prima di far ciò ci serve conoscrere gli ID dei nostri monitor connessi alla nostra scheda video. Usiamo il comando <code>xrand --query</code>. Dovremmo ottenere un output di questo tipo:</p>
+
+<pre><code>Screen 0: minimum 8 x 8, current 3200 x 1080, maximum 16384 x 16384
+VGA-0 connected 1280x1024+1920+0 (normal left inverted right x axis y axis) 376mm x 301mm
+   1280x1024      60.0*+   75.0  
+   1280x960       60.0  
+   1152x864       75.0  
+   1024x768       75.0     70.1     60.0  
+   800x600        75.0     72.2     60.3     56.2  
+   640x480        75.0     72.8     59.9  
+HDMI-0 connected 720x480+600+300 (normal left inverted right x axis y axis) 386mm x 290mm
+   1280x720       60.0 +   59.9  
+   1920x1080      60.1     60.0  
+   1440x480       60.1  
+   720x480        59.9*    60.1  
+   640x480        60.0     59.9  
+DVI-D-0 connected primary 1920x1080+0+0 (normal left inverted right x axis y axis) 531mm x 299mm
+   1920x1080      60.0*+   59.9     50.0  
+   1680x1050      60.0  
+   1600x900       60.0  
+   1440x900       59.9  
+   1280x1024      75.0     60.0  
+   1280x800       59.8  
+   1280x720       60.0     59.9     50.0  
+   1152x864       75.0  
+   1024x768       75.0     70.1     60.0  
+   800x600        75.0     72.2     60.3     56.2  
+   720x576        50.0  
+   720x480        59.9  
+   640x480        75.0     72.8     59.9  
+DVI-D-1 disconnected (normal left inverted right x axis y axis)
+</code></pre>
+
+<p>In questo caso <code>DVI-D-0</code> è il monitor principale (24&#8221; Samsung), <code>VGA-0</code> è il monitor secondario (19&#8221; QBel) e <code>HDMI-0</code> è la TV.</p>
+
+<p>Con questi dati possiamo iniziare a modificare il file <code>xorg.conf</code>. Nella sezione <code>Screen</code> aggiungiamo:</p>
+
+<pre><code>Option         "TwinView" "1"
+Option         "TVStandard" "PAL-B"
+Option         "nvidiaXineramaInfoOrder" "DVI-D-0"
+Option         "metamodes" "DVI-D-0: nvidia-auto-select +0+0, VGA-0: 1280x1024 +1920+0, HDMI-0: 720x480 +600+300"
+</code></pre>
+
+<ul>
+<li>Ovvero abilitiamo il TwinView della nostra scheda NVidia.</li>
+<li>Diciamo che lo standard della TV è il PAL-B.</li>
+<li>Diciamo che il monitor principale è il <code>DVI-D-0</code>, ovvero il Samsung da 24&#8221;.</li>
+<li>Disponiamo i vari monitor:
+
+<ul>
+<li>Il monitor <code>DVI-D-0</code> avrà risoluzione auto calcolata (1920x1080) e l&#8217;angolo top-left avrà coordinate 0,0</li>
+<li>Il monitor <code>VGA-0</code> avrà risoluzione 1280x1024 e l&#8217;angolo top-left avrà coordinate 1920,0 ovvero a destra del monitor principale infatti la larghezza del monitor principale (risoluzione orizzontale) è di 1920 pixel, quando termina inizia il monitor secondario.</li>
+<li>La TV invece <code>HDMI-0</code> avrà risoluzione 720x480 e l&#8217;angono top-left avrà coordinate 600,300 ovvero più o meno al centro del monitor principale.</li>
+</ul>
+</li>
+</ul>
+
+
+<p>A questo punto salvate il file <code>xorg.conf</code> e riavviate il server X!</p>
+</div>
+
+
+  <footer>
+    <p class="meta">
+      
+  
+
+<span class="byline author vcard">Creato da <span class="fn">Pioz</span></span>
+
+      
+
+
+
+
+
+
+
+
+  
+
+
+<time datetime="2014-01-25T13:04:00+01:00" pubdate data-updated="true">25/01/2014</time>
+      
+
+
+    </p>
+    
+      <div class="sharing">
+  
+  <a href="http://twitter.com/share" class="twitter-share-button" data-url="http://pioz.github.com/blog/2014/01/25/configurare-piu-monitor-con-scheda-video-nvidia-e-xorg/" data-via="pioz" data-counturl="http://pioz.github.com/blog/2014/01/25/configurare-piu-monitor-con-scheda-video-nvidia-e-xorg/" >Tweet</a>
+  
+  
+  
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="false"></div>
+  
+</div>
+
+    
+    <p class="meta">
+      
+        <a class="basic-alignment left" href="/blog/2013/03/27/mini-guida-su-xen-e-debian/" title="Previous Post: Mini guida su Xen e Debian">&laquo; Mini guida su Xen e Debian</a>
+      
+      
+    </p>
+  </footer>
+</article>
+
+</div>
+
+<aside class="sidebar">
+  
+    <section>
+  <h1>Post recenti</h1>
+  <ul id="recent_posts">
+    
+      <li class="post">
+        <a href="/blog/2014/01/25/configurare-piu-monitor-con-scheda-video-nvidia-e-xorg/">Configurare più monitor con scheda video NVidia e Xorg</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/03/27/mini-guida-su-xen-e-debian/">Mini guida su Xen e Debian</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2013/03/27/gestire-differenti-versioni-di-gcc-su-osx/">Gestire differenti versioni di gcc su OSX</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/08/03/chiamate-ricorsive-ruby-vs-python/">Chiamate ricorsive Ruby vs Python</a>
+      </li>
+    
+      <li class="post">
+        <a href="/blog/2012/07/27/colori-nella-shell/">Colori nella shell</a>
+      </li>
+    
+  </ul>
+</section>
+
+<section>
+  <h1>GitHub Repos</h1>
+  <ul id="gh_repos">
+    <li class="loading">Caricamento...</li>
+  </ul>
+  
+  <a href="https://github.com/pioz">@pioz</a> on GitHub
+  
+  <script type="text/javascript">
+    $(document).ready(function(){
+        if (!window.jXHR){
+            var jxhr = document.createElement('script');
+            jxhr.type = 'text/javascript';
+            jxhr.src = '/javascripts/libs/jXHR.js';
+            var s = document.getElementsByTagName('script')[0];
+            s.parentNode.insertBefore(jxhr, s);
+        }
+
+        github.showRepos({
+            user: 'pioz',
+            count: 3,
+            skip_forks: true,
+            target: '#gh_repos'
+        });
+    });
+  </script>
+  <script src="/javascripts/github.js" type="text/javascript"> </script>
+</section>
+
+
+
+
+
+<section>
+  
+  
+    <a href="http://twitter.com/pioz" class="twitter-follow-button" data-show-count="false">Follow @pioz</a>
+  
+</section>
+
+
+  
+</aside>
+
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2014 - Pioz -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/it_IT/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = 'http://platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
