@@ -6,4 +6,4 @@ comments: true
 categories: [c]
 ---
 
-ok
+{% gist 726474 autoclick.c %}
