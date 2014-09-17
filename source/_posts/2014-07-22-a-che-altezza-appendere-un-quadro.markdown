@@ -3,7 +3,7 @@ layout: post
 title: "A che altezza appendere un quadro?"
 date: 2014-07-22 14:57
 comments: true
-categories:
+categories: [home]
 ---
 
 Per appendere i quadri mi piace molto seguire lo stile della _linea mediana_.
