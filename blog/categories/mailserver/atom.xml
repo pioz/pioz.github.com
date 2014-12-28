@@ -4,7 +4,7 @@
   <title><![CDATA[Categoria: mailserver | programmer@work]]></title>
   <link href="http://pioz.github.com/blog/categories/mailserver/atom.xml" rel="self"/>
   <link href="http://pioz.github.com/"/>
-  <updated>2014-01-25T13:55:42+01:00</updated>
+  <updated>2014-12-28T01:32:24+01:00</updated>
   <id>http://pioz.github.com/</id>
   <author>
     <name><![CDATA[Pioz]]></name>
@@ -85,13 +85,13 @@ mysql&gt; GRANT select,insert,update,delete ON mail.* TO 'postfix'@'localhost' I
 mysql&gt; quit;
 </code></pre>
 
-<p>Ottimo, ora abbiamo il nostro BD... 2 tabelle: una per gli utenti e una per gli alias. Gli alias sono delle mail che sono alias di mail "reali".</p>
+<p>Ottimo, ora abbiamo il nostro BD&hellip; 2 tabelle: una per gli utenti e una per gli alias. Gli alias sono delle mail che sono alias di mail &ldquo;reali&rdquo;.</p>
 
 <p>Vediamo, prima di proseguire, i campi della tabella <code>user</code>:</p>
 
 <ul>
-<li><strong>domain</strong>: il dominio dell'indirizzo mail (per esempio luca@pippo.it ha dominio pippo.it).</li>
-<li><strong>username</strong>: lo username per accedere alla casella di posta, nel nostro caso, <strong>IMPORTANTE</strong>, è l'intero indirizzo mail (quindi non luca, ma luca@pippo.it). Questo perchè avendo mail con domini diversi dobbiano distinguerle in modo univoco.</li>
+<li><strong>domain</strong>: il dominio dell'indirizzo mail (per esempio <a href="&#109;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#108;&#117;&#x63;&#97;&#x40;&#112;&#x69;&#112;&#112;&#111;&#46;&#x69;&#116;">&#108;&#x75;&#99;&#x61;&#x40;&#x70;&#105;&#x70;&#112;&#x6f;&#x2e;&#105;&#x74;</a> ha dominio pippo.it).</li>
+<li><strong>username</strong>: lo username per accedere alla casella di posta, nel nostro caso, <strong>IMPORTANTE</strong>, è l'intero indirizzo mail (quindi non luca, ma <a href="&#x6d;&#97;&#x69;&#108;&#x74;&#x6f;&#58;&#108;&#117;&#x63;&#97;&#x40;&#112;&#x69;&#112;&#112;&#111;&#46;&#105;&#x74;">&#108;&#x75;&#99;&#x61;&#64;&#x70;&#x69;&#x70;&#x70;&#x6f;&#46;&#105;&#x74;</a>). Questo perchè avendo mail con domini diversi dobbiano distinguerle in modo univoco.</li>
 <li><strong>password</strong>: la password per accedere alla casella di posta. Vedremo che sarà criptata con AES.</li>
 <li><strong>quota</strong>: quota casella di posta.</li>
 <li><strong>active</strong>: l'account mail è attivo o disattivo.</li>
@@ -119,7 +119,7 @@ $ chmod 770 /var/vmail
 $ chown mail.mail /var/vmail
 </code></pre>
 
-<p>Bene, in pratica la casella di posta per luca@pippo.it sarà in <code>/var/vmail/luca@pippo.it</code>. Essa verrà creata in automatico al primo login.</p>
+<p>Bene, in pratica la casella di posta per <a href="&#109;&#97;&#x69;&#x6c;&#116;&#x6f;&#x3a;&#108;&#117;&#x63;&#97;&#x40;&#x70;&#105;&#x70;&#x70;&#111;&#x2e;&#x69;&#x74;">&#x6c;&#117;&#x63;&#x61;&#x40;&#112;&#105;&#112;&#x70;&#111;&#46;&#x69;&#x74;</a> sarà in <code>/var/vmail/luca@pippo.it</code>. Essa verrà creata in automatico al primo login.</p>
 
 <h2>PASSO 3: configurazione Dovecot</h2>
 
@@ -216,9 +216,9 @@ auth default {
 
 <ul>
 <li>La prima riga specifica i protocolli che vogliamo usare. Gli abilitiamo tutti per dare libertà totale ai nostri utenti. Mi raccomando di avere il certificato per il vostro dominio, nell'esempio per <code>mail.ciccio.com</code>.</li>
-<li><code>first_valid_uid</code> deve coincidere con uid dell'utente <code>mail</code>, solitamente 8. Per verificare lanciate il comando "<code>id mail</code>".</li>
-<li>Importante è la riga "<code>mechanisms = login plain digest-md5 cram-md5
-</code>" che specifica i meccanismi di autenticazione. Noi li abilitiamo tutti, sia quelli in chiaro che criptati in modo da permettere anche a client poco sofisticati (ad esempio quelli dei cellulari) di connettersi al nostro server. Mentre per client completi dare la possibilità di usare autenticazione cifrata (ad esempio Mozilla Thunderbird).</li>
+<li><code>first_valid_uid</code> deve coincidere con uid dell'utente <code>mail</code>, solitamente 8. Per verificare lanciate il comando &ldquo;<code>id mail</code>&rdquo;.</li>
+<li>Importante è la riga &ldquo;<code>mechanisms = login plain digest-md5 cram-md5
+</code>&rdquo; che specifica i meccanismi di autenticazione. Noi li abilitiamo tutti, sia quelli in chiaro che criptati in modo da permettere anche a client poco sofisticati (ad esempio quelli dei cellulari) di connettersi al nostro server. Mentre per client completi dare la possibilità di usare autenticazione cifrata (ad esempio Mozilla Thunderbird).</li>
 <li><code>userdb</code> e <code>passdb</code> vengono recuperati dall'altro file di configurazione.</li>
 <li>Infine fondamentale la sezione <code>socket listen</code> che apre una socket per permettere ad altri programmi di usare il sistema di autenticazione di Dovecot, nel nostro caso Postfix.</li>
 </ul>
@@ -394,7 +394,7 @@ smtpd_tls_session_cache_timeout = 3600s
 tls_random_source = dev:/dev/urandom
 </code></pre>
 
-<p>Anche qua non commentiamo... da notare solo che SASL per autenticare usa la socket che gli viene messa a disposizione da Dovecot.</p>
+<p>Anche qua non commentiamo&hellip; da notare solo che SASL per autenticare usa la socket che gli viene messa a disposizione da Dovecot.</p>
 
 <p>E gli altri tre in ordine per la connessione al BD:</p>
 

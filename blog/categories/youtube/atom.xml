@@ -4,7 +4,7 @@
   <title><![CDATA[Categoria: youtube | programmer@work]]></title>
   <link href="http://pioz.github.com/blog/categories/youtube/atom.xml" rel="self"/>
   <link href="http://pioz.github.com/"/>
-  <updated>2014-01-25T13:55:42+01:00</updated>
+  <updated>2014-12-28T01:32:24+01:00</updated>
   <id>http://pioz.github.com/</id>
   <author>
     <name><![CDATA[Pioz]]></name>
@@ -48,7 +48,7 @@ Per far ciò ci serve un token che cambia nel tempo ma che possiamo ottenere dal
 <pre><code>ffmpeg -i 'http://www.youtube.com/get_video?video_id=VugK063j0Zo&amp;t=vjVQa1PpcFMpsZHHpcVB1lB6w_EvoJYGbZTNi4KQ2g4%3D' -acodec libmp3lame -ac 2 -ab 128kb -vn -y magically_magical.mp3
 </code></pre>
 
-<p>It's magical...</p>
+<p>It&rsquo;s magical&hellip;</p>
 ]]></content>
   </entry>
   
