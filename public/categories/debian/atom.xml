@@ -1,0 +1,815 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Categoria: debian | programmer@work]]></title>
+  <link href="http://pioz.github.com/categories/debian/atom.xml" rel="self"/>
+  <link href="http://pioz.github.com/"/>
+  <updated>2015-01-13T00:41:24+01:00</updated>
+  <id>http://pioz.github.com/</id>
+  <author>
+    <name><![CDATA[Pioz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[ALSA: Switch audio output to USB headset]]></title>
+    <link href="http://pioz.github.com/alsa-switch-audio-output-to-usb-headset"/>
+    <updated>2014-09-17T13:31:00+02:00</updated>
+    <id>http://pioz.github.com/alsa-switch-audio-output-to-usb-headset</id>
+    <content type="html"><![CDATA[<p>Ho acquistato delle cuffie wireless USB, per essere preciso esattamente queste:
+<a href="http://www.amazon.it/gp/product/B005FY61MM">http://www.amazon.it/gp/product/B005FY61MM</a> . Sono molto comode e funzionano su
+Debian out-of-the-box ovvero senza installare alcun driver.</p>
+
+<p>Adesso nella mia Debian ho questo problema: vorrei che quando inserisco il
+ricevitore USB in automatico l&#8217;output di ALSA cambi dalla scheda audio integrata
+alle cuffie wireless.</p>
+
+<p>Questo può essere fatto usando le regole di udev (udev è il gestore dei
+dispositivi per il kernel Linux e amministra dinamicamente i dispositivi a
+blocchi per ogni periferica rilevata nel sistema).
+Iniziamo: apriamo il file <code>/etc/udev/rules.d/00-local.rules</code> e se non esiste lo
+creiamo; aggiungiamo le seguenti regole:
+&#8220;`</p>
+
+<h1>Set USB headset as default sound card when plugged in</h1>
+
+<p>KERNEL==&ldquo;pcmC[D0-9cp]<em>&rdquo;, ACTION==&ldquo;add&rdquo;, PROGRAM=&ldquo;/bin/sh -c &lsquo;K=%k; K=$${K#pcmC}; K=$${K%%D</em>}; echo defaults.ctl.card $$K > /etc/asound.conf; echo defaults.pcm.card $$K >>/etc/asound.conf&rsquo;&rdquo;</p>
+
+<h1>Restore default sound card when USB headset unplugged</h1>
+
+<p>KERNEL==&ldquo;pcmC[D0-9cp]*&rdquo;, ACTION==&ldquo;remove&rdquo;, PROGRAM=&ldquo;/bin/sh -c &lsquo;echo defaults.ctl.card 0 > /etc/asound.conf; echo defaults.pcm.card 0 >>/etc/asound.conf&rsquo;&rdquo;
+<code>``
+In pratica quando viene inserito il ricevitore USB udev lo detecta e lancia
+uno script per cambiare il file</code>/etc/asound.conf` cambiando il device di output
+con quello delle cuffie appena inserite.</p>
+
+<p>L&#8217;unica pecca è che quando viene cambiato l&#8217;output di ALSA tutti i programmi che
+stanno usando ALSA devono essere riavviti. Se trovate un modo per risolvere
+questo problema fatemi sarepe!</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Mini guida su Xen e Debian]]></title>
+    <link href="http://pioz.github.com/mini-guida-su-xen-e-debian"/>
+    <updated>2013-03-27T21:12:00+01:00</updated>
+    <id>http://pioz.github.com/mini-guida-su-xen-e-debian</id>
+    <content type="html"><![CDATA[<p><img src="http://www.debian.org/Pics/openlogo-50.png" alt="image" />
+Su questo post vedremo una mini guida su come installare una macchina virtuale con Xen
+in ambiente GNU/Linux Debian.</p>
+
+<p>Xen è un monitor di macchine virtuali open source rilasciato sotto licenza GPL per piattaforma
+x86 e compatibili (al momento sono in corso dei port per x86-64 e per IA-64) sviluppato
+presso il Computer Laboratory dell&#8217;Università di Cambridge.</p>
+
+<p>Per chiarezza ricordo che la macchina fisica di solito viene identificata con il
+nome <code>dom0</code> (domain 0), mentre le macchine virtuali con il nome <code>domU</code>.</p>
+
+<p>Detto ciò iniziamo.</p>
+
+<h2>dom0</h2>
+
+<p>Per prima cosa configuriamo alcune opzioni di rete per permettere alle varie domU di
+usare la rete di dom0. Nel file <code>/etc/sysctl.conf</code> aggiungiamo la linea:</p>
+
+<pre><code>net.ipv4.ip_forward=1
+</code></pre>
+
+<p>e applichiamo la configurazione con il comando:</p>
+
+<pre><code>sysctl -p
+</code></pre>
+
+<!--
+Nel famoso file `/etc/network/interfaces` aggiungiamo alla fine:
+
+    # Routing for VMs
+    up route add -host IP_STATICO_MACCHINA_VIRTUALE gw IP_STATICO_MACCHINA_VIRTUALE
+-->
+
+
+<p>Fatto questo installiamo il necessario:</p>
+
+<pre><code>$ apt-get install xen-hypervisor xen-linux-system xen-tools xen-utils xenstore-utils xenwatch
+</code></pre>
+
+<p>A questo punto dovremmo aver installato anche un nuovo kernel per la nostra
+Debian in grado di gestire la virtualizzazione. Dovremmo fare una modifica alla conf di grub
+per dare priorità al kernel xen rispetto a quello standard: in pratica bisogna rinominare il
+file dentro la directory <code>/etc/grub.d</code> con nome <code>xx_linux</code> DOPO il file <code>yy_linux_xen</code>.
+Nel mio caso i file in questione sono <code>10_linux</code> e <code>20_linux_xen</code>. Spostiamo il primo dopo
+il secondo semplicemente rinominando il numero con cui inizia il file (10) in un numero maggiore:</p>
+
+<pre><code>$ cd /etc/grub.d/
+$ mv 10_linux 50_linux
+</code></pre>
+
+<p>Fatto ciò rigeneriamo il file di configurazione di grub (il nostro bootloader preferito) con
+il comando:</p>
+
+<pre><code>$ update-grub2
+</code></pre>
+
+<p>e facciamo un reboot:</p>
+
+<pre><code>$ reboot
+</code></pre>
+
+<p>Controlliamo che sia partito il kernel giusto con il comando:</p>
+
+<pre><code>$ uname -a
+Linux 2.6.32-5-xen-amd64 #1 SMP Sun May 6 08:57:29 UTC 2012 x86_64 GNU/Linux
+</code></pre>
+
+<p>(Eh si&hellip; Debian stable)</p>
+
+<p>Ora abbiamo un paio di file di configurazione su cui mettere le mani</p>
+
+<ul>
+<li><code>/etc/xen/xend-config.sxp</code></li>
+<li><code>/etc/xen-tools/xen-tools.conf</code></li>
+</ul>
+
+
+<p>Il primo file <code>/etc/xen/xend-config.sxp</code> gestisce la configurazione del demone xend.
+I valori di default vanno bene, anche se dobbiamo fare alcune modifiche per abilitare
+il network routing tra la la dom0 e le nostre domU commentando le seguenti righe:</p>
+
+<pre><code>##
+# To bridge network traffic, like this:
+#
+# dom0: ----------------- bridge -&gt; real eth0 -&gt; the network
+#                            |
+# domU: fake eth0 -&gt; vifN.0 -+
+#
+# use
+#
+#(network-script network-bridge)
+#
+...
+#
+# If you are using only one bridge, the vif-bridge script will discover that,
+# so there is no need to specify it explicitly.
+#
+#(vif-script vif-bridge)
+</code></pre>
+
+<p>e decommentando</p>
+
+<pre><code>## Use the following if network traffic is routed, as an alternative to the
+# settings for bridged networking given above.
+(network-script network-route)
+(vif-script     vif-route)
+</code></pre>
+
+<p>Le altre opzioni vanno bene così come sono, ma se volte approfondire c&#8217;è sempre la doc.</p>
+
+<p>Il secondo file <code>/etc/xen-tools/xen-tools.conf</code> serve per gestire la configurazione con
+cui vengono create le macchine virtuali. Vediamo alcune opzioni:</p>
+
+<pre><code>##
+#  Output directory for storing loopback images.
+#
+#  If you choose to use loopback images, which are simple to manage but
+# slower than LVM partitions, then specify a directory here and uncomment
+# the line.
+#
+#  New instances will be stored in subdirectories named after their
+# hostnames.
+#
+##
+dir = /var/xen
+</code></pre>
+
+<p>Specifica la directory dove verranno salvate le immagini delle macchine virtuali.
+In pratica i file che sono a tutti gli effetti gli HD delle vostre macchine virtuali.
+Infatti se volete fare un backup di un&#8217;intera macchina virtuale salvatevi il suo file
+immagine.</p>
+
+<pre><code>#
+##
+#
+# If you don't wish to use loopback images then you may specify an
+# LVM volume group here instead
+#
+##
+# lvm = vg0
+</code></pre>
+
+<p>Se non volete usare le immagini, ma HD fisici allora dovrete usate un LVM (Logical Volume Manager).</p>
+
+<pre><code>#
+##
+#
+#  Installation method.
+#
+#  There are four distinct methods which you may to install a new copy
+# of Linux to use in your Xen guest domain:
+#
+#   - Installation via the debootstrap command.
+#   - Installation via the rpmstrap command.
+#   - Installation via the rinse command.
+#   - Installation by copying a directory containing a previous installation.
+#   - Installation by untarring a previously archived image.
+#
+#  NOTE That if you use the "untar", or "copy" options you should ensure
+# that the image you're left with matches the 'dist' setting later in
+# this file.
+#
+#
+##
+#
+#
+# install-method = [ debootstrap | rinse | rpmstrap | copy | tar ]
+#
+#
+install-method = debootstrap
+</code></pre>
+
+<p>In questa sezione di decice in quale modo il sistema operativo delle vostre macchine
+virtuali verrà installato. Ci sono diversi modi, ma il più comune e semplice è quello di
+usare l&#8217;utility <code>debootstrap</code> che viene usato per creare un sistema Debian da zero,
+senza la necessità di dpkg o apt. Per fare questo, vengono scaricati i file .deb da
+un sito mirror e vengono spacchettati in una directory su cui è eventualmente
+possibile fare il chroot.</p>
+
+<pre><code>#
+##
+#  Disk and Sizing options.
+##
+#
+size   = 4Gb      # Disk image size.
+memory = 128Mb    # Memory size
+swap   = 128Mb    # Swap size
+# noswap = 1      # Don't use swap at all for the new system.
+fs     = ext4     # use the EXT3 filesystem for the disk image.
+dist   = `xt-guess-suite-and-mirror --suite` # Default distribution to install.
+image  = sparse   # Specify sparse vs. full disk images.
+</code></pre>
+
+<p>Molto intuitivo, un commento solo alle ultime due opzioni: <code>dist</code> specifica se
+installare la versione stable, testing o unstable. Mentre <code>image</code> il tipo di immagine
+da usare come file system: possiamo scegliere tra un&#8217;immagine <em>sparse</em> oppure tra
+un&#8217;immagine <em>full disk</em>. Nel primo caso il file aumenta la sua dimensione dinamicamente,
+mentre nel secondo caso il file avrà la stessa grandezza del valore scelto qualche riga sopra (<code>size</code>).</p>
+
+<pre><code>#
+# Uncomment the following line if you wish to interactively setup a
+# new root password for images.
+#
+passwd = 1
+#
+</code></pre>
+
+<p>Immettiamo noi quando creiamo le nostre macchine virtuali la password per l&#8217;utente root.</p>
+
+<p>Per le altre opzioni vi rimando alla doc.</p>
+
+<p>A questo punto creiamo la directory che conterrà i file immagini delle nostre macchine virtuali
+che deve essere quella specificata nella variabile <code>dir</code> del file <code>/etc/xen-tools/xen-tools.conf</code>:</p>
+
+<pre><code>$ mkdir -p /var/xen
+$ chmod 755 /var/xen
+</code></pre>
+
+<p>Riavviamo xend:</p>
+
+<pre><code>$ /etc/init.d/xend restart
+</code></pre>
+
+<h2>domU</h2>
+
+<p>Ora il nostro ambiente Debian/Xen dovrebbe essere pronto per la virtualizzazione.
+Andiamo a creare la nostra macchina virtuale. Per far ciò usiamo i tools che xen ci mette a
+disposizione, in questo caso <code>xen-create-image</code>. Questo comando necessita di un solo parametro
+fondamentale ovvero il nome della vostra macchina virtuale. Poi utilizzerà la configurazione
+salvata nel file <code>/etc/xen-tools/xen-tools.conf</code> (vi ricordate?) per il resto. Possiamo comunque
+ovverridare alcune opzioni con dei parametri da linea di comando:</p>
+
+<pre><code>$ xen-create-image --hostname=vm1 --size=200Gb --memory=32Gb --ip=www.xxx.yyy.zzz --netmask=255.255.255.248 --gateway=ip.di.dom.0
+</code></pre>
+
+<p>Questo comando non farà altro che create il file di configurazione specifico per la macchina
+virtuale &ldquo;vm1&rdquo; in <code>/etc/xen/vm1.cfg</code>. Comunque abbiamo creato una configurazione per una
+macchina virtuale di nome <em>vm1</em> con HD di capacità 200Gb, memoria ram da 32Gb, ip statico www.xxx.yyy.zzz,
+netmask 255.255.255.248 e gateway ip.di.dom.0 (ovviamente dom0 deve avere un HD > di 200Gb e memoria RAM > di 32Gb).</p>
+
+<p>Ok, adesso finalmente creiamo sta maledetta macchina:</p>
+
+<pre><code>$ xm create /etc/xen/vm1.cfg
+</code></pre>
+
+<p>La macchina virtuale si avvia, per vedere lo stato del sistema usate il comodo comando:</p>
+
+<pre><code>$ xm list
+Name                                        ID   Mem VCPUs      State   Time(s)
+Domain-0                                     0  2353     8     r-----  24266.4
+vm1                                          3 30720     8     -b---- 150851.7
+</code></pre>
+
+<p>I valori di <code>State</code> possono essere:</p>
+
+<ul>
+<li>r - <em>running</em>: la macchina sta girando e usando una CPU.</li>
+<li>b - <em>blocked</em>: la macchina è bloccata e non sta usando la CPU. Questo perchè sta aspettando per operazioni di IO oppure è in sleep perchè non ha niente da fare.</li>
+<li>p - <em>paused</em>: la macchina è in pausa (<code>xm pause</code>).</li>
+<li>s - <em>shutdown</em>: la macchina si sta spegnendo o riavviando o sospendendo.</li>
+<li>c - <em>crashed</em>: la macchina è crashata.</li>
+<li>d - <em>dying</em>.</li>
+</ul>
+
+
+<p>Per accedere alla vostra macchina virtuale potete o connettervi via ssh oppure usare il comando:</p>
+
+<pre><code>$ xm console vm1
+</code></pre>
+
+<p>che vi apre una console alla vostra macchina. Per uscire dalla console usare la combinazione <code>ctrl+]</code>.</p>
+
+<p>Per spegnere la macchina:</p>
+
+<pre><code>$ xm shutdown vm1
+</code></pre>
+
+<p>Per mettere in pausa la macchina:</p>
+
+<pre><code>$ xm pause vm1
+</code></pre>
+
+<p>Per riattivarla:</p>
+
+<pre><code>$ xm restore vm1
+</code></pre>
+
+<p>Per eliminare la macchina:</p>
+
+<pre><code>$ xm delete vm1
+</code></pre>
+
+<p>Ora per abilitare la connessione sulla macchina virtuale domU <code>vm1</code> dobbiamo editare
+il file <code>/etc/network/interfaces</code> nel seguente modo:</p>
+
+<pre><code># The primary network interface
+auto eth0
+iface eth0 inet static
+ address IP.DI.DOMU
+ gateway IP.DI.DOM0
+ netmask NETMASK.DI.DOM0
+ broadcast BROADCAST.DI.DOM0
+ pointopoint IP.DI.DOM0
+</code></pre>
+
+<p>Se volete che al boot di dom0 partano anche le vostre macchine virtuali allora
+dovete fare un link simbolico del file di configurazione delle vm nella cartella <code>/etc/xen/auto</code></p>
+
+<pre><code>$ ln -s /etc/xen/vm1.cfg /etc/xen/auto
+</code></pre>
+
+<p>Infine se un dì avrete bisogno di aumentare lo spazio degli &ldquo;HD&rdquo; delle vostre macchine virtuali dovrete aumentare i file immagini.
+Ciò è possibile con i comandi <code>dd</code> e <code>resize2fs</code>:</p>
+
+<pre><code>$ dd if=/dev/zero bs=1M count=2000 &gt;&gt; /etc/xen/domains/vm1/disk.img
+$ resize2fs -f /etc/xen/domains/vm1/disk.img
+</code></pre>
+
+<p>Con questo comando abbiamo aggiunto 2 Gigabyte all&#8217;&ldquo;HD&rdquo; della macchina virtuale vm1.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Configurare un multi domain mail server con Postfix, Dovecot e autenticazione sicura]]></title>
+    <link href="http://pioz.github.com/configurare-multi-domain-mail-server-postfix-dovecot"/>
+    <updated>2009-12-11T10:22:00+01:00</updated>
+    <id>http://pioz.github.com/configurare-multi-domain-mail-server-postfix-dovecot</id>
+    <content type="html"><![CDATA[<p>Allora in questa guida vedremo come installare e configurare un mail server professionale.
+Il tutto è stato testato in una <a href="http://www.debian.org">Debian</a> 5.0 stable.</p>
+
+<p>Con questo server mail sarà possibile gestire più domini e quindi per esempio allo stesso tempo mantenere mail del tipo <em>@pioz.it</em> e <em>@barison.org</em>.
+Il tutto avverrà dando la possibilità all&#8217;utente se utilizzare comunicazioni criptate (come SSL o TLS) o in chiaro, se utilizzare autenticazione in chiaro (PLAIN) o criptata (CRAM-MD5 o DIGEST-MD5). Dando la possibilità di usare protocollo IMAP o POP3.</p>
+
+<p>Il necessario:</p>
+
+<ul>
+<li><strong>Postfix</strong> come server SMTP</li>
+<li><strong>Dovecot</strong> come server POP3 e IMAP</li>
+<li><strong>MySQL</strong> come database per il salvataggio degli utenti, password e domini</li>
+<li><strong>SASL</strong> per criptare il trasferimento dei dati tra server e client</li>
+</ul>
+
+
+<p>Installiamo il necessario:</p>
+
+<pre><code>$ apt-get install postfix postfix-mysql
+$ apt-get install dovecot-imapd dovecot-pop3d
+$ apt-get install mysql-server-5.0
+$ apt-get install libsasl2 sasl2-bin libsasl2-modules
+</code></pre>
+
+<h3>Passo 0: domini</h3>
+
+<p>Per capirci meglio usiamo le seguenti convenzioni: il dominio associato al mail server sarà <code>ciccio.com</code>, mentre i domini che hosteremo saranno <code>pippo.it</code> e <code>pluto.com</code>.</p>
+
+<p>Questo significa che tutti e tre i domini dovranno avere un record MX nel DNS chiamato mail.nomedominio che punterà all&#8217;IP del nostro server mail.</p>
+
+<p>Inoltre dato che useremo anche SSL per il trasferimento dei dati tra server e client è necessario avere un certificato (valido) per il dominio <code>mail.ciccio.com</code>.</p>
+
+<h2>PASSO 1: configurazione database</h2>
+
+<p>Per prima cosa creiamo un database per contenere gli utenti che potranno usufruire del nostro servizio mail.
+Creiamo un file e lo chiamiamo <code>mail.sql</code> e ci incolliamo dentro il seguente codice SQL:</p>
+
+<pre><code>create database mail;
+
+use mail;
+
+CREATE TABLE user (
+  domain varchar(255) NOT NULL,
+  username varchar(255) NOT NULL,
+  password varchar(255) NOT NULL,
+  quota int(255) NOT NULL default 0,
+  active tinyint(1) NOT NULL default 1,
+  admin tinyint(1) NOT NULL default 0,
+  PRIMARY KEY (username, domain)
+);
+
+CREATE TABLE alias (
+  address varchar(255) NOT NULL,
+  goto varchar(255) NOT NULL,
+  active tinyint(1) NOT NULL default 1,
+  PRIMARY KEY (address, goto)
+);
+</code></pre>
+
+<p>A questo punto eseguiamo il codice SQL e creiamo un utente con privilegi ristretti che verrà usato da postfix e dovecot per connettersi al DB:</p>
+
+<pre><code>$ mysql -u root -p
+mysql&gt; source mail.sql;
+mysql&gt; GRANT select,insert,update,delete ON mail.* TO 'postfix'@'localhost' IDENTIFIED BY 'password';
+mysql&gt; quit;
+</code></pre>
+
+<p>Ottimo, ora abbiamo il nostro BD&hellip; 2 tabelle: una per gli utenti e una per gli alias. Gli alias sono delle mail che sono alias di mail &ldquo;reali&rdquo;.</p>
+
+<p>Vediamo, prima di proseguire, i campi della tabella <code>user</code>:</p>
+
+<ul>
+<li><strong>domain</strong>: il dominio dell&#8217;indirizzo mail (per esempio <a href="&#x6d;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#x6c;&#x75;&#99;&#97;&#x40;&#112;&#x69;&#112;&#x70;&#x6f;&#x2e;&#105;&#116;">&#108;&#x75;&#x63;&#97;&#x40;&#112;&#105;&#112;&#112;&#111;&#x2e;&#x69;&#116;</a> ha dominio pippo.it).</li>
+<li><strong>username</strong>: lo username per accedere alla casella di posta, nel nostro caso, <strong>IMPORTANTE</strong>, è l&#8217;intero indirizzo mail (quindi non luca, ma <a href="&#109;&#97;&#x69;&#x6c;&#x74;&#111;&#58;&#x6c;&#117;&#99;&#97;&#64;&#112;&#x69;&#x70;&#x70;&#x6f;&#x2e;&#x69;&#116;">&#108;&#117;&#x63;&#97;&#64;&#x70;&#105;&#112;&#x70;&#x6f;&#46;&#x69;&#x74;</a>). Questo perchè avendo mail con domini diversi dobbiano distinguerle in modo univoco.</li>
+<li><strong>password</strong>: la password per accedere alla casella di posta. Vedremo che sarà criptata con AES.</li>
+<li><strong>quota</strong>: quota casella di posta.</li>
+<li><strong>active</strong>: l&#8217;account mail è attivo o disattivo.</li>
+<li><strong>admin</strong>: campo utile per verificare, magari da qualche app esterna, se l&#8217;utente può creare altri account.</li>
+</ul>
+
+
+<p>I campi della tabella <code>alias</code>:</p>
+
+<ul>
+<li><strong>address</strong>: indirizzo mail dell&#8217;alias.</li>
+<li><strong>goto</strong>: è alias di.</li>
+<li><strong>active</strong>: l&#8217;alias è attivo o disattivo.</li>
+</ul>
+
+
+<h2>PASSO 2: creazione delle Maildir</h2>
+
+<p>Le nostre caselle di posta saranno sottoforma di maildir e le posizioniamo in <code>/etc/vmail/</code>. Creiamole impostando i relativi permessi:</p>
+
+<pre><code>$ adduser postfix mail
+$ adduser dovecot mail
+$ mkdir /var/vmail
+$ chmod 770 /var/vmail
+$ chown mail.mail /var/vmail
+</code></pre>
+
+<p>Bene, in pratica la casella di posta per <a href="&#x6d;&#97;&#x69;&#x6c;&#x74;&#111;&#58;&#x6c;&#117;&#99;&#x61;&#x40;&#x70;&#x69;&#x70;&#112;&#111;&#x2e;&#x69;&#116;">&#x6c;&#x75;&#x63;&#97;&#64;&#x70;&#x69;&#x70;&#112;&#111;&#x2e;&#x69;&#x74;</a> sarà in <code>/var/vmail/luca@pippo.it</code>. Essa verrà creata in automatico al primo login.</p>
+
+<h2>PASSO 3: configurazione Dovecot</h2>
+
+<p>Adesso è arrivato il momento di configurare <a href="http://www.dovecot.org/">Dovecot</a>: il server pop e imap.</p>
+
+<p>Dovecot, per i nostri usi consiste in due file di configurazione:</p>
+
+<ul>
+<li><code>/etc/dovecot/dovecot.conf</code>: file di configurazione principale.</li>
+<li><code>/etc/dovecot/dovecot-sql.conf</code>: file di configurazione per la connessione e recupero dati dal database MySQL.</li>
+</ul>
+
+
+<p>Vediamo il primo:</p>
+
+<pre><code>## Dovecot configuration file
+
+protocols = pop3 pop3s imap imaps
+disable_plaintext_auth = no
+log_path = /var/log/mail.log
+log_timestamp = "%Y-%m-%d %H:%M:%S "
+
+ssl_disable = no
+ssl_cert_file = /etc/ssl/mycerts/mail.ciccio.com/cert.crt
+ssl_key_file = /etc/ssl/mycerts/mail.ciccio.com/key.key
+ssl_ca_file = /etc/ssl/mycerts/mail.ciccio.com/root.crt
+
+mail_location = maildir:/var/vmail/%u/
+mail_privileged_group = mail
+#first_valid_uid = 150
+first_valid_uid = 8
+
+protocol imap {
+  mail_plugins = autocreate
+  plugin {
+    autocreate  = Trash
+    autocreate2 = Junk
+    autocreate3 = Drafts
+    autocreate4 = Sent
+    autocreate5 = INBOX
+
+    autosubscribe  = Trash
+    autosubscribe2 = Junk
+    autosubscribe3 = Drafts
+    autosubscribe4 = Sent
+    autosubscribe5 = INBOX
+  }
+}
+
+protocol pop3 {
+  pop3_uidl_format = %08Xu%08Xv
+}
+
+protocol lda {
+  # log_path = /etc/dovecot/sieve.log
+  mail_plugins = cmusieve
+  postmaster_address = enrico@megiston.it
+}
+
+plugin {
+  sieve = /etc/dovecot/sieve/default.sieve
+}
+
+auth_verbose = no
+auth_debug = no
+auth_debug_passwords = no
+auth default {
+  mechanisms = login plain digest-md5 cram-md5
+  passdb sql {
+    args = /etc/dovecot/dovecot-sql.conf
+  }
+  userdb sql {
+    args = /etc/dovecot/dovecot-sql.conf
+  }
+  user = root
+  socket listen {
+    master {
+      path = /var/run/dovecot/auth-master
+      mode = 0660
+      user = dovecot
+      group = mail
+    }
+    client {
+      path = /var/spool/postfix/private/auth
+      mode = 0660
+      user = postfix
+      group = mail
+    }
+  }
+}
+</code></pre>
+
+<p>Adesso non entriamo nel dettaglio in quanto non ho voglia di star qua a scrivere, comunque due cosette sulle cose principali:</p>
+
+<ul>
+<li>La prima riga specifica i protocolli che vogliamo usare. Gli abilitiamo tutti per dare libertà totale ai nostri utenti. Mi raccomando di avere il certificato per il vostro dominio, nell&#8217;esempio per <code>mail.ciccio.com</code>.</li>
+<li><code>first_valid_uid</code> deve coincidere con uid dell&#8217;utente <code>mail</code>, solitamente 8. Per verificare lanciate il comando &ldquo;<code>id mail</code>&rdquo;.</li>
+<li>Importante è la riga &ldquo;<code>mechanisms = login plain digest-md5 cram-md5
+</code>&rdquo; che specifica i meccanismi di autenticazione. Noi li abilitiamo tutti, sia quelli in chiaro che criptati in modo da permettere anche a client poco sofisticati (ad esempio quelli dei cellulari) di connettersi al nostro server. Mentre per client completi dare la possibilità di usare autenticazione cifrata (ad esempio Mozilla Thunderbird).</li>
+<li><code>userdb</code> e <code>passdb</code> vengono recuperati dall&#8217;altro file di configurazione.</li>
+<li>Infine fondamentale la sezione <code>socket listen</code> che apre una socket per permettere ad altri programmi di usare il sistema di autenticazione di Dovecot, nel nostro caso Postfix.</li>
+</ul>
+
+
+<p>L&#8217;altro file di configurazione per il recupero degli utenti e delle password risulta essere una cosa del genere:</p>
+
+<pre><code>driver = mysql
+connect = host=127.0.0.1 dbname=mail user=postfix password=password
+default_pass_scheme = PLAIN
+user_query = SELECT concat('maildir:/var/vmail/', username, '/') as mail, 8 AS uid, 8 AS gid FROM user WHERE username = '%u' AND domain = '%d' AND active = '1'
+password_query = SELECT username AS user, AES_DECRYPT(UNHEX(password),'AESKEY') AS password FROM user WHERE username = '%u' AND domain = '%d' AND active = 1
+</code></pre>
+
+<p>Commentiamo:</p>
+
+<ul>
+<li><code>driver</code> specifica che il database è MySQL.</li>
+<li><code>connect</code> info per la connessione al database.</li>
+<li><code>default_pass_scheme</code> usiamo PLAIN, infatti se diamo la possibilità di usare meccanismi di autenticazione in chiaro e non in chiaro (es plain e cram-md5) non c&#8217;è alternativa, non possiamo salvare la password in modo criptato per meccanismo PLAIN. Comunque niente paura, la password non sarà salvata in chiaro ma criptata con la funzione AES di mysql e trasformata da binario a text con la funzione HEX.</li>
+<li><code>user_query</code> è la query per recuperare l&#8217;utente. Da notare che uid e gid devono essere lo stesso dell&#8217;utente <code>mail</code> (<code>id mail</code>). Questa in realtà deve recuperare il path della maildir dell&#8217;utente, per questo c&#8217;è il <code>concat</code>.</li>
+<li><code>user_password</code> è la query per recuperare le password decriptandole usando una chiave (nell&#8217;esempio AESKEY).</li>
+</ul>
+
+
+<p>Bene ora Dovecot è pronto. Riavviamo Dovecot con <code>/etc/init.d/dovecot restart</code></p>
+
+<h2>PASSO 4: configurazione Postfix</h2>
+
+<p>Postfix è il server SMTP. Viene gestito da due file di configurazione principali, più altri per la connessione con il database:</p>
+
+<ol>
+<li><code>/etc/postfix/master.cf</code></li>
+<li><code>/etc/postfix/main.cf</code></li>
+<li><code>/etc/postfix/mysql_virtual_alias_maps.cf</code></li>
+<li><code>/etc/postfix/mysql_virtual_domains_maps.cf</code></li>
+<li><code>/etc/postfix/mysql_virtual_mailbox_maps.cf</code></li>
+</ol>
+
+
+<p>Il master (1):</p>
+
+<pre><code>#
+# Postfix master process configuration file.  For details on the format
+# of the file, see the master(5) manual page (command: "man 5 master").
+#
+# Do not forget to execute "postfix reload" after editing this file.
+#
+# ==========================================================================
+# service type  private unpriv  chroot  wakeup  maxproc command + args
+#               (yes)   (yes)   (yes)   (never) (100)
+# ==========================================================================
+smtp      inet  n       -       n       -       -       smtpd
+#submission inet n       -       -       -       -       smtpd
+#  -o smtpd_tls_security_level=encrypt
+#  -o smtpd_sasl_auth_enable=yes
+#  -o smtpd_client_restrictions=permit_sasl_authenticated,reject
+#  -o milter_macro_daemon_name=ORIGINATING
+# Decommentiamo il seguito per abilitare il wrapper SSL su TLS
+smtps     inet  n       -       -       -       -       smtpd
+  -o smtpd_tls_wrappermode=yes
+  -o smtpd_sasl_auth_enable=yes
+  -o smtpd_client_restrictions=permit_sasl_authenticated,reject
+#  -o milter_macro_daemon_name=ORIGINATING
+#628      inet  n       -       -       -       -       qmqpd
+pickup    fifo  n       -       -       60      1       pickup
+cleanup   unix  n       -       -       -       0       cleanup
+qmgr      fifo  n       -       n       300     1       qmgr
+#qmgr     fifo  n       -       -       300     1       oqmgr
+tlsmgr    unix  -       -       -       1000?   1       tlsmgr
+rewrite   unix  -       -       -       -       -       trivial-rewrite
+bounce    unix  -       -       -       -       0       bounce
+defer     unix  -       -       -       -       0       bounce
+trace     unix  -       -       -       -       0       bounce
+verify    unix  -       -       -       -       1       verify
+flush     unix  n       -       -       1000?   0       flush
+proxymap  unix  -       -       n       -       -       proxymap
+proxywrite unix -       -       n       -       1       proxymap
+smtp      unix  -       -       -       -       -       smtp
+# When relaying mail as backup MX, disable fallback_relay to avoid MX loops
+relay     unix  -       -       -       -       -       smtp
+        -o smtp_fallback_relay=
+#       -o smtp_helo_timeout=5 -o smtp_connect_timeout=5
+showq     unix  n       -       -       -       -       showq
+error     unix  -       -       -       -       -       error
+retry     unix  -       -       -       -       -       error
+discard   unix  -       -       -       -       -       discard
+local     unix  -       n       n       -       -       local
+virtual   unix  -       n       n       -       -       virtual
+lmtp      unix  -       -       -       -       -       lmtp
+anvil     unix  -       -       -       -       1       anvil
+scache    unix  -       -       -       -       1       scache
+#
+# ====================================================================
+# Interfaces to non-Postfix software. Be sure to examine the manual
+# pages of the non-Postfix software to find out what options it wants.
+#
+# Many of the following services use the Postfix pipe(8) delivery
+# agent.  See the pipe(8) man page for information about ${recipient}
+# and other message envelope options.
+# ====================================================================
+#
+# maildrop. See the Postfix MAILDROP_README file for details.
+# Also specify in main.cf: maildrop_destination_recipient_limit=1
+#
+maildrop  unix  -       n       n       -       -       pipe
+  flags=DRhu user=vmail argv=/usr/bin/maildrop -d ${recipient}
+#
+# See the Postfix UUCP_README file for configuration details.
+#
+uucp      unix  -       n       n       -       -       pipe
+  flags=Fqhu user=uucp argv=uux -r -n -z -a$sender - $nexthop!rmail ($recipient)
+#
+# Other external delivery methods.
+#
+ifmail    unix  -       n       n       -       -       pipe
+  flags=F user=ftn argv=/usr/lib/ifmail/ifmail -r $nexthop ($recipient)
+bsmtp     unix  -       n       n       -       -       pipe
+  flags=Fq. user=bsmtp argv=/usr/lib/bsmtp/bsmtp -t$nexthop -f$sender $recipient
+scalemail-backend unix  -       n       n       -       2       pipe
+  flags=R user=scalemail argv=/usr/lib/scalemail/bin/scalemail-store ${nexthop} ${user} ${extension}
+mailman   unix  -       n       n       -       -       pipe
+  flags=FR user=list argv=/usr/lib/mailman/bin/postfix-to-mailman.py
+  ${nexthop} ${user}
+dovecot   unix  -       n       n       -       -       pipe
+  flags=DRhu user=mail argv=/usr/lib/dovecot/deliver -n -f ${sender} -d ${recipient}
+</code></pre>
+
+<p>Non commentiamo, è molto simile a quello di default a parte un paio di modifiche, tra cui l&#8217;abilitazione del wrapper SSL su TLS.</p>
+
+<p>Il main.cf (2):</p>
+
+<pre><code># MAIN POSTFIX CONFIGUTARION #
+
+# smtpd_banner = $myhostname ESMTP $mail_name (Debian/GNU)
+# biff = no
+# append_dot_mydomain = yes
+debug_peer_level = 3
+myhostname = mail.ciccio.com
+
+virtual_uid_maps = static:8
+virtual_gid_maps = static:8
+virtual_minimum_uid = 8
+virtual_mailbox_base = /var/vmail/
+virtual_alias_maps = mysql:/etc/postfix/mysql_virtual_alias_maps.cf
+virtual_mailbox_domains = mysql:/etc/postfix/mysql_virtual_domains_maps.cf
+virtual_mailbox_maps = mysql:/etc/postfix/mysql_virtual_mailbox_maps.cf
+virtual_transport = virtual
+
+# SASL #
+
+smtpd_sasl_auth_enable = yes
+smtpd_sasl_local_domain = $myhostname
+smtpd_sasl_security_options = noanonymous
+smtpd_sasl_auth_header = yes
+smtpd_sasl_type = dovecot
+smtpd_sasl_path = private/auth
+broken_sasl_auth_clients = yes
+smtpd_recipient_restrictions =
+  permit_sasl_authenticated,
+  reject_unauth_destination
+
+# TLS #
+
+smtp_use_tls = yes
+smtpd_use_tls = yes
+smtpd_tls_key_file = /etc/ssl/mycerts/mail.ciccio.com/key.key
+smtpd_tls_cert_file = /etc/ssl/mycerts/mail.ciccio.com/cert.crt
+smtpd_tls_CAfile = /etc/ssl/mycerts/mail.ciccio.com/root.crt
+smtpd_tls_loglevel = 1
+smtpd_tls_received_header = yes
+smtpd_tls_session_cache_timeout = 3600s
+tls_random_source = dev:/dev/urandom
+</code></pre>
+
+<p>Anche qua non commentiamo&hellip; da notare solo che SASL per autenticare usa la socket che gli viene messa a disposizione da Dovecot.</p>
+
+<p>E gli altri tre in ordine per la connessione al BD:</p>
+
+<pre><code># /etc/postfix/mysql_virtual_alias_maps.cf
+user = postfix
+password = password
+hosts = 127.0.0.1
+dbname = mail
+table = alias
+select_field = goto
+where_field = address
+
+# /etc/postfix/mysql_virtual_domains_maps.cf
+user = postfix
+password = password
+hosts = 127.0.0.1
+dbname = mail
+table = user
+select_field = domain
+where_field = domain
+
+# /etc/postfix/mysql_virtual_mailbox_maps.cf
+user = postfix
+password = password
+hosts = 127.0.0.1
+dbname = mail
+query = SELECT concat(username,'/') FROM user WHERE username = '%s' AND active = 1
+</code></pre>
+
+<p>Ok, per Postfix abbiamo finito. Riavviamolo con <code>/etc/init.d/postfix/restart</code></p>
+
+<h2>PASSO 5: proviamo il tutto</h2>
+
+<p>Inseriamo gli utenti nel nosto DB e poi testiamo il tutto usando Thunderbird.
+Per aggiungere un utente usiamo la seguente query:</p>
+
+<pre><code>$ mysql -u postfix -p
+$ insert into user(domain,username,password) values("pippo.it", "luca@pippo.it", HEX(AES_ENCRIPT('passwordchevoglio', 'AESKEY')));
+$ insert into user(domain,username,password) values("pluto.com", "nicola@pluto.com", HEX(AES_ENCRIPT('passworddd', 'AESKEY')));
+</code></pre>
+
+<p>Vediamo per esempio come configurare Thunderbird:
+<img src="http://media.tumblr.com/tumblr_kuhdz2ptTT1qa79c0.png" alt="" /></p>
+
+<h3>Alcune note</h3>
+
+<p>Ricordate di installare Spamassasin per Postfix e magari una bella webmail come <a href="http://roundcube.net/">Roundcube</a>.</p>
+
+<p>Se avete dubbi, chiarimenti, o volete approfondire alcune sezioni non fatevi scrupoli a contattarmi al mio indirizzo mail <a href="mailto:pioz@pioz.it">pioz@pioz.it</a>.</p>
+]]></content>
+  </entry>
+  
+</feed>
