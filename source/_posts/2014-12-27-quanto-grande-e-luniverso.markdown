@@ -39,7 +39,7 @@ all'altra, impieghereste niente meno di 100 mila anni. Tale durata è
 approssimativamente 1250 vite medie umane. No, non confondete queste cifre
 legandole alle reali capacità dei nostri mezzi aerospaziali, queste tempistiche
 sono calcolate alla velocità della luce. Viaggiando così veloce, potreste
-completare in un secondo 7 volte il giro della terra.  
+completare in un secondo 7 volte il giro della Terra.  
 Che cosa succederebbe se voleste visitare la nostra galassia più vicina a questa
 velocità? Per raggiungere la galassia
 [Andromeda](http://it.wikipedia.org/wiki/Galassia_di_Andromeda), uscendo dalla
@@ -92,7 +92,7 @@ il nostro universo fino a 78 miliardi di anni luce ovvero una sfera osservabile
 larga 156 miliardi di anni luce. Semplicemente diciamo che una stella lontana
 13.7 miliardi di anni luce ha emesso un fotone (sebbene ciò sia impossibile
 perchè sarebbe successo all'inizio del tutto, prendiamo l'esempio per buono)
-Dopo di che, ora che quel fotone raggiunge la Terra, il punto di partenza di
+dopo di che, ora che quel fotone raggiunge la Terra, il punto di partenza di
 quel fotone non è più distante 13.7 miliardi di anni luce bensì a 78 miliardi
 di anni luce. La luce non ha viaggiato attraverso 78 miliardi di anni luce, ma
 lo spazio tra noi e il punto di partenza si è allungato. Allora i fotoni di
