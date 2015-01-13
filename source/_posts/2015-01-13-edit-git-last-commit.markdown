@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "Edit git specific commit"
+title: "Edit git last commit"
 date: 2015-01-13 14:44:28 +0100
 comments: true
 categories: git
 ---
 
 Oggi mi è capitato questa situazione mentre stavo fixando una issue di
-[Chess](https://github.com/pioz/chess), una mia gemma di Ruby su github: in
+[Chess](https://github.com/pioz/chess), una mia gemma per Ruby su github: in
 pratica ho fixato il problema e ho fatto un commit `git commit -am "fix issue
 bla bla"`. Mi sono poi accorto che non ho aumentato il numero di versione della
 gemma e che quindi non potevo pusharla su Rubygems. A questo punto potevo
