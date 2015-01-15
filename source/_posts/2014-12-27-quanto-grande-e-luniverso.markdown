@@ -3,7 +3,7 @@ layout: post
 title: "Quanto grande è l'universo?"
 date: 2014-12-27 17:44
 comments: true
-categories: [universe questions]
+categories: [universe, questions]
 ---
 
 In certi momenti ci si riesce ad accorgere quanto sia enorme l'universo, anche
