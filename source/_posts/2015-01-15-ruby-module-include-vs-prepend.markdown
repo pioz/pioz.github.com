@@ -44,10 +44,13 @@ la classe `Person` e non quello definito nel modulo `Superhero`.   Questo ci
 potrebbe anche andare bene, ma a volte vorremmo che quando facciamo questo tipo
 di operazione i metodi del modulo che mixiamo sovrascrivessero (override) i
 metodi della classe, come succede quando estendiamo una classe. Per ottenere
-questo usiamo il metodo `prepend` al posto di `include`. 
+questo usiamo il metodo `prepend` al posto di `include` disponibile dalla
+versione 2 di Ruby.
+
 ```
 Person.prepend(Superhero)
 
 Person.new.name
 ```
+
 Adesso vediamo che viene invocato il metodo `name` definito nel modulo `Superhero`.
