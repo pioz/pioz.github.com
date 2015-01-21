@@ -1,38 +1,40 @@
 ---
 layout: post
-title: "Chiamate ricorsive Ruby vs Python"
+title: "Recursion: Ruby vs Python"
 date: 2012-08-03 21:27
 comments: true
 categories: [ruby, python, c]
 ---
 
-Facciamo un piccolo test: calcoliamo Fibonacci ricorsivamente in Ruby (v2.0.0) e in Python (v2.7.2) e vediamo chi vince in termini di tempo
+Let's do a litte test: we compute Fibonacci sequence with recursion in Ruby
+(v2.0.0) and Python (v2.7.2) and let's see who wins in terms of time:
 
-Ruby Fibonacci code (`f.rb`)
+Ruby Fibonacci code (`f.rb`):
+```
+def fib(n)
+  if n == 0 || n == 1
+    n
+  else
+    fib(n-1) + fib(n-2)
+  end
+end
 
-
-    def fib(n)
-      if n == 0 || n == 1
-        n
-      else
-        fib(n-1) + fib(n-2)
-      end
-    end
-    
-    36.times { |i| fib(i) }
+36.times { |i| fib(i) }
+```
 
 Python Fibonacci code (`f.py`)
+```
+def fib(n):
+  if n == 0 or n == 1:
+    return n
+  else:
+    return fib(n-1) + fib(n-2)
 
-    def fib(n):
-      if n == 0 or n == 1:
-        return n
-      else:
-        return fib(n-1) + fib(n-2)
-    
-    for i in range(36):
-      fib(i)
+for i in range(36):
+  fib(i)
+```
 
-Ora lanciamo i due programmi nel seguente modo:
+Now let's run the programs as follows:
 
     $ time ruby f.rb && time python f.py
     real  0m4.795s
@@ -43,38 +45,40 @@ Ora lanciamo i due programmi nel seguente modo:
     user  0m12.849s
     sys   0m0.049s
 
-Ecco Ruby impiega **4.795** secondi mentre Python **12.935** secondi!
 
-**Ruby vince nettamente su Python!!**
+Look: Ruby took **4.795** seconds, while Python **12.935** seconds!
 
-Oh beh provate però questo codice in C (`f.c`):
+**Ruby wins clearly on Python!!**
 
-    int
-    fib (int n)
-    {
-      if (n == 0 || n == 1)
-        return n;
-      else
-        return fib (n-1) + fib (n-2);
-    }
+But now check this C code (`f.c`):
+```
+int
+fib (int n)
+{
+  if (n == 0 || n == 1)
+    return n;
+  else
+    return fib (n-1) + fib (n-2);
+}
 
-    int
-    main ()
-    {
-      int i;
-      for (i = 0; i < 36; i++)
-        fib (i);
-    }
+int
+main ()
+{
+  int i;
+  for (i = 0; i < 36; i++)
+    fib (i);
+}
+```
 
-Compiliamo:
+Compile:
 
      gcc f.c
 
-Ed eseguiamo:
+Run:
 
     $ time ./a.out
     real  0m0.232s
     user  0m0.229s
     sys   0m0.003s
-    
-0.232 secondi!
+
+0.232 seconds!

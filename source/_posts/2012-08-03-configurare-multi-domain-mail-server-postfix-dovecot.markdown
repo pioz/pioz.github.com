@@ -3,7 +3,7 @@ layout: post
 title: "Configurare un multi domain mail server con Postfix, Dovecot e autenticazione sicura"
 date: 2009-12-11 10:22
 comments: true
-categories: [mail, mailserver, debian, linux, mysql, dovecot, postfix]
+categories: [ITA, mail, mailserver, debian, linux, mysql, dovecot, postfix]
 ---
 
 Allora in questa guida vedremo come installare e configurare un mail server professionale.
@@ -106,22 +106,22 @@ Dovecot, per i nostri usi consiste in due file di configurazione:
 Vediamo il primo:
 
     ## Dovecot configuration file
-    
+
     protocols = pop3 pop3s imap imaps
     disable_plaintext_auth = no
     log_path = /var/log/mail.log
     log_timestamp = "%Y-%m-%d %H:%M:%S "
-    
+
     ssl_disable = no
     ssl_cert_file = /etc/ssl/mycerts/mail.ciccio.com/cert.crt
     ssl_key_file = /etc/ssl/mycerts/mail.ciccio.com/key.key
     ssl_ca_file = /etc/ssl/mycerts/mail.ciccio.com/root.crt
-    
+
     mail_location = maildir:/var/vmail/%u/
     mail_privileged_group = mail
     #first_valid_uid = 150
     first_valid_uid = 8
-    
+
     protocol imap {
       mail_plugins = autocreate
       plugin {
@@ -130,7 +130,7 @@ Vediamo il primo:
         autocreate3 = Drafts
         autocreate4 = Sent
         autocreate5 = INBOX
-    
+
         autosubscribe  = Trash
         autosubscribe2 = Junk
         autosubscribe3 = Drafts
@@ -138,17 +138,17 @@ Vediamo il primo:
         autosubscribe5 = INBOX
       }
     }
-    
+
     protocol pop3 {
       pop3_uidl_format = %08Xu%08Xv
     }
-    
+
     protocol lda {
       # log_path = /etc/dovecot/sieve.log
       mail_plugins = cmusieve
       postmaster_address = enrico@megiston.it
     }
-    
+
     plugin {
       sieve = /etc/dovecot/sieve/default.sieve
     }
@@ -310,13 +310,13 @@ Non commentiamo, è molto simile a quello di default a parte un paio di modifich
 Il main.cf (2):
 
     # MAIN POSTFIX CONFIGUTARION #
-    
+
     # smtpd_banner = $myhostname ESMTP $mail_name (Debian/GNU)
     # biff = no
     # append_dot_mydomain = yes
     debug_peer_level = 3
     myhostname = mail.ciccio.com
-    
+
     virtual_uid_maps = static:8
     virtual_gid_maps = static:8
     virtual_minimum_uid = 8
@@ -325,9 +325,9 @@ Il main.cf (2):
     virtual_mailbox_domains = mysql:/etc/postfix/mysql_virtual_domains_maps.cf
     virtual_mailbox_maps = mysql:/etc/postfix/mysql_virtual_mailbox_maps.cf
     virtual_transport = virtual
-    
+
     # SASL #
-    
+
     smtpd_sasl_auth_enable = yes
     smtpd_sasl_local_domain = $myhostname
     smtpd_sasl_security_options = noanonymous
@@ -338,9 +338,9 @@ Il main.cf (2):
     smtpd_recipient_restrictions =
       permit_sasl_authenticated,
       reject_unauth_destination
-    
+
     # TLS #
-    
+
     smtp_use_tls = yes
     smtpd_use_tls = yes
     smtpd_tls_key_file = /etc/ssl/mycerts/mail.ciccio.com/key.key

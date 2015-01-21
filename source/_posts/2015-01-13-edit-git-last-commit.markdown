@@ -6,22 +6,20 @@ comments: true
 categories: git
 ---
 
-Oggi mi è capitato questa situazione mentre stavo fixando una issue di
-[Chess](https://github.com/pioz/chess), una mia gemma per Ruby su github: in
-pratica ho fixato il problema e ho fatto un commit `git commit -am "fix issue
-bla bla"`. Mi sono poi accorto che non ho aumentato il numero di versione della
-gemma e che quindi non potevo pusharla su Rubygems. A questo punto potevo
-modificare il numero di versione e fare un secondo commit, ma questo non mi
-andava, mi sarebbe piaciuto modificare l'ultimo commit e includere la modifica
-del file `version.rb`.  
-Come fare? Facciamo la nostra modifica al file `version.rb` aumentando la
-versione della gemma e committiamo il tutto con il comando:
+Today, while I was fixing a github issue on
+[Chess](https://github.com/pioz/chess), I noticed this situation: I fixed that
+issue and I did a commit `git commit -am "fix issue bla bla"`. Then I realized
+that I didn't increment the version number of the gem and so I couldn't push it
+on Rubygems. Now I can edit the version number and perform a second commit, or
+find a way to edit the last commit and include the change of the file
+`version.rb`.
+How to do this? First edit the file `version.rb`, then increment the version of
+the gem, and finally commit with the follow command:
 
     git commit -a --amend --no-edit
 
-Bene! Abbiamo modificato l'ultimo commit. Ultima cosa da aggiungere: se avevate
-già fatto il push dell'ultimo commit lo SHA-1 di questo sarà cambiato dopo
-questa operazione e quindi bisognerà pushare le modifiche usando l'opzione
-`--force`
+Good! We now have edited the last commit. If you already pushed, the SHA-1 of the
+last commit will be different after this operation and so we need to push with
+the option `--force`:
 
     git push -f  

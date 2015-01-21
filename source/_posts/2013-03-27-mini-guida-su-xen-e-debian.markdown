@@ -3,7 +3,7 @@ layout: post
 title: "Mini guida su Xen e Debian"
 date: 2013-03-27 21:12
 comments: true
-categories: [xen, debian, vm, macchine virtuali, os]
+categories: [ITA, xen, debian, vm, macchine virtuali, os]
 ---
 
 ![image](http://www.debian.org/Pics/openlogo-50.png)
@@ -40,7 +40,7 @@ Nel famoso file `/etc/network/interfaces` aggiungiamo alla fine:
 Fatto questo installiamo il necessario:
 
     $ apt-get install xen-hypervisor xen-linux-system xen-tools xen-utils xenstore-utils xenwatch
-    
+
 A questo punto dovremmo aver installato anche un nuovo kernel per la nostra
 Debian in grado di gestire la virtualizzazione. Dovremmo fare una modifica alla conf di grub
 per dare priorità al kernel xen rispetto a quello standard: in pratica bisogna rinominare il
@@ -50,21 +50,21 @@ il secondo semplicemente rinominando il numero con cui inizia il file (10) in un
 
     $ cd /etc/grub.d/
     $ mv 10_linux 50_linux
-    
+
 Fatto ciò rigeneriamo il file di configurazione di grub (il nostro bootloader preferito) con
 il comando:
 
     $ update-grub2
-    
+
 e facciamo un reboot:
 
     $ reboot
-    
+
 Controlliamo che sia partito il kernel giusto con il comando:
 
     $ uname -a
     Linux 2.6.32-5-xen-amd64 #1 SMP Sun May 6 08:57:29 UTC 2012 x86_64 GNU/Linux
-    
+
 (Eh si... Debian stable)
 
 Ora abbiamo un paio di file di configurazione su cui mettere le mani
@@ -161,7 +161,7 @@ Se non volete usare le immagini, ma HD fisici allora dovrete usate un LVM (Logic
     #
     #
     install-method = debootstrap
-    
+
 In questa sezione di decice in quale modo il sistema operativo delle vostre macchine
 virtuali verrà installato. Ci sono diversi modi, ma il più comune e semplice è quello di
 usare l'utility `debootstrap` che viene usato per creare un sistema Debian da zero,
@@ -204,11 +204,11 @@ che deve essere quella specificata nella variabile `dir` del file `/etc/xen-tool
 
     $ mkdir -p /var/xen
     $ chmod 755 /var/xen
-    
+
 Riavviamo xend:
 
     $ /etc/init.d/xend restart
-    
+
 ## domU
 
 Ora il nostro ambiente Debian/Xen dovrebbe essere pronto per la virtualizzazione.
@@ -219,7 +219,7 @@ salvata nel file `/etc/xen-tools/xen-tools.conf` (vi ricordate?) per il resto. P
 ovverridare alcune opzioni con dei parametri da linea di comando:
 
     $ xen-create-image --hostname=vm1 --size=200Gb --memory=32Gb --ip=www.xxx.yyy.zzz --netmask=255.255.255.248 --gateway=ip.di.dom.0
-    
+
 Questo comando non farà altro che create il file di configurazione specifico per la macchina
 virtuale "vm1" in `/etc/xen/vm1.cfg`. Comunque abbiamo creato una configurazione per una
 macchina virtuale di nome _vm1_ con HD di capacità 200Gb, memoria ram da 32Gb, ip statico www.xxx.yyy.zzz,
@@ -248,21 +248,21 @@ I valori di `State` possono essere:
 Per accedere alla vostra macchina virtuale potete o connettervi via ssh oppure usare il comando:
 
     $ xm console vm1
-  
+
 che vi apre una console alla vostra macchina. Per uscire dalla console usare la combinazione `ctrl+]`.
 
 Per spegnere la macchina:
 
     $ xm shutdown vm1
-    
+
 Per mettere in pausa la macchina:
 
     $ xm pause vm1
-    
+
 Per riattivarla:
 
     $ xm restore vm1
-    
+
 Per eliminare la macchina:
 
     $ xm delete vm1
@@ -289,5 +289,5 @@ Ciò è possibile con i comandi `dd` e `resize2fs`:
 
     $ dd if=/dev/zero bs=1M count=2000 >> /etc/xen/domains/vm1/disk.img
     $ resize2fs -f /etc/xen/domains/vm1/disk.img
-    
+
 Con questo comando abbiamo aggiunto 2 Gigabyte all'"HD" della macchina virtuale vm1.

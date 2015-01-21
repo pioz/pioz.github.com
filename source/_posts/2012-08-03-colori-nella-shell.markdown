@@ -1,16 +1,17 @@
 ---
 layout: post
-title: "Colori nella shell"
+title: "Shell colors"
 date: 2012-07-27 21:43
 comments: true
 categories: [shell, linux]
 ---
 
-Per colorare una string nella shell possiamo usare questo template:
+To color a string in our shell we can use this template:
 
-    \033[CODE1;CODE2;CODE3mTESTO\033[0m
+    \033[CODE1;CODE2;CODE3mSTRING\033[0m
 
-CODE1 possono essere una serie di valori che alterano lo stile del testo, di seguito una tabella:
+CODE1 can be a series of values that change the style of the text, below a
+table:
 
 * `0` Normal Characters
 * `1` Bold Characters
@@ -18,7 +19,7 @@ CODE1 possono essere una serie di valori che alterano lo stile del testo, di seg
 * `5` Blinking Characters
 * `7` Reverse video Characters
 
-CODE2 invece rappresenta il colore, di seguito una tabella:
+CODE2 rappresents the foreground color, below a table:
 
 * `30` Black
 * `31` Red
@@ -29,7 +30,7 @@ CODE2 invece rappresenta il colore, di seguito una tabella:
 * `36` Cyan
 * `37` White
 
-CODE3 rappresenta il colore di sfondo del testo, di seguito una tabella:
+CODE3 rappresents the background color, below a table:
 
 * `40` Black
 * `41` Red
@@ -40,10 +41,11 @@ CODE3 rappresenta il colore di sfondo del testo, di seguito una tabella:
 * `46` Cyan
 * `47` White
 
-Per resettare il testo allo stile di default usare il carattere `\033[0m`.
+To reset the text to the default style and color we can use the character
+`\033[0m`.
 
-Alcuni esempi:
+Some examples:
 
-    echo -e "\033[31mQUESTO TESTO SARA STAMPATO IN ROSSO\033[0m"
-    echo -e "\033[1;36mQUESTO TESTO SARA STAMPATO IN GROSSETTO E COLOR CIANO\033[0m"
-    echo -e "\033[1;35;47mQUESTO TESTO SARA STAMPATO IN GROSSETTO E COLOR MAGENTA SU SFONDO BIANCO\033[0m"
+    echo -e "\033[31mTHIS STRING WILL BE RED\033[0m"
+    echo -e "\033[1;36mTHIS STRING WILL BE CYAN IN BOLD\033[0m"
+    echo -e "\033[1;35;47mTHIS STRING WILL BE MAGENTA IN BOLD WITH WHITE BACKGROUND\033[0m"

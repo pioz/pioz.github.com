@@ -6,7 +6,7 @@ comments: true
 categories: [apache, daemon, solr, linux]
 ---
 
-Copiate il seguente script in `/etc/init.d/solr`
+Copy the follow script in `/etc/init.d/solr`
 
     #!/bin/sh
 
@@ -16,14 +16,14 @@ Copiate il seguente script in `/etc/init.d/solr`
     VERSION=1.4.1
     SOLR_PATH=/opt/solr-$VERSION
     COMMAND=/usr/bin/java
-    OPTIONS="-Dsolr.solr.home=$SOLR_PATH/solr -Djetty.home=$SOLR_PATH -jar $SOLR_PATH/start.jar"    
+    OPTIONS="-Dsolr.solr.home=$SOLR_PATH/solr -Djetty.home=$SOLR_PATH -jar $SOLR_PATH/start.jar"
     PIDFILE=/var/run/$NAME.pid
-        
+
     test -x $COMMAND || exit 0
     test -f $SOLR_PATH/start.jar || exit 0
-    
+
     set -e
-    
+
     case "$1" in
       start)
             if [ -f $PIDFILE ]; then
@@ -56,6 +56,5 @@ Copiate il seguente script in `/etc/init.d/solr`
             exit 1
             ;;
     esac
-    
-    exit 0
 
+    exit 0

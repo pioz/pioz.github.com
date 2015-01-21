@@ -3,7 +3,7 @@ layout: post
 title: "Configurare più monitor con scheda video NVidia e Xorg"
 date: 2014-01-25 13:04
 comments: true
-categories: 
+categories: [ITA, linux, xorg, nvidia]
 ---
 
 L'altro giorno mi sono trovato a configurare un dual monitor più connessione alla TV sul mio
@@ -105,7 +105,7 @@ Con questi dati possiamo iniziare a modificare il file `xorg.conf`. Nella sezion
     Option         "TVStandard" "PAL-B"
     Option         "nvidiaXineramaInfoOrder" "DVI-D-0"
     Option         "metamodes" "DVI-D-0: nvidia-auto-select +0+0, VGA-0: 1280x1024 +1920+0, HDMI-0: 720x480 +600+300"
-    
+
 - Ovvero abilitiamo il TwinView della nostra scheda NVidia.
 - Diciamo che lo standard della TV è il PAL-B.
 - Diciamo che il monitor principale è il `DVI-D-0`, ovvero il Samsung da 24".
@@ -113,5 +113,5 @@ Con questi dati possiamo iniziare a modificare il file `xorg.conf`. Nella sezion
   - Il monitor `DVI-D-0` avrà risoluzione auto calcolata (1920x1080) e l'angolo top-left avrà coordinate 0,0
   - Il monitor `VGA-0` avrà risoluzione 1280x1024 e l'angolo top-left avrà coordinate 1920,0 ovvero a destra del monitor principale infatti la larghezza del monitor principale (risoluzione orizzontale) è di 1920 pixel, quando termina inizia il monitor secondario.
   - La TV invece `HDMI-0` avrà risoluzione 720x480 e l'angono top-left avrà coordinate 600,300 ovvero più o meno al centro del monitor principale.
-  
+
 A questo punto salvate il file `xorg.conf` e riavviate il server X!
