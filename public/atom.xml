@@ -1,10 +1,91 @@
-<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE html>
+<!--[if IEMobile 7 ]><html class="no-js iem7"><![endif]-->
+<!--[if lt IE 9]><html class="no-js lte-ie8"><![endif]-->
+<!--[if (gt IE 8)|(gt IEMobile 7)|!(IEMobile)|!(IE)]><!--><html class="no-js" lang="en"><!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <title>programmer@work</title>
+  <meta name="author" content="Pioz">
+
+  
+  <meta name="description" content="2016-11-19T04:45:45+01:00 http://blog.pioz.it/ Octopress 2016-11-19T04:04:39+01:00 http://blog.pioz.it/world-of-warcraft-leaderboards-is-arena-pvp- &hellip;">
+  
+
+  <!-- http://t.co/dKP3o1e -->
+  <meta name="HandheldFriendly" content="True">
+  <meta name="MobileOptimized" content="320">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  
+  <link rel="canonical" href="http://blog.pioz.it/atom.xml">
+  <link href="/favicon.png" rel="icon">
+  <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
+  <link href="/atom.xml" rel="alternate" title="programmer@work" type="application/atom+xml">
+  <script src="/javascripts/modernizr-2.0.js"></script>
+  <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+  <script>!window.jQuery && document.write(unescape('%3Cscript src="/javascripts/libs/jquery.min.js"%3E%3C/script%3E'))</script>
+  <script src="/javascripts/octopress.js" type="text/javascript"></script>
+  <!--Fonts from Google"s Web font directory at http://google.com/webfonts -->
+<link href="http://fonts.googleapis.com/css?family=PT+Serif:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+<link href="http://fonts.googleapis.com/css?family=PT+Sans:regular,italic,bold,bolditalic" rel="stylesheet" type="text/css">
+
+  
+  <script type="text/javascript">
+    var _gaq = _gaq || [];
+    _gaq.push(['_setAccount', 'UA-11903383-1']);
+    _gaq.push(['_trackPageview']);
+
+    (function() {
+      var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+      ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+      var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+    })();
+  </script>
+
+
+</head>
+
+<body   >
+  <header role="banner"><hgroup>
+  <h1><a href="/">programmer@work</a></h1>
+  
+    <h2>robe da informatici</h2>
+  
+</hgroup>
+
+</header>
+  <nav role="navigation"><ul class="subscription" data-subscription="rss email">
+  <li><a href="/atom.xml" rel="subscribe-rss" title="subscribe via RSS">RSS</a></li>
+  
+    <li><a href="mailto:pioz@pioz.it" rel="subscribe-email" title="subscribe via email">Email</a></li>
+  
+</ul>
+  
+<form action="http://google.com/search" method="get">
+  <fieldset role="search">
+    <input type="hidden" name="sitesearch" value="blog.pioz.it">
+    <input class="search" type="text" name="q" results="0" placeholder="Search"/>
+  </fieldset>
+</form>
+  
+<ul class="main-navigation">
+  <li><a href="/">Blog</a></li>
+  <li><a href="/archives">Archivio</a></li>
+  <li><a href="/about">Su di me</a></li>
+  <li><a href="http://www.pioz.it/">Website</a></li>
+</ul>
+
+</nav>
+  <div id="main">
+    <div id="content">
+      <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[programmer@work]]></title>
   <link href="http://blog.pioz.it/atom.xml" rel="self"/>
   <link href="http://blog.pioz.it/"/>
-  <updated>2016-11-19T04:43:25+01:00</updated>
+  <updated>2016-11-19T04:45:45+01:00</updated>
   <id>http://blog.pioz.it/</id>
   <author>
     <name><![CDATA[Pioz]]></name>
@@ -1421,8 +1502,8 @@ mysql&gt; quit;
 <p>Vediamo, prima di proseguire, i campi della tabella <code>user</code>:</p>
 
 <ul>
-<li><strong>domain</strong>: il dominio dell'indirizzo mail (per esempio <a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#58;&#x6c;&#x75;&#99;&#97;&#64;&#112;&#x69;&#x70;&#x70;&#111;&#46;&#x69;&#x74;">&#x6c;&#x75;&#x63;&#x61;&#64;&#112;&#105;&#112;&#x70;&#111;&#46;&#105;&#116;</a> ha dominio pippo.it).</li>
-<li><strong>username</strong>: lo username per accedere alla casella di posta, nel nostro caso, <strong>IMPORTANTE</strong>, è l'intero indirizzo mail (quindi non luca, ma <a href="&#109;&#97;&#x69;&#x6c;&#x74;&#x6f;&#58;&#x6c;&#x75;&#x63;&#97;&#64;&#112;&#x69;&#112;&#112;&#111;&#46;&#x69;&#x74;">&#x6c;&#117;&#x63;&#x61;&#x40;&#112;&#105;&#x70;&#112;&#x6f;&#x2e;&#x69;&#x74;</a>). Questo perchè avendo mail con domini diversi dobbiano distinguerle in modo univoco.</li>
+<li><strong>domain</strong>: il dominio dell'indirizzo mail (per esempio <a href="&#x6d;&#97;&#105;&#108;&#x74;&#x6f;&#58;&#x6c;&#x75;&#99;&#97;&#x40;&#112;&#105;&#x70;&#112;&#111;&#x2e;&#x69;&#x74;">&#108;&#117;&#x63;&#x61;&#64;&#x70;&#x69;&#112;&#112;&#x6f;&#x2e;&#105;&#x74;</a> ha dominio pippo.it).</li>
+<li><strong>username</strong>: lo username per accedere alla casella di posta, nel nostro caso, <strong>IMPORTANTE</strong>, è l'intero indirizzo mail (quindi non luca, ma <a href="&#x6d;&#97;&#105;&#108;&#x74;&#x6f;&#x3a;&#x6c;&#x75;&#99;&#x61;&#x40;&#x70;&#105;&#x70;&#112;&#x6f;&#x2e;&#105;&#x74;">&#108;&#x75;&#99;&#97;&#64;&#112;&#105;&#x70;&#x70;&#111;&#46;&#x69;&#x74;</a>). Questo perchè avendo mail con domini diversi dobbiano distinguerle in modo univoco.</li>
 <li><strong>password</strong>: la password per accedere alla casella di posta. Vedremo che sarà criptata con AES.</li>
 <li><strong>quota</strong>: quota casella di posta.</li>
 <li><strong>active</strong>: l'account mail è attivo o disattivo.</li>
@@ -1450,7 +1531,7 @@ $ chmod 770 /var/vmail
 $ chown mail.mail /var/vmail
 </code></pre>
 
-<p>Bene, in pratica la casella di posta per <a href="&#109;&#97;&#105;&#x6c;&#116;&#111;&#x3a;&#x6c;&#117;&#x63;&#x61;&#x40;&#112;&#x69;&#x70;&#112;&#111;&#46;&#x69;&#x74;">&#x6c;&#117;&#99;&#x61;&#x40;&#x70;&#105;&#112;&#112;&#x6f;&#x2e;&#105;&#x74;</a> sarà in <code>/var/vmail/luca@pippo.it</code>. Essa verrà creata in automatico al primo login.</p>
+<p>Bene, in pratica la casella di posta per <a href="&#x6d;&#x61;&#105;&#108;&#x74;&#x6f;&#58;&#x6c;&#117;&#x63;&#x61;&#64;&#x70;&#x69;&#x70;&#112;&#111;&#x2e;&#105;&#x74;">&#x6c;&#117;&#99;&#x61;&#x40;&#x70;&#105;&#x70;&#112;&#x6f;&#46;&#x69;&#x74;</a> sarà in <code>/var/vmail/luca@pippo.it</code>. Essa verrà creata in automatico al primo login.</p>
 
 <h2>PASSO 3: configurazione Dovecot</h2>
 
@@ -1779,3 +1860,45 @@ $ insert into user(domain,username,password) values("pluto.com", "nicola@pluto.c
   </entry>
   
 </feed>
+
+    </div>
+  </div>
+  <footer role="contentinfo"><p>
+  Copyright &copy; 2016 - Pioz -
+  <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
+</p>
+
+</footer>
+  
+
+
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+  var js, fjs = d.getElementsByTagName(s)[0];
+  if (d.getElementById(id)) {return;}
+  js = d.createElement(s); js.id = id; js.async = true;
+  js.src = "//connect.facebook.net/en_US/all.js#appId=212934732101925&xfbml=1";
+  fjs.parentNode.insertBefore(js, fjs);
+}(document, 'script', 'facebook-jssdk'));</script>
+
+
+
+
+
+  <script type="text/javascript">
+    (function(){
+      var twitterWidgets = document.createElement('script');
+      twitterWidgets.type = 'text/javascript';
+      twitterWidgets.async = true;
+      twitterWidgets.src = '//platform.twitter.com/widgets.js';
+      document.getElementsByTagName('head')[0].appendChild(twitterWidgets);
+    })();
+  </script>
+
+
+
+
+
+</body>
+</html>
