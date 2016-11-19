@@ -173,8 +173,8 @@ mysql&gt; quit;
 <p>Vediamo, prima di proseguire, i campi della tabella <code>user</code>:</p>
 
 <ul>
-<li><strong>domain</strong>: il dominio dell'indirizzo mail (per esempio <a href="&#109;&#x61;&#105;&#x6c;&#116;&#x6f;&#x3a;&#108;&#117;&#99;&#x61;&#x40;&#112;&#105;&#x70;&#112;&#111;&#46;&#x69;&#x74;">&#x6c;&#x75;&#x63;&#97;&#64;&#x70;&#105;&#112;&#112;&#x6f;&#x2e;&#105;&#116;</a> ha dominio pippo.it).</li>
-<li><strong>username</strong>: lo username per accedere alla casella di posta, nel nostro caso, <strong>IMPORTANTE</strong>, è l'intero indirizzo mail (quindi non luca, ma <a href="&#x6d;&#97;&#105;&#108;&#x74;&#111;&#58;&#x6c;&#x75;&#x63;&#x61;&#x40;&#x70;&#105;&#x70;&#x70;&#x6f;&#46;&#105;&#x74;">&#108;&#117;&#x63;&#x61;&#x40;&#x70;&#x69;&#112;&#112;&#111;&#46;&#x69;&#116;</a>). Questo perchè avendo mail con domini diversi dobbiano distinguerle in modo univoco.</li>
+<li><strong>domain</strong>: il dominio dell'indirizzo mail (per esempio <a href="&#x6d;&#x61;&#x69;&#x6c;&#x74;&#111;&#x3a;&#108;&#117;&#99;&#x61;&#x40;&#112;&#x69;&#112;&#x70;&#x6f;&#x2e;&#105;&#116;">&#108;&#x75;&#99;&#x61;&#x40;&#x70;&#105;&#112;&#x70;&#111;&#46;&#105;&#116;</a> ha dominio pippo.it).</li>
+<li><strong>username</strong>: lo username per accedere alla casella di posta, nel nostro caso, <strong>IMPORTANTE</strong>, è l'intero indirizzo mail (quindi non luca, ma <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#x6f;&#58;&#x6c;&#x75;&#x63;&#x61;&#64;&#112;&#105;&#x70;&#x70;&#x6f;&#46;&#105;&#116;">&#108;&#x75;&#x63;&#x61;&#x40;&#x70;&#105;&#112;&#x70;&#111;&#46;&#x69;&#116;</a>). Questo perchè avendo mail con domini diversi dobbiano distinguerle in modo univoco.</li>
 <li><strong>password</strong>: la password per accedere alla casella di posta. Vedremo che sarà criptata con AES.</li>
 <li><strong>quota</strong>: quota casella di posta.</li>
 <li><strong>active</strong>: l'account mail è attivo o disattivo.</li>
@@ -202,7 +202,7 @@ $ chmod 770 /var/vmail
 $ chown mail.mail /var/vmail
 </code></pre>
 
-<p>Bene, in pratica la casella di posta per <a href="&#109;&#97;&#x69;&#108;&#116;&#111;&#x3a;&#108;&#117;&#99;&#x61;&#64;&#x70;&#105;&#x70;&#x70;&#111;&#46;&#x69;&#x74;">&#x6c;&#117;&#99;&#97;&#64;&#112;&#105;&#112;&#112;&#111;&#46;&#105;&#116;</a> sarà in <code>/var/vmail/luca@pippo.it</code>. Essa verrà creata in automatico al primo login.</p>
+<p>Bene, in pratica la casella di posta per <a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#x6f;&#58;&#x6c;&#x75;&#99;&#x61;&#x40;&#112;&#105;&#112;&#112;&#111;&#46;&#105;&#x74;">&#x6c;&#117;&#x63;&#x61;&#64;&#x70;&#105;&#x70;&#x70;&#x6f;&#x2e;&#105;&#116;</a> sarà in <code>/var/vmail/luca@pippo.it</code>. Essa verrà creata in automatico al primo login.</p>
 
 <h2>PASSO 3: configurazione Dovecot</h2>
 
