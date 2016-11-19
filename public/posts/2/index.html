@@ -9,7 +9,8 @@
   <meta name="author" content="Pioz">
 
   
-  <meta name="description" content="Vediamo oggi come aggiungere i famosi metodi magici acts_as alle classi ActiveRecord. La cosa da fare è create un modulo (magari dentro lib) con il &hellip;">
+  <meta name="description" content="In certi momenti ci si riesce ad accorgere quanto sia enorme l'universo, anche
+se facciamo fatica a concepirlo. Dalle stelle più vicine a vastissimi &hellip;">
   
 
   <!-- http://t.co/dKP3o1e -->
@@ -18,7 +19,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://pioz.github.com/posts/2">
+  <link rel="canonical" href="http://blog.pioz.it/posts/2/">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="programmer@work" type="application/atom+xml">
@@ -64,7 +65,7 @@
   
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
-    <input type="hidden" name="sitesearch" value="pioz.github.com">
+    <input type="hidden" name="sitesearch" value="blog.pioz.it">
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -87,7 +88,415 @@
       
   <header>
     
-      <h1 class="entry-title"><a href="/add-an-acts-as-method-to-active-record">Add an &#8216;acts_as&#8217; method to Active Record</a></h1>
+      <h1 class="entry-title"><a href="/quanto-grande-e-luniverso">Quanto grande è l'universo?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-12-27T17:44:00+01:00'><span class='date'>27/12/2014</span> <span class='time'>5:44 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>In certi momenti ci si riesce ad accorgere quanto sia enorme l'universo, anche
+se facciamo fatica a concepirlo. Dalle stelle più vicine a vastissimi
+supergruppi di galassie, a distanze di miliardi di anni luce fino ai limiti di
+ciò che è possibile vedere. L'universo è grande&hellip; veramente grosso. Non avete
+idea di quanto enorme esso sia. L'universo comprende qualsiasi cosa che esiste,
+si pensa così. Sempre che ce ne siano altri, e il nostro è solo uno su trilioni,
+ma questo è un argomento per un altro articolo.</p>
+
+<h5>Davanti all'uscio di casa</h5>
+
+<p>Ok, quindi tutti sappiamo di vivere in una galassia chiamata la
+<a href="http://it.wikipedia.org/wiki/Via_Lattea">Via Lattea</a> che contiene qualche
+centinaio di miliardi di stelle, delle quali il Sole è solo una delle tante. Se
+la Via Lattea fosse ridotta a un disco di 10 metri di diametro, il nostro intero
+sistema solare misurerebbe non più di 0.1 millimetri. In una bella notte col
+cielo sereno saremmo in grado di vedere lo 0.000003% di tutte le stelle che sono
+presenti nella nostra galassia.   Dunque prendiamo una di quelle stelle, la più
+vicina al nostro Sole, infatti. È una stella nana rossa chiamata
+<a href="http://it.wikipedia.org/wiki/Proxima_Centauri">Proxima Centauri</a> che dista 4.24
+anni luce. È troppo piccola perché sia visibile a occhio nudo, ma la sua luce
+impiega più di quattro anni per raggiungerci. Se voleste intraprendere un
+viaggio a Proxima Centauri usando la tecnologia aerospaziale adesso disponibile
+a noi terrestri, ci mettereste tra i 70000 e 80000 anni per arrivare. Se
+avessimo scoperto il metodo per viaggiare alla velocità della luce, ci
+metteremmo comunque più di quattro anni e un quarto per raggiungere la
+destinazione. In altri termini, 9 anni e mezzo per un viaggio di andata e
+ritorno. Tutto ciò riguarda la nostra stella vicina di casa, dietro l'angolo.
+Niente a che fare con viaggi attraverso l'universo.<br/>
+Se voleste attraversare la vostra spirale di casa, la Via Lattea da una parte
+all'altra, impieghereste niente meno di 100 mila anni. Tale durata è
+approssimativamente 1250 vite medie umane. No, non confondete queste cifre
+legandole alle reali capacità dei nostri mezzi aerospaziali, queste tempistiche
+sono calcolate alla velocità della luce. Viaggiando così veloce, potreste
+completare in un secondo 7 volte il giro della Terra.<br/>
+Che cosa succederebbe se voleste visitare la nostra galassia più vicina a questa
+velocità? Per raggiungere la galassia
+<a href="http://it.wikipedia.org/wiki/Galassia_di_Andromeda">Andromeda</a>, uscendo dalla
+Via Lattea, v'imbarchereste in un viaggio di 2 milioni e mezzo di anni.<br/>
+Possiamo mettere questi fatti sotto la giusta luce, l'universo è comunque
+un'entità intera e immensa, molto più grande, a  confronto di queste piccole
+galassie.</p>
+
+<h5>Gruppi e supergruppi galattici</h5>
+
+<p>Qui le cifre iniziano a essere vagamente terrificanti. Ci sono miliardi su
+miliardi su miliardi di altre galassie in giro, proprio come la Via Lattea e
+Andromeda, ognuna con il proprio centinaio di miliardi di sistemi solari e i
+suoi trilioni di pianeti. Se uscite da questo perimetro e guardate a un contesto
+ulteriormente espanso, vedrete galassie che sembrano ammassate l'una sull'altra;
+queste sono i
+<a href="http://it.wikipedia.org/wiki/Gruppi_e_ammassi_di_galassie">gruppi di galassie</a>.
+Sono collezioni di galassie che partono da 50 e arrivano fino a 1000. Si giunge
+infine ai
+<a href="http://it.wikipedia.org/wiki/Superammasso_di_galassie">supergruppi galattici</a>,
+dei giganteschi conglomerati che rappresentano la scala massima dei gruppi
+galattici. Questi ultimi sono le cose più grandi conosciute dalla razza umana,
+formati da gruppi di galassie e supergruppi che diventano enormi superstrutture
+cosmiche che occupano milioni di anni luce o persino miliardi di anni luce. Sono
+immaginabili come muri colossali, fogli e filamenti di galassie. Sono oggetti di
+proporzioni inimmaginabili, che occupano grandi sezioni dell'universo visibile.
+Se ci inoltriamo ancora più fuori, i gruppi e supergruppi si formano intorno a
+zone di vuoto cosmico e assomigliano a strutture come una spugna o una pagnotta
+di pane. I gruppi galattici sono il pane e i vuoti sono le bolle d'aria.</p>
+
+<h5>Tempo</h5>
+
+<p>Allora, quanto è grande l'intero universo? Beh, nessuno conosce la risposta
+esatta. Possiamo solo osservare, il più lontano possibile, in tutte le direzioni
+ma, è proprio in quel momento che ci scontriamo con un muro solido di mattoni.
+La distanza non è il problema saliente quando puntiamo a osservare i limiti
+dell'universo, bensì il tempo. Al cosmo si attribuisce un'età pari a 13.7
+miliardi di anni e con la stessa misura si pensa a qualsiasi cosa che sia
+distante da noi 13.7 miliardi di anni luce. Dopo tale distanza è ragionevole
+pensare che qualsiasi informazione precedente al
+<a href="http://it.wikipedia.org/wiki/Big_Bang">Big Bang</a> che viaggia alla velocità
+della luce non ha ancora raggiunto il nostro pianeta. Tutto ciò rende l'universo
+visibile a noi una sfera con raggio di circa tredici miliardi di anni luce. Nel
+momento che sono stati scritti tali numeri, tredici miliardi d'anni luce sono la
+distanza della più lontana galassia mai vista.<br/>
+Ma che si dice della rapida espansione dell'universo e di quella misteriosa
+energia oscura che costantemente accellera l'espansione? ebbene questa
+espansione ha allargato lo spazio nel frattempo e rende attualmente osservabile
+il nostro universo fino a 78 miliardi di anni luce ovvero una sfera osservabile
+larga 156 miliardi di anni luce. Semplicemente diciamo che una stella lontana
+13.7 miliardi di anni luce ha emesso un fotone (sebbene ciò sia impossibile
+perchè sarebbe successo all'inizio del tutto, prendiamo l'esempio per buono)
+dopo di che, ora che quel fotone raggiunge la Terra, il punto di partenza di
+quel fotone non è più distante 13.7 miliardi di anni luce bensì a 78 miliardi
+di anni luce. La luce non ha viaggiato attraverso 78 miliardi di anni luce, ma
+lo spazio tra noi e il punto di partenza si è allungato. Allora i fotoni di
+luce che vediamo da oggetti tanto distanti sono in realtà già più lontani
+rispetto al momento che la luce è stata emessa.<br/>
+C'è un punto dove è diventato impossibile viaggiare, per la luce o di
+qualsiasi altro tipo di radiazione; questo punto è più recente di 380 mila
+anni dopo il Big Bang. Astronomi non vedrebbero mai nessun tipo di luce da quel
+tempo: nessuna luce visibile o raggi gamma o ultravioletti e nemmeno segnali
+radio; niente che deriva dallo spettro elettromagnetico. Forse avete notato
+quello strano ammasso di blocchi blu e verdi (vedi sotto): quello si chiama la
+<a href="http://it.wikipedia.org/wiki/Radiazione_cosmica_di_fondo">radiazione cosmica di fondo</a>.
+In altri termini è l'alone di luce residua del Big Bang e la radiazione di
+sfondo a microonde cosmiche segna il punto laddove l'universo divenne
+trasparente alle radiazioni. Appariva opaco prima di quel momento, opaco come il
+centro di una stella.</p>
+
+<p><img src="http://upload.wikimedia.org/wikipedia/commons/a/a5/WMAP.jpg" alt="Radiazione cosmica di fondo" /></p>
+
+<p>I colori che cambiano sulla Radiazione di sfondo a microonde cosmiche mostrano
+delle piccole variazioni di temepratura in quanto il neonato universo si
+raffreddò e divenne trasparente. Queste piccole variazioni di temperatura
+implicano la presenza di densità variabili e lo schema corrisponde alle
+località dove i gruppi giganti di  galassie così come i supergruppi sono
+situati oggi.</p>
+
+<h5>Cosa si cela oltre?</h5>
+
+<p>In conclusione gli astronomi mirano a osservare fino ai limiti di questa sfera
+che porta un raggio di 78 miliardi di anni luce, ma persino questa ampiezza
+rappresenta probabilmente una minuscola parte di ciò che potrebbe veramente
+esistere. Nessuno lo sà per certo ma gli scienziati stimano che questa porzione
+corrisponda a circa un decimillesimo di ciò che potrebbe esserci là fuori.<br/>
+Come sarebbe l'universo oltre questa barriera? Sarebbe lo stesso ovunque oppure
+le leggi fisiche cambierebbero? Quali mondi e altre civiltà si nascondono là
+fuori ma permanentemente fuori dalla nostra portata? Prosegue all'infinito o
+altrimenti ha un bordo? Pare che gran parte dell'universo stia oltre i nostri
+telescopi, la nostra comprensione e forse persino la nostra immaginazione. E se
+prima del Big Bang c'era il nulla, cosa o chi ha scatenato quella scintilla che
+ha dato origine al nostro universo? Forse Dio?</p>
+
+<p>Fonte: <a href="http://getprismatic.com/story/1419368520134">http://getprismatic.com/story/1419368520134</a></p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/alsa-switch-audio-output-to-usb-headset">ALSA: Switch audio output to USB headset</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-09-17T13:31:00+02:00'><span class='date'>17/09/2014</span> <span class='time'>1:31 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Ho acquistato delle cuffie wireless USB, per essere preciso esattamente queste:
+<a href="http://www.amazon.it/gp/product/B005FY61MM">http://www.amazon.it/gp/product/B005FY61MM</a> . Sono molto comode e funzionano su
+Debian out-of-the-box ovvero senza installare alcun driver.</p>
+
+<p>Adesso nella mia Debian ho questo problema: vorrei che quando inserisco il
+ricevitore USB in automatico l'output di ALSA cambi dalla scheda audio integrata
+alle cuffie wireless.</p>
+
+<p>Questo può essere fatto usando le regole di udev (udev è il gestore dei
+dispositivi per il kernel Linux e amministra dinamicamente i dispositivi a
+blocchi per ogni periferica rilevata nel sistema).
+Iniziamo: apriamo il file <code>/etc/udev/rules.d/00-local.rules</code> e se non esiste lo
+creiamo; aggiungiamo le seguenti regole:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'># Set USB headset as default sound card when plugged in
+</span><span class='line'>KERNEL=="pcmC[D0-9cp]*", ACTION=="add", PROGRAM="/bin/sh -c 'K=%k; K=$${K#pcmC}; K=$${K%%D*}; echo defaults.ctl.card $$K &gt; /etc/asound.conf; echo defaults.pcm.card $$K &gt;&gt;/etc/asound.conf'"
+</span><span class='line'>
+</span><span class='line'># Restore default sound card when USB headset unplugged
+</span><span class='line'>KERNEL=="pcmC[D0-9cp]*", ACTION=="remove", PROGRAM="/bin/sh -c 'echo defaults.ctl.card 0 &gt; /etc/asound.conf; echo defaults.pcm.card 0 &gt;&gt;/etc/asound.conf'"</span></code></pre></td></tr></table></div></figure>
+
+
+<p>In pratica quando viene inserito il ricevitore USB udev lo detecta e lancia
+uno script per cambiare il file <code>/etc/asound.conf</code> cambiando il device di output
+con quello delle cuffie appena inserite.</p>
+
+<p>L'unica pecca è che quando viene cambiato l'output di ALSA tutti i programmi che
+stanno usando ALSA devono essere riavviti. Se trovate un modo per risolvere
+questo problema fatemi sarepe!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/a-che-altezza-appendere-un-quadro">A che altezza appendere un quadro?</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-07-22T14:57:00+02:00'><span class='date'>22/07/2014</span> <span class='time'>2:57 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>Per appendere i quadri mi piace molto seguire lo stile della <em>linea mediana</em>.
+In pratica si traccia una linea immaginaria sulla parete che sta a 5/8
+dell'altezza della parete stessa. Una volta che abbiamo a mente questa linea
+i quadri vanno appesi con i 3/8 della loro altezza sopra la linea mediana.</p>
+
+<p>Quindi la formula per calcolare l'altezza dove appendere un quadro è:</p>
+
+<pre><code>h = (H*5 + q*3) / 8
+</code></pre>
+
+<p>dove <code>H</code> è l'altezza della parete dove volete appendere il quadro e <code>q</code> è
+l'altezza del quadro stesso.</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/configurare-piu-monitor-con-scheda-video-nvidia-e-xorg">Configurare più monitor con scheda video NVidia e Xorg</a></h1>
+    
+    
+      <p class="meta">
+        
+
+
+
+
+<time class='entry-date' datetime='2014-01-25T13:04:00+01:00'><span class='date'>25/01/2014</span> <span class='time'>1:04 pm</span></time>
+        
+      </p>
+    
+  </header>
+
+
+  <div class="entry-content"><p>L'altro giorno mi sono trovato a configurare un dual monitor più connessione alla TV sul mio
+pc fisso che monta una Debian con una scheda video NVidia GeForce GTX 650.</p>
+
+<p>La configurazione che ho fatto è questa:</p>
+
+<ul>
+<li>monitor Samsung 24" come principale</li>
+<li>monitor QBel 19" a destra del monitor principale</li>
+<li>TV che clona il monitor principale</li>
+</ul>
+
+
+<p>Dato che il il monitor principale ha una risoluzione massima di 1920x1080,
+mentre la TV soltanto 720x480 (si è una di quelle ancora col tubo catodico) non si riesce a fare un clone pieno, ovvero proiettare i 1920x1080 pixel del monitor principale sui 720x480 pixel della TV. Quindi mi sono accontentato di proiettare i 720x480 pixel della parte centrale del monitor principale sulla TV. In questo modo se apro un film con VLC basta che ridimensioni la finestra a 720x480 al centro del monitor per vedere il film in full screen sulla TV (ho uno scriptino che me lo fa, ma questo magari lo vedremo un altro giorno).</p>
+
+<p>Quindi vediamo come fare sta roba.
+Apriamo il nostro file <code>/etc/X11/xorg.conf</code>, il file di configurazione principale per Xorg (open source implementation of the X Window System). Il mio si presenta più o meno così:</p>
+
+<pre><code>Section "ServerLayout"
+    Identifier     "Layout0"
+    Screen      0  "Screen0" 0 0
+    InputDevice    "Keyboard0" "CoreKeyboard"
+    InputDevice    "Mouse0" "CorePointer"
+    Option         "Xinerama" "0"
+EndSection
+
+Section "Files"
+EndSection
+
+Section "InputDevice"
+    # generated from default
+    Identifier     "Mouse0"
+    Driver         "mouse"
+    Option         "Protocol" "auto"
+    Option         "Device" "/dev/psaux"
+    Option         "Emulate3Buttons" "no"
+    Option         "ZAxisMapping" "4 5"
+EndSection
+
+Section "InputDevice"
+    # generated from default
+    Identifier     "Keyboard0"
+    Driver         "kbd"
+EndSection
+
+Section "Device"
+    Identifier     "Device0"
+    Driver         "nvidia"
+    VendorName     "NVIDIA Corporation"
+    BoardName      "GeForce GTX 650"
+EndSection
+
+Section "Screen"
+    Identifier     "Screen0"
+    Device         "Device0"
+    DefaultDepth    24
+    Option         "Stereo" "0"
+    SubSection     "Display"
+        Depth       24
+    EndSubSection
+EndSection
+</code></pre>
+
+<p>Quello che dobbiamo fare è andare a modificare la sezione <code>Screen</code> che permette di configurare la disposizione dei monitor. Ma prima di far ciò ci serve conoscrere gli ID dei nostri monitor connessi alla nostra scheda video. Usiamo il comando <code>xrand --query</code>. Dovremmo ottenere un output di questo tipo:</p>
+
+<pre><code>Screen 0: minimum 8 x 8, current 3200 x 1080, maximum 16384 x 16384
+VGA-0 connected 1280x1024+1920+0 (normal left inverted right x axis y axis) 376mm x 301mm
+   1280x1024      60.0*+   75.0  
+   1280x960       60.0  
+   1152x864       75.0  
+   1024x768       75.0     70.1     60.0  
+   800x600        75.0     72.2     60.3     56.2  
+   640x480        75.0     72.8     59.9  
+HDMI-0 connected 720x480+600+300 (normal left inverted right x axis y axis) 386mm x 290mm
+   1280x720       60.0 +   59.9  
+   1920x1080      60.1     60.0  
+   1440x480       60.1  
+   720x480        59.9*    60.1  
+   640x480        60.0     59.9  
+DVI-D-0 connected primary 1920x1080+0+0 (normal left inverted right x axis y axis) 531mm x 299mm
+   1920x1080      60.0*+   59.9     50.0  
+   1680x1050      60.0  
+   1600x900       60.0  
+   1440x900       59.9  
+   1280x1024      75.0     60.0  
+   1280x800       59.8  
+   1280x720       60.0     59.9     50.0  
+   1152x864       75.0  
+   1024x768       75.0     70.1     60.0  
+   800x600        75.0     72.2     60.3     56.2  
+   720x576        50.0  
+   720x480        59.9  
+   640x480        75.0     72.8     59.9  
+DVI-D-1 disconnected (normal left inverted right x axis y axis)
+</code></pre>
+
+<p>In questo caso <code>DVI-D-0</code> è il monitor principale (24" Samsung), <code>VGA-0</code> è il monitor secondario (19" QBel) e <code>HDMI-0</code> è la TV.</p>
+
+<p>Con questi dati possiamo iniziare a modificare il file <code>xorg.conf</code>. Nella sezione <code>Screen</code> aggiungiamo:</p>
+
+<pre><code>Option         "TwinView" "1"
+Option         "TVStandard" "PAL-B"
+Option         "nvidiaXineramaInfoOrder" "DVI-D-0"
+Option         "metamodes" "DVI-D-0: nvidia-auto-select +0+0, VGA-0: 1280x1024 +1920+0, HDMI-0: 720x480 +600+300"
+</code></pre>
+
+<ul>
+<li>Ovvero abilitiamo il TwinView della nostra scheda NVidia.</li>
+<li>Diciamo che lo standard della TV è il PAL-B.</li>
+<li>Diciamo che il monitor principale è il <code>DVI-D-0</code>, ovvero il Samsung da 24".</li>
+<li>Disponiamo i vari monitor:
+
+<ul>
+<li>Il monitor <code>DVI-D-0</code> avrà risoluzione auto calcolata (1920x1080) e l'angolo top-left avrà coordinate 0,0</li>
+<li>Il monitor <code>VGA-0</code> avrà risoluzione 1280x1024 e l'angolo top-left avrà coordinate 1920,0 ovvero a destra del monitor principale infatti la larghezza del monitor principale (risoluzione orizzontale) è di 1920 pixel, quando termina inizia il monitor secondario.</li>
+<li>La TV invece <code>HDMI-0</code> avrà risoluzione 720x480 e l'angono top-left avrà coordinate 600,300 ovvero più o meno al centro del monitor principale.</li>
+</ul>
+</li>
+</ul>
+
+
+<p>A questo punto salvate il file <code>xorg.conf</code> e riavviate il server X!</p>
+</div>
+  
+  
+
+
+    </article>
+  
+  
+    <article>
+      
+  <header>
+    
+      <h1 class="entry-title"><a href="/add-an-acts-as-method-to-active-record">Add an 'acts_as' method to Active Record</a></h1>
     
     
       <p class="meta">
@@ -140,595 +549,11 @@ end
 ActiveRecord::Base.send(:include, Ciccio) # optional
 </code></pre>
 
-<p>Caricando questo modulo all&#8217;avvio di Rails, tutte le vostre classi che derivano da <code>ActiveRecord::Base</code>
+<p>Caricando questo modulo all'avvio di Rails, tutte le vostre classi che derivano da <code>ActiveRecord::Base</code>
 avranno i metodi di classe che sono definiti dentro il modulo <code>Ciccio::ClassMethods</code> e i metodi di istanza
 che sono definiti dentro <code>Ciccio::InstanceMethods</code> o dentro <code>Ciccio</code>.
 Nel nostro esempio inoltre possiamo aggiungere ad una classe i metodi di istanza dentro <code>Ciccio::InstanceMethods2</code>
-solo se invochiamo il metodo di classe <code>acts_as_ciccio(add_power: true)</code> passando l&#8217;opzione <code>add_power</code> a true.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/mini-guida-su-xen-e-debian">Mini guida su Xen e Debian</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2013-03-27T21:12:00+01:00'><span class='date'>27/03/2013</span> <span class='time'>9:12 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p><img src="http://www.debian.org/Pics/openlogo-50.png" alt="image" />
-Su questo post vedremo una mini guida su come installare una macchina virtuale con Xen
-in ambiente GNU/Linux Debian.</p>
-
-<p>Xen è un monitor di macchine virtuali open source rilasciato sotto licenza GPL per piattaforma
-x86 e compatibili (al momento sono in corso dei port per x86-64 e per IA-64) sviluppato
-presso il Computer Laboratory dell&#8217;Università di Cambridge.</p>
-
-<p>Per chiarezza ricordo che la macchina fisica di solito viene identificata con il
-nome <code>dom0</code> (domain 0), mentre le macchine virtuali con il nome <code>domU</code>.</p>
-
-<p>Detto ciò iniziamo.</p>
-
-<h2>dom0</h2>
-
-<p>Per prima cosa configuriamo alcune opzioni di rete per permettere alle varie domU di
-usare la rete di dom0. Nel file <code>/etc/sysctl.conf</code> aggiungiamo la linea:</p>
-
-<pre><code>net.ipv4.ip_forward=1
-</code></pre>
-
-<p>e applichiamo la configurazione con il comando:</p>
-
-<pre><code>sysctl -p
-</code></pre>
-
-<!--
-Nel famoso file `/etc/network/interfaces` aggiungiamo alla fine:
-
-    # Routing for VMs
-    up route add -host IP_STATICO_MACCHINA_VIRTUALE gw IP_STATICO_MACCHINA_VIRTUALE
--->
-
-
-<p>Fatto questo installiamo il necessario:</p>
-
-<pre><code>$ apt-get install xen-hypervisor xen-linux-system xen-tools xen-utils xenstore-utils xenwatch
-</code></pre>
-
-<p>A questo punto dovremmo aver installato anche un nuovo kernel per la nostra
-Debian in grado di gestire la virtualizzazione. Dovremmo fare una modifica alla conf di grub
-per dare priorità al kernel xen rispetto a quello standard: in pratica bisogna rinominare il
-file dentro la directory <code>/etc/grub.d</code> con nome <code>xx_linux</code> DOPO il file <code>yy_linux_xen</code>.
-Nel mio caso i file in questione sono <code>10_linux</code> e <code>20_linux_xen</code>. Spostiamo il primo dopo
-il secondo semplicemente rinominando il numero con cui inizia il file (10) in un numero maggiore:</p>
-
-<pre><code>$ cd /etc/grub.d/
-$ mv 10_linux 50_linux
-</code></pre>
-
-<p>Fatto ciò rigeneriamo il file di configurazione di grub (il nostro bootloader preferito) con
-il comando:</p>
-
-<pre><code>$ update-grub2
-</code></pre>
-
-<p>e facciamo un reboot:</p>
-
-<pre><code>$ reboot
-</code></pre>
-
-<p>Controlliamo che sia partito il kernel giusto con il comando:</p>
-
-<pre><code>$ uname -a
-Linux 2.6.32-5-xen-amd64 #1 SMP Sun May 6 08:57:29 UTC 2012 x86_64 GNU/Linux
-</code></pre>
-
-<p>(Eh si&hellip; Debian stable)</p>
-
-<p>Ora abbiamo un paio di file di configurazione su cui mettere le mani</p>
-
-<ul>
-<li><code>/etc/xen/xend-config.sxp</code></li>
-<li><code>/etc/xen-tools/xen-tools.conf</code></li>
-</ul>
-
-
-<p>Il primo file <code>/etc/xen/xend-config.sxp</code> gestisce la configurazione del demone xend.
-I valori di default vanno bene, anche se dobbiamo fare alcune modifiche per abilitare
-il network routing tra la la dom0 e le nostre domU commentando le seguenti righe:</p>
-
-<pre><code>##
-# To bridge network traffic, like this:
-#
-# dom0: ----------------- bridge -&gt; real eth0 -&gt; the network
-#                            |
-# domU: fake eth0 -&gt; vifN.0 -+
-#
-# use
-#
-#(network-script network-bridge)
-#
-...
-#
-# If you are using only one bridge, the vif-bridge script will discover that,
-# so there is no need to specify it explicitly.
-#
-#(vif-script vif-bridge)
-</code></pre>
-
-<p>e decommentando</p>
-
-<pre><code>## Use the following if network traffic is routed, as an alternative to the
-# settings for bridged networking given above.
-(network-script network-route)
-(vif-script     vif-route)
-</code></pre>
-
-<p>Le altre opzioni vanno bene così come sono, ma se volte approfondire c&#8217;è sempre la doc.</p>
-
-<p>Il secondo file <code>/etc/xen-tools/xen-tools.conf</code> serve per gestire la configurazione con
-cui vengono create le macchine virtuali. Vediamo alcune opzioni:</p>
-
-<pre><code>##
-#  Output directory for storing loopback images.
-#
-#  If you choose to use loopback images, which are simple to manage but
-# slower than LVM partitions, then specify a directory here and uncomment
-# the line.
-#
-#  New instances will be stored in subdirectories named after their
-# hostnames.
-#
-##
-dir = /var/xen
-</code></pre>
-
-<p>Specifica la directory dove verranno salvate le immagini delle macchine virtuali.
-In pratica i file che sono a tutti gli effetti gli HD delle vostre macchine virtuali.
-Infatti se volete fare un backup di un&#8217;intera macchina virtuale salvatevi il suo file
-immagine.</p>
-
-<pre><code>#
-##
-#
-# If you don't wish to use loopback images then you may specify an
-# LVM volume group here instead
-#
-##
-# lvm = vg0
-</code></pre>
-
-<p>Se non volete usare le immagini, ma HD fisici allora dovrete usate un LVM (Logical Volume Manager).</p>
-
-<pre><code>#
-##
-#
-#  Installation method.
-#
-#  There are four distinct methods which you may to install a new copy
-# of Linux to use in your Xen guest domain:
-#
-#   - Installation via the debootstrap command.
-#   - Installation via the rpmstrap command.
-#   - Installation via the rinse command.
-#   - Installation by copying a directory containing a previous installation.
-#   - Installation by untarring a previously archived image.
-#
-#  NOTE That if you use the "untar", or "copy" options you should ensure
-# that the image you're left with matches the 'dist' setting later in
-# this file.
-#
-#
-##
-#
-#
-# install-method = [ debootstrap | rinse | rpmstrap | copy | tar ]
-#
-#
-install-method = debootstrap
-</code></pre>
-
-<p>In questa sezione di decice in quale modo il sistema operativo delle vostre macchine
-virtuali verrà installato. Ci sono diversi modi, ma il più comune e semplice è quello di
-usare l&#8217;utility <code>debootstrap</code> che viene usato per creare un sistema Debian da zero,
-senza la necessità di dpkg o apt. Per fare questo, vengono scaricati i file .deb da
-un sito mirror e vengono spacchettati in una directory su cui è eventualmente
-possibile fare il chroot.</p>
-
-<pre><code>#
-##
-#  Disk and Sizing options.
-##
-#
-size   = 4Gb      # Disk image size.
-memory = 128Mb    # Memory size
-swap   = 128Mb    # Swap size
-# noswap = 1      # Don't use swap at all for the new system.
-fs     = ext4     # use the EXT3 filesystem for the disk image.
-dist   = `xt-guess-suite-and-mirror --suite` # Default distribution to install.
-image  = sparse   # Specify sparse vs. full disk images.
-</code></pre>
-
-<p>Molto intuitivo, un commento solo alle ultime due opzioni: <code>dist</code> specifica se
-installare la versione stable, testing o unstable. Mentre <code>image</code> il tipo di immagine
-da usare come file system: possiamo scegliere tra un&#8217;immagine <em>sparse</em> oppure tra
-un&#8217;immagine <em>full disk</em>. Nel primo caso il file aumenta la sua dimensione dinamicamente,
-mentre nel secondo caso il file avrà la stessa grandezza del valore scelto qualche riga sopra (<code>size</code>).</p>
-
-<pre><code>#
-# Uncomment the following line if you wish to interactively setup a
-# new root password for images.
-#
-passwd = 1
-#
-</code></pre>
-
-<p>Immettiamo noi quando creiamo le nostre macchine virtuali la password per l&#8217;utente root.</p>
-
-<p>Per le altre opzioni vi rimando alla doc.</p>
-
-<p>A questo punto creiamo la directory che conterrà i file immagini delle nostre macchine virtuali
-che deve essere quella specificata nella variabile <code>dir</code> del file <code>/etc/xen-tools/xen-tools.conf</code>:</p>
-
-<pre><code>$ mkdir -p /var/xen
-$ chmod 755 /var/xen
-</code></pre>
-
-<p>Riavviamo xend:</p>
-
-<pre><code>$ /etc/init.d/xend restart
-</code></pre>
-
-<h2>domU</h2>
-
-<p>Ora il nostro ambiente Debian/Xen dovrebbe essere pronto per la virtualizzazione.
-Andiamo a creare la nostra macchina virtuale. Per far ciò usiamo i tools che xen ci mette a
-disposizione, in questo caso <code>xen-create-image</code>. Questo comando necessita di un solo parametro
-fondamentale ovvero il nome della vostra macchina virtuale. Poi utilizzerà la configurazione
-salvata nel file <code>/etc/xen-tools/xen-tools.conf</code> (vi ricordate?) per il resto. Possiamo comunque
-ovverridare alcune opzioni con dei parametri da linea di comando:</p>
-
-<pre><code>$ xen-create-image --hostname=vm1 --size=200Gb --memory=32Gb --ip=www.xxx.yyy.zzz --netmask=255.255.255.248 --gateway=ip.di.dom.0
-</code></pre>
-
-<p>Questo comando non farà altro che create il file di configurazione specifico per la macchina
-virtuale &ldquo;vm1&rdquo; in <code>/etc/xen/vm1.cfg</code>. Comunque abbiamo creato una configurazione per una
-macchina virtuale di nome <em>vm1</em> con HD di capacità 200Gb, memoria ram da 32Gb, ip statico www.xxx.yyy.zzz,
-netmask 255.255.255.248 e gateway ip.di.dom.0 (ovviamente dom0 deve avere un HD > di 200Gb e memoria RAM > di 32Gb).</p>
-
-<p>Ok, adesso finalmente creiamo sta maledetta macchina:</p>
-
-<pre><code>$ xm create /etc/xen/vm1.cfg
-</code></pre>
-
-<p>La macchina virtuale si avvia, per vedere lo stato del sistema usate il comodo comando:</p>
-
-<pre><code>$ xm list
-Name                                        ID   Mem VCPUs      State   Time(s)
-Domain-0                                     0  2353     8     r-----  24266.4
-vm1                                          3 30720     8     -b---- 150851.7
-</code></pre>
-
-<p>I valori di <code>State</code> possono essere:</p>
-
-<ul>
-<li>r - <em>running</em>: la macchina sta girando e usando una CPU.</li>
-<li>b - <em>blocked</em>: la macchina è bloccata e non sta usando la CPU. Questo perchè sta aspettando per operazioni di IO oppure è in sleep perchè non ha niente da fare.</li>
-<li>p - <em>paused</em>: la macchina è in pausa (<code>xm pause</code>).</li>
-<li>s - <em>shutdown</em>: la macchina si sta spegnendo o riavviando o sospendendo.</li>
-<li>c - <em>crashed</em>: la macchina è crashata.</li>
-<li>d - <em>dying</em>.</li>
-</ul>
-
-
-<p>Per accedere alla vostra macchina virtuale potete o connettervi via ssh oppure usare il comando:</p>
-
-<pre><code>$ xm console vm1
-</code></pre>
-
-<p>che vi apre una console alla vostra macchina. Per uscire dalla console usare la combinazione <code>ctrl+]</code>.</p>
-
-<p>Per spegnere la macchina:</p>
-
-<pre><code>$ xm shutdown vm1
-</code></pre>
-
-<p>Per mettere in pausa la macchina:</p>
-
-<pre><code>$ xm pause vm1
-</code></pre>
-
-<p>Per riattivarla:</p>
-
-<pre><code>$ xm restore vm1
-</code></pre>
-
-<p>Per eliminare la macchina:</p>
-
-<pre><code>$ xm delete vm1
-</code></pre>
-
-<p>Ora per abilitare la connessione sulla macchina virtuale domU <code>vm1</code> dobbiamo editare
-il file <code>/etc/network/interfaces</code> nel seguente modo:</p>
-
-<pre><code># The primary network interface
-auto eth0
-iface eth0 inet static
- address IP.DI.DOMU
- gateway IP.DI.DOM0
- netmask NETMASK.DI.DOM0
- broadcast BROADCAST.DI.DOM0
- pointopoint IP.DI.DOM0
-</code></pre>
-
-<p>Se volete che al boot di dom0 partano anche le vostre macchine virtuali allora
-dovete fare un link simbolico del file di configurazione delle vm nella cartella <code>/etc/xen/auto</code></p>
-
-<pre><code>$ ln -s /etc/xen/vm1.cfg /etc/xen/auto
-</code></pre>
-
-<p>Infine se un dì avrete bisogno di aumentare lo spazio degli &ldquo;HD&rdquo; delle vostre macchine virtuali dovrete aumentare i file immagini.
-Ciò è possibile con i comandi <code>dd</code> e <code>resize2fs</code>:</p>
-
-<pre><code>$ dd if=/dev/zero bs=1M count=2000 &gt;&gt; /etc/xen/domains/vm1/disk.img
-$ resize2fs -f /etc/xen/domains/vm1/disk.img
-</code></pre>
-
-<p>Con questo comando abbiamo aggiunto 2 Gigabyte all&#8217;&ldquo;HD&rdquo; della macchina virtuale vm1.</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/gestire-differenti-versioni-di-gcc-su-osx">Gestire differenti versioni di gcc su OSX</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2013-03-27T20:56:00+01:00'><span class='date'>27/03/2013</span> <span class='time'>8:56 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Vediamo in questo post come gestire differenti versioni di gcc su Mac OS X con port.</p>
-
-<p>La storia è molto semplice grazie all&#8217;utility <code>gcc_select</code> che installiamo nel seguente modo:</p>
-
-<pre><code>$ sudo port install gcc_select
-</code></pre>
-
-<p>A questo punto possiamo vedere le varie versioni di gcc che sono installate sul nostro
-sistema operativo con il comando:</p>
-
-<pre><code>$ port select --list gcc
-Available versions for gcc:
-    llvm-gcc42
-    mp-gcc47 (active)
-    none
-</code></pre>
-
-<p>In questo esempio il gcc che viene usato è il gcc 4.7 installato con port.</p>
-
-<p>Per switchare versione possiamo dare il comando:</p>
-
-<pre><code>$ sudo port select --set gcc llvm-gcc42
-Selecting 'llvm-gcc42' for 'gcc' succeeded. 'llvm-gcc42' is now active.
-</code></pre>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/chiamate-ricorsive-ruby-vs-python">Chiamate ricorsive Ruby vs Python</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2012-08-03T21:27:00+02:00'><span class='date'>03/08/2012</span> <span class='time'>9:27 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Facciamo un piccolo test: calcoliamo Fibonacci ricorsivamente in Ruby (v2.0.0) e in Python (v2.7.2) e vediamo chi vince in termini di tempo</p>
-
-<p>Ruby Fibonacci code (<code>f.rb</code>)</p>
-
-<pre><code>def fib(n)
-  if n == 0 || n == 1
-    n
-  else
-    fib(n-1) + fib(n-2)
-  end
-end
-
-36.times { |i| fib(i) }
-</code></pre>
-
-<p>Python Fibonacci code (<code>f.py</code>)</p>
-
-<pre><code>def fib(n):
-  if n == 0 or n == 1:
-    return n
-  else:
-    return fib(n-1) + fib(n-2)
-
-for i in range(36):
-  fib(i)
-</code></pre>
-
-<p>Ora lanciamo i due programmi nel seguente modo:</p>
-
-<pre><code>$ time ruby f.rb &amp;&amp; time python f.py
-real  0m4.795s
-user  0m4.787s
-sys   0m0.007s
-
-real  0m12.935s
-user  0m12.849s
-sys   0m0.049s
-</code></pre>
-
-<p>Ecco Ruby impiega <strong>4.795</strong> secondi mentre Python <strong>12.935</strong> secondi!</p>
-
-<p><strong>Ruby vince nettamente su Python!!</strong></p>
-
-<p>Oh beh provate però questo codice in C (<code>f.c</code>):</p>
-
-<pre><code>int
-fib (int n)
-{
-  if (n == 0 || n == 1)
-    return n;
-  else
-    return fib (n-1) + fib (n-2);
-}
-
-int
-main ()
-{
-  int i;
-  for (i = 0; i &lt; 36; i++)
-    fib (i);
-}
-</code></pre>
-
-<p>Compiliamo:</p>
-
-<pre><code> gcc f.c
-</code></pre>
-
-<p>Ed eseguiamo:</p>
-
-<pre><code>$ time ./a.out
-real  0m0.232s
-user  0m0.229s
-sys   0m0.003s
-</code></pre>
-
-<p>0.232 secondi!</p>
-</div>
-  
-  
-
-
-    </article>
-  
-  
-    <article>
-      
-  <header>
-    
-      <h1 class="entry-title"><a href="/colori-nella-shell">Colori nella shell</a></h1>
-    
-    
-      <p class="meta">
-        
-
-
-
-
-<time class='entry-date' datetime='2012-07-27T21:43:00+02:00'><span class='date'>27/07/2012</span> <span class='time'>9:43 pm</span></time>
-        
-      </p>
-    
-  </header>
-
-
-  <div class="entry-content"><p>Per colorare una string nella shell possiamo usare questo template:</p>
-
-<pre><code>\033[CODE1;CODE2;CODE3mTESTO\033[0m
-</code></pre>
-
-<p>CODE1 possono essere una serie di valori che alterano lo stile del testo, di seguito una tabella:</p>
-
-<ul>
-<li><code>0</code> Normal Characters</li>
-<li><code>1</code> Bold Characters</li>
-<li><code>4</code> Underlined Characters</li>
-<li><code>5</code> Blinking Characters</li>
-<li><code>7</code> Reverse video Characters</li>
-</ul>
-
-
-<p>CODE2 invece rappresenta il colore, di seguito una tabella:</p>
-
-<ul>
-<li><code>30</code> Black</li>
-<li><code>31</code> Red</li>
-<li><code>32</code> Green</li>
-<li><code>33</code> Yellow</li>
-<li><code>34</code> Blue</li>
-<li><code>35</code> Magenta</li>
-<li><code>36</code> Cyan</li>
-<li><code>37</code> White</li>
-</ul>
-
-
-<p>CODE3 rappresenta il colore di sfondo del testo, di seguito una tabella:</p>
-
-<ul>
-<li><code>40</code> Black</li>
-<li><code>41</code> Red</li>
-<li><code>42</code> Green</li>
-<li><code>43</code> Yellow</li>
-<li><code>44</code> Blue</li>
-<li><code>45</code> Magenta</li>
-<li><code>46</code> Cyan</li>
-<li><code>47</code> White</li>
-</ul>
-
-
-<p>Per resettare il testo allo stile di default usare il carattere <code>\033[0m</code>.</p>
-
-<p>Alcuni esempi:</p>
-
-<pre><code>echo -e "\033[31mQUESTO TESTO SARA STAMPATO IN ROSSO\033[0m"
-echo -e "\033[1;36mQUESTO TESTO SARA STAMPATO IN GROSSETTO E COLOR CIANO\033[0m"
-echo -e "\033[1;35;47mQUESTO TESTO SARA STAMPATO IN GROSSETTO E COLOR MAGENTA SU SFONDO BIANCO\033[0m"
-</code></pre>
+solo se invochiamo il metodo di classe <code>acts_as_ciccio(add_power: true)</code> passando l'opzione <code>add_power</code> a true.</p>
 </div>
   
   
@@ -740,7 +565,7 @@ echo -e "\033[1;35;47mQUESTO TESTO SARA STAMPATO IN GROSSETTO E COLOR MAGENTA SU
     
       <a class="prev" href="/posts/3">&larr; Older</a>
     
-    <a href="/archives">Blog Archives</a>
+    <a href="/blog/archives">Blog Archives</a>
     
     <a class="next" href="/index.html">Newer &rarr;</a>
     
@@ -753,23 +578,23 @@ echo -e "\033[1;35;47mQUESTO TESTO SARA STAMPATO IN GROSSETTO E COLOR MAGENTA SU
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/rubys-predefined-variables-data">Ruby&#8217;s predefined variables: DATA</a>
+        <a href="/world-of-warcraft-leaderboards-is-arena-pvp-balanced">World of Warcraft leaderboards: is arena PvP balanced?</a>
       </li>
     
       <li class="post">
-        <a href="/quanto-grande-e-luniverso">Quanto grande è l&#8217;universo?</a>
+        <a href="/il-numero-666">Il numero 666</a>
       </li>
     
       <li class="post">
-        <a href="/alsa-switch-audio-output-to-usb-headset">ALSA: Switch audio output to USB headset</a>
+        <a href="/ruby-module-include-vs-prepend">Ruby Module include vs prepend</a>
       </li>
     
       <li class="post">
-        <a href="/a-che-altezza-appendere-un-quadro">A che altezza appendere un quadro?</a>
+        <a href="/edit-git-last-commit">Edit git last commit</a>
       </li>
     
       <li class="post">
-        <a href="/configurare-piu-monitor-con-scheda-video-nvidia-e-xorg">Configurare più monitor con scheda video NVidia e Xorg</a>
+        <a href="/rubys-predefined-variables-data">Ruby's predefined variables: DATA</a>
       </li>
     
   </ul>
@@ -778,7 +603,7 @@ echo -e "\033[1;35;47mQUESTO TESTO SARA STAMPATO IN GROSSETTO E COLOR MAGENTA SU
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/pioz">@pioz</a> on GitHub
@@ -822,7 +647,7 @@ echo -e "\033[1;35;47mQUESTO TESTO SARA STAMPATO IN GROSSETTO E COLOR MAGENTA SU
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - Pioz -
+  Copyright &copy; 2016 - Pioz -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

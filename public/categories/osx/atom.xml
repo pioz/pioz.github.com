@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Categoria: osx | programmer@work]]></title>
-  <link href="http://pioz.github.com/categories/osx/atom.xml" rel="self"/>
-  <link href="http://pioz.github.com/"/>
-  <updated>2015-01-13T00:41:24+01:00</updated>
-  <id>http://pioz.github.com/</id>
+  <link href="http://blog.pioz.it/categories/osx/atom.xml" rel="self"/>
+  <link href="http://blog.pioz.it/"/>
+  <updated>2016-11-19T04:39:07+01:00</updated>
+  <id>http://blog.pioz.it/</id>
   <author>
     <name><![CDATA[Pioz]]></name>
     
@@ -15,12 +15,12 @@
   
   <entry>
     <title type="html"><![CDATA[Gestire differenti versioni di gcc su OSX]]></title>
-    <link href="http://pioz.github.com/gestire-differenti-versioni-di-gcc-su-osx"/>
+    <link href="http://blog.pioz.it/gestire-differenti-versioni-di-gcc-su-osx"/>
     <updated>2013-03-27T20:56:00+01:00</updated>
-    <id>http://pioz.github.com/gestire-differenti-versioni-di-gcc-su-osx</id>
+    <id>http://blog.pioz.it/gestire-differenti-versioni-di-gcc-su-osx</id>
     <content type="html"><![CDATA[<p>Vediamo in questo post come gestire differenti versioni di gcc su Mac OS X con port.</p>
 
-<p>La storia è molto semplice grazie all&#8217;utility <code>gcc_select</code> che installiamo nel seguente modo:</p>
+<p>La storia è molto semplice grazie all'utility <code>gcc_select</code> che installiamo nel seguente modo:</p>
 
 <pre><code>$ sudo port install gcc_select
 </code></pre>
@@ -47,15 +47,15 @@ Selecting 'llvm-gcc42' for 'gcc' succeeded. 'llvm-gcc42' is now active.
   
   <entry>
     <title type="html"><![CDATA[Configurare i tasti HOME e END nel terminale di OSX]]></title>
-    <link href="http://pioz.github.com/tasti-home-end-terminale-osx"/>
+    <link href="http://blog.pioz.it/tasti-home-end-terminale-osx"/>
     <updated>2010-07-21T21:35:00+02:00</updated>
-    <id>http://pioz.github.com/tasti-home-end-terminale-osx</id>
-    <content type="html"><![CDATA[<p>Per usare i tasti HOME ed END nel modo classico (HOME va all&#8217;inizio della riga, END alla fine) guardate l&#8217;immagine qua sotto:</p>
+    <id>http://blog.pioz.it/tasti-home-end-terminale-osx</id>
+    <content type="html"><![CDATA[<p>Per usare i tasti HOME ed END nel modo classico (HOME va all'inizio della riga, END alla fine) guardate l'immagine qua sotto:</p>
 
 <p><img src="http://i.imgur.com/Bdged.png" alt="image" /></p>
 
 <p>Per generare la string <code>\005</code> premere ctrl+e, mentre per la string <code>\001</code> ctrl+a.<br/>
-A questo punto usando option+RIGHT e option+LEFT ci muoviamo all&#8217;inizio o alla fine della riga.</p>
+A questo punto usando option+RIGHT e option+LEFT ci muoviamo all'inizio o alla fine della riga.</p>
 ]]></content>
   </entry>
   

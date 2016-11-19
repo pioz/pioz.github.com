@@ -19,7 +19,7 @@ Il tutto è stato testato in una Debian 5.0 stable. Con &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://pioz.github.com/configurare-multi-domain-mail-server-postfix-dovecot">
+  <link rel="canonical" href="http://blog.pioz.it/configurare-multi-domain-mail-server-postfix-dovecot">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="programmer@work" type="application/atom+xml">
@@ -65,7 +65,7 @@ Il tutto è stato testato in una Debian 5.0 stable. Con &hellip;">
   
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
-    <input type="hidden" name="sitesearch" value="pioz.github.com">
+    <input type="hidden" name="sitesearch" value="blog.pioz.it">
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -105,7 +105,7 @@ Il tutto è stato testato in una Debian 5.0 stable. Con &hellip;">
 Il tutto è stato testato in una <a href="http://www.debian.org">Debian</a> 5.0 stable.</p>
 
 <p>Con questo server mail sarà possibile gestire più domini e quindi per esempio allo stesso tempo mantenere mail del tipo <em>@pioz.it</em> e <em>@barison.org</em>.
-Il tutto avverrà dando la possibilità all&#8217;utente se utilizzare comunicazioni criptate (come SSL o TLS) o in chiaro, se utilizzare autenticazione in chiaro (PLAIN) o criptata (CRAM-MD5 o DIGEST-MD5). Dando la possibilità di usare protocollo IMAP o POP3.</p>
+Il tutto avverrà dando la possibilità all'utente se utilizzare comunicazioni criptate (come SSL o TLS) o in chiaro, se utilizzare autenticazione in chiaro (PLAIN) o criptata (CRAM-MD5 o DIGEST-MD5). Dando la possibilità di usare protocollo IMAP o POP3.</p>
 
 <p>Il necessario:</p>
 
@@ -129,7 +129,7 @@ $ apt-get install libsasl2 sasl2-bin libsasl2-modules
 
 <p>Per capirci meglio usiamo le seguenti convenzioni: il dominio associato al mail server sarà <code>ciccio.com</code>, mentre i domini che hosteremo saranno <code>pippo.it</code> e <code>pluto.com</code>.</p>
 
-<p>Questo significa che tutti e tre i domini dovranno avere un record MX nel DNS chiamato mail.nomedominio che punterà all&#8217;IP del nostro server mail.</p>
+<p>Questo significa che tutti e tre i domini dovranno avere un record MX nel DNS chiamato mail.nomedominio che punterà all'IP del nostro server mail.</p>
 
 <p>Inoltre dato che useremo anche SSL per il trasferimento dei dati tra server e client è necessario avere un certificato (valido) per il dominio <code>mail.ciccio.com</code>.</p>
 
@@ -173,21 +173,21 @@ mysql&gt; quit;
 <p>Vediamo, prima di proseguire, i campi della tabella <code>user</code>:</p>
 
 <ul>
-<li><strong>domain</strong>: il dominio dell&#8217;indirizzo mail (per esempio <a href="&#109;&#x61;&#x69;&#108;&#116;&#x6f;&#58;&#x6c;&#x75;&#99;&#x61;&#x40;&#112;&#x69;&#112;&#112;&#111;&#x2e;&#105;&#116;">&#x6c;&#x75;&#x63;&#97;&#x40;&#x70;&#x69;&#x70;&#112;&#111;&#46;&#105;&#116;</a> ha dominio pippo.it).</li>
-<li><strong>username</strong>: lo username per accedere alla casella di posta, nel nostro caso, <strong>IMPORTANTE</strong>, è l&#8217;intero indirizzo mail (quindi non luca, ma <a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#x6f;&#58;&#x6c;&#117;&#99;&#x61;&#x40;&#112;&#105;&#x70;&#x70;&#111;&#x2e;&#105;&#x74;">&#108;&#117;&#99;&#97;&#x40;&#x70;&#105;&#112;&#112;&#111;&#46;&#x69;&#x74;</a>). Questo perchè avendo mail con domini diversi dobbiano distinguerle in modo univoco.</li>
+<li><strong>domain</strong>: il dominio dell'indirizzo mail (per esempio <a href="&#109;&#97;&#x69;&#108;&#116;&#x6f;&#x3a;&#x6c;&#117;&#x63;&#97;&#x40;&#112;&#105;&#112;&#x70;&#x6f;&#x2e;&#x69;&#x74;">&#x6c;&#x75;&#x63;&#97;&#64;&#112;&#x69;&#x70;&#112;&#111;&#x2e;&#x69;&#x74;</a> ha dominio pippo.it).</li>
+<li><strong>username</strong>: lo username per accedere alla casella di posta, nel nostro caso, <strong>IMPORTANTE</strong>, è l'intero indirizzo mail (quindi non luca, ma <a href="&#109;&#x61;&#x69;&#108;&#116;&#x6f;&#58;&#x6c;&#x75;&#x63;&#x61;&#64;&#112;&#x69;&#x70;&#x70;&#111;&#46;&#105;&#x74;">&#108;&#x75;&#x63;&#97;&#64;&#112;&#105;&#x70;&#x70;&#x6f;&#46;&#105;&#116;</a>). Questo perchè avendo mail con domini diversi dobbiano distinguerle in modo univoco.</li>
 <li><strong>password</strong>: la password per accedere alla casella di posta. Vedremo che sarà criptata con AES.</li>
 <li><strong>quota</strong>: quota casella di posta.</li>
-<li><strong>active</strong>: l&#8217;account mail è attivo o disattivo.</li>
-<li><strong>admin</strong>: campo utile per verificare, magari da qualche app esterna, se l&#8217;utente può creare altri account.</li>
+<li><strong>active</strong>: l'account mail è attivo o disattivo.</li>
+<li><strong>admin</strong>: campo utile per verificare, magari da qualche app esterna, se l'utente può creare altri account.</li>
 </ul>
 
 
 <p>I campi della tabella <code>alias</code>:</p>
 
 <ul>
-<li><strong>address</strong>: indirizzo mail dell&#8217;alias.</li>
+<li><strong>address</strong>: indirizzo mail dell'alias.</li>
 <li><strong>goto</strong>: è alias di.</li>
-<li><strong>active</strong>: l&#8217;alias è attivo o disattivo.</li>
+<li><strong>active</strong>: l'alias è attivo o disattivo.</li>
 </ul>
 
 
@@ -202,7 +202,7 @@ $ chmod 770 /var/vmail
 $ chown mail.mail /var/vmail
 </code></pre>
 
-<p>Bene, in pratica la casella di posta per <a href="&#109;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#x6c;&#x75;&#99;&#x61;&#x40;&#x70;&#105;&#x70;&#x70;&#111;&#46;&#x69;&#116;">&#x6c;&#x75;&#x63;&#97;&#x40;&#x70;&#105;&#112;&#x70;&#111;&#x2e;&#x69;&#116;</a> sarà in <code>/var/vmail/luca@pippo.it</code>. Essa verrà creata in automatico al primo login.</p>
+<p>Bene, in pratica la casella di posta per <a href="&#x6d;&#97;&#x69;&#108;&#116;&#111;&#58;&#108;&#117;&#99;&#97;&#x40;&#x70;&#x69;&#x70;&#x70;&#111;&#46;&#x69;&#x74;">&#x6c;&#x75;&#x63;&#x61;&#64;&#112;&#105;&#x70;&#112;&#111;&#46;&#105;&#116;</a> sarà in <code>/var/vmail/luca@pippo.it</code>. Essa verrà creata in automatico al primo login.</p>
 
 <h2>PASSO 3: configurazione Dovecot</h2>
 
@@ -298,16 +298,16 @@ auth default {
 <p>Adesso non entriamo nel dettaglio in quanto non ho voglia di star qua a scrivere, comunque due cosette sulle cose principali:</p>
 
 <ul>
-<li>La prima riga specifica i protocolli che vogliamo usare. Gli abilitiamo tutti per dare libertà totale ai nostri utenti. Mi raccomando di avere il certificato per il vostro dominio, nell&#8217;esempio per <code>mail.ciccio.com</code>.</li>
-<li><code>first_valid_uid</code> deve coincidere con uid dell&#8217;utente <code>mail</code>, solitamente 8. Per verificare lanciate il comando &ldquo;<code>id mail</code>&rdquo;.</li>
+<li>La prima riga specifica i protocolli che vogliamo usare. Gli abilitiamo tutti per dare libertà totale ai nostri utenti. Mi raccomando di avere il certificato per il vostro dominio, nell'esempio per <code>mail.ciccio.com</code>.</li>
+<li><code>first_valid_uid</code> deve coincidere con uid dell'utente <code>mail</code>, solitamente 8. Per verificare lanciate il comando &ldquo;<code>id mail</code>&rdquo;.</li>
 <li>Importante è la riga &ldquo;<code>mechanisms = login plain digest-md5 cram-md5
 </code>&rdquo; che specifica i meccanismi di autenticazione. Noi li abilitiamo tutti, sia quelli in chiaro che criptati in modo da permettere anche a client poco sofisticati (ad esempio quelli dei cellulari) di connettersi al nostro server. Mentre per client completi dare la possibilità di usare autenticazione cifrata (ad esempio Mozilla Thunderbird).</li>
-<li><code>userdb</code> e <code>passdb</code> vengono recuperati dall&#8217;altro file di configurazione.</li>
+<li><code>userdb</code> e <code>passdb</code> vengono recuperati dall'altro file di configurazione.</li>
 <li>Infine fondamentale la sezione <code>socket listen</code> che apre una socket per permettere ad altri programmi di usare il sistema di autenticazione di Dovecot, nel nostro caso Postfix.</li>
 </ul>
 
 
-<p>L&#8217;altro file di configurazione per il recupero degli utenti e delle password risulta essere una cosa del genere:</p>
+<p>L'altro file di configurazione per il recupero degli utenti e delle password risulta essere una cosa del genere:</p>
 
 <pre><code>driver = mysql
 connect = host=127.0.0.1 dbname=mail user=postfix password=password
@@ -321,9 +321,9 @@ password_query = SELECT username AS user, AES_DECRYPT(UNHEX(password),'AESKEY') 
 <ul>
 <li><code>driver</code> specifica che il database è MySQL.</li>
 <li><code>connect</code> info per la connessione al database.</li>
-<li><code>default_pass_scheme</code> usiamo PLAIN, infatti se diamo la possibilità di usare meccanismi di autenticazione in chiaro e non in chiaro (es plain e cram-md5) non c&#8217;è alternativa, non possiamo salvare la password in modo criptato per meccanismo PLAIN. Comunque niente paura, la password non sarà salvata in chiaro ma criptata con la funzione AES di mysql e trasformata da binario a text con la funzione HEX.</li>
-<li><code>user_query</code> è la query per recuperare l&#8217;utente. Da notare che uid e gid devono essere lo stesso dell&#8217;utente <code>mail</code> (<code>id mail</code>). Questa in realtà deve recuperare il path della maildir dell&#8217;utente, per questo c&#8217;è il <code>concat</code>.</li>
-<li><code>user_password</code> è la query per recuperare le password decriptandole usando una chiave (nell&#8217;esempio AESKEY).</li>
+<li><code>default_pass_scheme</code> usiamo PLAIN, infatti se diamo la possibilità di usare meccanismi di autenticazione in chiaro e non in chiaro (es plain e cram-md5) non c'è alternativa, non possiamo salvare la password in modo criptato per meccanismo PLAIN. Comunque niente paura, la password non sarà salvata in chiaro ma criptata con la funzione AES di mysql e trasformata da binario a text con la funzione HEX.</li>
+<li><code>user_query</code> è la query per recuperare l'utente. Da notare che uid e gid devono essere lo stesso dell'utente <code>mail</code> (<code>id mail</code>). Questa in realtà deve recuperare il path della maildir dell'utente, per questo c'è il <code>concat</code>.</li>
+<li><code>user_password</code> è la query per recuperare le password decriptandole usando una chiave (nell'esempio AESKEY).</li>
 </ul>
 
 
@@ -430,7 +430,7 @@ dovecot   unix  -       n       n       -       -       pipe
   flags=DRhu user=mail argv=/usr/lib/dovecot/deliver -n -f ${sender} -d ${recipient}
 </code></pre>
 
-<p>Non commentiamo, è molto simile a quello di default a parte un paio di modifiche, tra cui l&#8217;abilitazione del wrapper SSL su TLS.</p>
+<p>Non commentiamo, è molto simile a quello di default a parte un paio di modifiche, tra cui l'abilitazione del wrapper SSL su TLS.</p>
 
 <p>Il main.cf (2):</p>
 
@@ -556,7 +556,7 @@ $ insert into user(domain,username,password) values("pluto.com", "nicola@pluto.c
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pioz.github.com/configurare-multi-domain-mail-server-postfix-dovecot" data-via="pioz" data-counturl="http://pioz.github.com/configurare-multi-domain-mail-server-postfix-dovecot" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.pioz.it/configurare-multi-domain-mail-server-postfix-dovecot" data-via="pioz" data-counturl="http://blog.pioz.it/configurare-multi-domain-mail-server-postfix-dovecot" >Tweet</a>
   
   
   
@@ -583,23 +583,23 @@ $ insert into user(domain,username,password) values("pluto.com", "nicola@pluto.c
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/rubys-predefined-variables-data">Ruby&#8217;s predefined variables: DATA</a>
+        <a href="/world-of-warcraft-leaderboards-is-arena-pvp-balanced">World of Warcraft leaderboards: is arena PvP balanced?</a>
       </li>
     
       <li class="post">
-        <a href="/quanto-grande-e-luniverso">Quanto grande è l&#8217;universo?</a>
+        <a href="/il-numero-666">Il numero 666</a>
       </li>
     
       <li class="post">
-        <a href="/alsa-switch-audio-output-to-usb-headset">ALSA: Switch audio output to USB headset</a>
+        <a href="/ruby-module-include-vs-prepend">Ruby Module include vs prepend</a>
       </li>
     
       <li class="post">
-        <a href="/a-che-altezza-appendere-un-quadro">A che altezza appendere un quadro?</a>
+        <a href="/edit-git-last-commit">Edit git last commit</a>
       </li>
     
       <li class="post">
-        <a href="/configurare-piu-monitor-con-scheda-video-nvidia-e-xorg">Configurare più monitor con scheda video NVidia e Xorg</a>
+        <a href="/rubys-predefined-variables-data">Ruby's predefined variables: DATA</a>
       </li>
     
   </ul>
@@ -608,7 +608,7 @@ $ insert into user(domain,username,password) values("pluto.com", "nicola@pluto.c
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/pioz">@pioz</a> on GitHub
@@ -653,7 +653,7 @@ $ insert into user(domain,username,password) values("pluto.com", "nicola@pluto.c
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - Pioz -
+  Copyright &copy; 2016 - Pioz -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

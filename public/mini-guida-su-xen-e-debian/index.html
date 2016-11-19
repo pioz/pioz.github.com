@@ -19,7 +19,7 @@ in ambiente GNU/Linux Debian. Xen è un monitor di macchine &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://pioz.github.com/mini-guida-su-xen-e-debian">
+  <link rel="canonical" href="http://blog.pioz.it/mini-guida-su-xen-e-debian">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="programmer@work" type="application/atom+xml">
@@ -65,7 +65,7 @@ in ambiente GNU/Linux Debian. Xen è un monitor di macchine &hellip;">
   
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
-    <input type="hidden" name="sitesearch" value="pioz.github.com">
+    <input type="hidden" name="sitesearch" value="blog.pioz.it">
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -107,7 +107,7 @@ in ambiente GNU/Linux Debian.</p>
 
 <p>Xen è un monitor di macchine virtuali open source rilasciato sotto licenza GPL per piattaforma
 x86 e compatibili (al momento sono in corso dei port per x86-64 e per IA-64) sviluppato
-presso il Computer Laboratory dell&#8217;Università di Cambridge.</p>
+presso il Computer Laboratory dell'Università di Cambridge.</p>
 
 <p>Per chiarezza ricordo che la macchina fisica di solito viene identificata con il
 nome <code>dom0</code> (domain 0), mentre le macchine virtuali con il nome <code>domU</code>.</p>
@@ -209,7 +209,7 @@ il network routing tra la la dom0 e le nostre domU commentando le seguenti righe
 (vif-script     vif-route)
 </code></pre>
 
-<p>Le altre opzioni vanno bene così come sono, ma se volte approfondire c&#8217;è sempre la doc.</p>
+<p>Le altre opzioni vanno bene così come sono, ma se volte approfondire c'è sempre la doc.</p>
 
 <p>Il secondo file <code>/etc/xen-tools/xen-tools.conf</code> serve per gestire la configurazione con
 cui vengono create le macchine virtuali. Vediamo alcune opzioni:</p>
@@ -230,7 +230,7 @@ dir = /var/xen
 
 <p>Specifica la directory dove verranno salvate le immagini delle macchine virtuali.
 In pratica i file che sono a tutti gli effetti gli HD delle vostre macchine virtuali.
-Infatti se volete fare un backup di un&#8217;intera macchina virtuale salvatevi il suo file
+Infatti se volete fare un backup di un'intera macchina virtuale salvatevi il suo file
 immagine.</p>
 
 <pre><code>#
@@ -275,7 +275,7 @@ install-method = debootstrap
 
 <p>In questa sezione di decice in quale modo il sistema operativo delle vostre macchine
 virtuali verrà installato. Ci sono diversi modi, ma il più comune e semplice è quello di
-usare l&#8217;utility <code>debootstrap</code> che viene usato per creare un sistema Debian da zero,
+usare l'utility <code>debootstrap</code> che viene usato per creare un sistema Debian da zero,
 senza la necessità di dpkg o apt. Per fare questo, vengono scaricati i file .deb da
 un sito mirror e vengono spacchettati in una directory su cui è eventualmente
 possibile fare il chroot.</p>
@@ -296,8 +296,8 @@ image  = sparse   # Specify sparse vs. full disk images.
 
 <p>Molto intuitivo, un commento solo alle ultime due opzioni: <code>dist</code> specifica se
 installare la versione stable, testing o unstable. Mentre <code>image</code> il tipo di immagine
-da usare come file system: possiamo scegliere tra un&#8217;immagine <em>sparse</em> oppure tra
-un&#8217;immagine <em>full disk</em>. Nel primo caso il file aumenta la sua dimensione dinamicamente,
+da usare come file system: possiamo scegliere tra un'immagine <em>sparse</em> oppure tra
+un'immagine <em>full disk</em>. Nel primo caso il file aumenta la sua dimensione dinamicamente,
 mentre nel secondo caso il file avrà la stessa grandezza del valore scelto qualche riga sopra (<code>size</code>).</p>
 
 <pre><code>#
@@ -308,7 +308,7 @@ passwd = 1
 #
 </code></pre>
 
-<p>Immettiamo noi quando creiamo le nostre macchine virtuali la password per l&#8217;utente root.</p>
+<p>Immettiamo noi quando creiamo le nostre macchine virtuali la password per l'utente root.</p>
 
 <p>Per le altre opzioni vi rimando alla doc.</p>
 
@@ -419,7 +419,7 @@ Ciò è possibile con i comandi <code>dd</code> e <code>resize2fs</code>:</p>
 $ resize2fs -f /etc/xen/domains/vm1/disk.img
 </code></pre>
 
-<p>Con questo comando abbiamo aggiunto 2 Gigabyte all&#8217;&ldquo;HD&rdquo; della macchina virtuale vm1.</p>
+<p>Con questo comando abbiamo aggiunto 2 Gigabyte all'&ldquo;HD&rdquo; della macchina virtuale vm1.</p>
 </div>
 
 
@@ -449,7 +449,7 @@ $ resize2fs -f /etc/xen/domains/vm1/disk.img
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pioz.github.com/mini-guida-su-xen-e-debian" data-via="pioz" data-counturl="http://pioz.github.com/mini-guida-su-xen-e-debian" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.pioz.it/mini-guida-su-xen-e-debian" data-via="pioz" data-counturl="http://blog.pioz.it/mini-guida-su-xen-e-debian" >Tweet</a>
   
   
   
@@ -463,7 +463,7 @@ $ resize2fs -f /etc/xen/domains/vm1/disk.img
         <a class="basic-alignment left" href="/gestire-differenti-versioni-di-gcc-su-osx" title="Previous Post: Gestire differenti versioni di gcc su OSX">&laquo; Gestire differenti versioni di gcc su OSX</a>
       
       
-        <a class="basic-alignment right" href="/add-an-acts-as-method-to-active-record" title="Next Post: Add an 'acts_as' method to Active Record">Add an &#8216;acts_as&#8217; method to Active Record &raquo;</a>
+        <a class="basic-alignment right" href="/add-an-acts-as-method-to-active-record" title="Next Post: Add an 'acts_as' method to Active Record">Add an 'acts_as' method to Active Record &raquo;</a>
       
     </p>
   </footer>
@@ -478,23 +478,23 @@ $ resize2fs -f /etc/xen/domains/vm1/disk.img
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/rubys-predefined-variables-data">Ruby&#8217;s predefined variables: DATA</a>
+        <a href="/world-of-warcraft-leaderboards-is-arena-pvp-balanced">World of Warcraft leaderboards: is arena PvP balanced?</a>
       </li>
     
       <li class="post">
-        <a href="/quanto-grande-e-luniverso">Quanto grande è l&#8217;universo?</a>
+        <a href="/il-numero-666">Il numero 666</a>
       </li>
     
       <li class="post">
-        <a href="/alsa-switch-audio-output-to-usb-headset">ALSA: Switch audio output to USB headset</a>
+        <a href="/ruby-module-include-vs-prepend">Ruby Module include vs prepend</a>
       </li>
     
       <li class="post">
-        <a href="/a-che-altezza-appendere-un-quadro">A che altezza appendere un quadro?</a>
+        <a href="/edit-git-last-commit">Edit git last commit</a>
       </li>
     
       <li class="post">
-        <a href="/configurare-piu-monitor-con-scheda-video-nvidia-e-xorg">Configurare più monitor con scheda video NVidia e Xorg</a>
+        <a href="/rubys-predefined-variables-data">Ruby's predefined variables: DATA</a>
       </li>
     
   </ul>
@@ -503,7 +503,7 @@ $ resize2fs -f /etc/xen/domains/vm1/disk.img
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/pioz">@pioz</a> on GitHub
@@ -548,7 +548,7 @@ $ resize2fs -f /etc/xen/domains/vm1/disk.img
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - Pioz -
+  Copyright &copy; 2016 - Pioz -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

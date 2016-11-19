@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Categoria: ruby | programmer@work]]></title>
-  <link href="http://pioz.github.com/categories/ruby/atom.xml" rel="self"/>
-  <link href="http://pioz.github.com/"/>
-  <updated>2015-01-13T00:41:24+01:00</updated>
-  <id>http://pioz.github.com/</id>
+  <link href="http://blog.pioz.it/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://blog.pioz.it/"/>
+  <updated>2016-11-19T04:39:07+01:00</updated>
+  <id>http://blog.pioz.it/</id>
   <author>
     <name><![CDATA[Pioz]]></name>
     
@@ -14,10 +14,64 @@
 
   
   <entry>
+    <title type="html"><![CDATA[Ruby Module include vs prepend]]></title>
+    <link href="http://blog.pioz.it/ruby-module-include-vs-prepend"/>
+    <updated>2015-01-15T15:15:18+01:00</updated>
+    <id>http://blog.pioz.it/ruby-module-include-vs-prepend</id>
+    <content type="html"><![CDATA[<p>Oggi cerchiamo di capire un po' meglio la differenza tra i metodi <code>Module#include</code> e <code>Module#prepend</code>.
+Vediamo la differenza con un esempio mooolto semplice:</p>
+
+<pre><code>class Person
+  def name
+    # return name here
+    puts 'Call method name in class Person'
+  end
+end
+
+module Superhero
+  def fly
+    # fly here
+    puts 'Call method fly in module Superhero'
+  end
+
+  def name
+    # return name here
+    puts 'Call method name in module Superhero'
+  end
+end
+
+Person.include(Superhero)
+
+Person.new.name
+</code></pre>
+
+<p>Cosa abbiamo fatto? Allora abbiamo la classe <code>Person</code> con un metodo <code>name</code>. Poi
+abbiamo il modulo <code>Superhero</code> con due metodi: <code>fly</code> e <code>name</code>. Notare a questo
+punto che sia la classe <code>Person</code> che il modulo <code>Superhero</code> hanno entrambi un
+metodo che si chiama <code>name</code>. Ora andiamo a mixare la classe <code>Person</code> con il
+modulo <code>Superhero</code> usando il metodo <code>include</code>. Se invochiamo il metodo <code>name</code> su
+un oggetto di tipo <code>Person</code> vedremo che viene chiamato il metodo definito dentro
+la classe <code>Person</code> e non quello definito nel modulo <code>Superhero</code>.   Questo ci
+potrebbe anche andare bene, ma a volte vorremmo che quando facciamo questo tipo
+di operazione i metodi del modulo che mixiamo sovrascrivessero (override) i
+metodi della classe, come succede quando estendiamo una classe. Per ottenere
+questo usiamo il metodo <code>prepend</code> al posto di <code>include</code> disponibile dalla
+versione 2 di Ruby.</p>
+
+<pre><code>Person.prepend(Superhero)
+
+Person.new.name
+</code></pre>
+
+<p>Adesso vediamo che viene invocato il metodo <code>name</code> definito nel modulo <code>Superhero</code>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Ruby's predefined variables: DATA]]></title>
-    <link href="http://pioz.github.com/rubys-predefined-variables-data"/>
+    <link href="http://blog.pioz.it/rubys-predefined-variables-data"/>
     <updated>2015-01-13T00:09:44+01:00</updated>
-    <id>http://pioz.github.com/rubys-predefined-variables-data</id>
+    <id>http://blog.pioz.it/rubys-predefined-variables-data</id>
     <content type="html"><![CDATA[<p>Ho scoperto da poco che tra le variabili predefiniti di Ruby ne esiste una che
 si chiama <code>DATA</code>. È molto interessante.<br/>
 In un file sorgente Ruby tutto quello che segue <code>__END__</code> diventa una specie
@@ -39,9 +93,9 @@ beer again
   
   <entry>
     <title type="html"><![CDATA[Chiamate ricorsive Ruby vs Python]]></title>
-    <link href="http://pioz.github.com/chiamate-ricorsive-ruby-vs-python"/>
+    <link href="http://blog.pioz.it/chiamate-ricorsive-ruby-vs-python"/>
     <updated>2012-08-03T21:27:00+02:00</updated>
-    <id>http://pioz.github.com/chiamate-ricorsive-ruby-vs-python</id>
+    <id>http://blog.pioz.it/chiamate-ricorsive-ruby-vs-python</id>
     <content type="html"><![CDATA[<p>Facciamo un piccolo test: calcoliamo Fibonacci ricorsivamente in Ruby (v2.0.0) e in Python (v2.7.2) e vediamo chi vince in termini di tempo</p>
 
 <p>Ruby Fibonacci code (<code>f.rb</code>)</p>

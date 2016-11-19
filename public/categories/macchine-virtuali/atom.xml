@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Categoria: macchine virtuali | programmer@work]]></title>
-  <link href="http://pioz.github.com/categories/macchine-virtuali/atom.xml" rel="self"/>
-  <link href="http://pioz.github.com/"/>
-  <updated>2015-01-13T00:41:24+01:00</updated>
-  <id>http://pioz.github.com/</id>
+  <link href="http://blog.pioz.it/categories/macchine-virtuali/atom.xml" rel="self"/>
+  <link href="http://blog.pioz.it/"/>
+  <updated>2016-11-19T04:39:07+01:00</updated>
+  <id>http://blog.pioz.it/</id>
   <author>
     <name><![CDATA[Pioz]]></name>
     
@@ -15,16 +15,16 @@
   
   <entry>
     <title type="html"><![CDATA[Mini guida su Xen e Debian]]></title>
-    <link href="http://pioz.github.com/mini-guida-su-xen-e-debian"/>
+    <link href="http://blog.pioz.it/mini-guida-su-xen-e-debian"/>
     <updated>2013-03-27T21:12:00+01:00</updated>
-    <id>http://pioz.github.com/mini-guida-su-xen-e-debian</id>
+    <id>http://blog.pioz.it/mini-guida-su-xen-e-debian</id>
     <content type="html"><![CDATA[<p><img src="http://www.debian.org/Pics/openlogo-50.png" alt="image" />
 Su questo post vedremo una mini guida su come installare una macchina virtuale con Xen
 in ambiente GNU/Linux Debian.</p>
 
 <p>Xen è un monitor di macchine virtuali open source rilasciato sotto licenza GPL per piattaforma
 x86 e compatibili (al momento sono in corso dei port per x86-64 e per IA-64) sviluppato
-presso il Computer Laboratory dell&#8217;Università di Cambridge.</p>
+presso il Computer Laboratory dell'Università di Cambridge.</p>
 
 <p>Per chiarezza ricordo che la macchina fisica di solito viene identificata con il
 nome <code>dom0</code> (domain 0), mentre le macchine virtuali con il nome <code>domU</code>.</p>
@@ -126,7 +126,7 @@ il network routing tra la la dom0 e le nostre domU commentando le seguenti righe
 (vif-script     vif-route)
 </code></pre>
 
-<p>Le altre opzioni vanno bene così come sono, ma se volte approfondire c&#8217;è sempre la doc.</p>
+<p>Le altre opzioni vanno bene così come sono, ma se volte approfondire c'è sempre la doc.</p>
 
 <p>Il secondo file <code>/etc/xen-tools/xen-tools.conf</code> serve per gestire la configurazione con
 cui vengono create le macchine virtuali. Vediamo alcune opzioni:</p>
@@ -147,7 +147,7 @@ dir = /var/xen
 
 <p>Specifica la directory dove verranno salvate le immagini delle macchine virtuali.
 In pratica i file che sono a tutti gli effetti gli HD delle vostre macchine virtuali.
-Infatti se volete fare un backup di un&#8217;intera macchina virtuale salvatevi il suo file
+Infatti se volete fare un backup di un'intera macchina virtuale salvatevi il suo file
 immagine.</p>
 
 <pre><code>#
@@ -192,7 +192,7 @@ install-method = debootstrap
 
 <p>In questa sezione di decice in quale modo il sistema operativo delle vostre macchine
 virtuali verrà installato. Ci sono diversi modi, ma il più comune e semplice è quello di
-usare l&#8217;utility <code>debootstrap</code> che viene usato per creare un sistema Debian da zero,
+usare l'utility <code>debootstrap</code> che viene usato per creare un sistema Debian da zero,
 senza la necessità di dpkg o apt. Per fare questo, vengono scaricati i file .deb da
 un sito mirror e vengono spacchettati in una directory su cui è eventualmente
 possibile fare il chroot.</p>
@@ -213,8 +213,8 @@ image  = sparse   # Specify sparse vs. full disk images.
 
 <p>Molto intuitivo, un commento solo alle ultime due opzioni: <code>dist</code> specifica se
 installare la versione stable, testing o unstable. Mentre <code>image</code> il tipo di immagine
-da usare come file system: possiamo scegliere tra un&#8217;immagine <em>sparse</em> oppure tra
-un&#8217;immagine <em>full disk</em>. Nel primo caso il file aumenta la sua dimensione dinamicamente,
+da usare come file system: possiamo scegliere tra un'immagine <em>sparse</em> oppure tra
+un'immagine <em>full disk</em>. Nel primo caso il file aumenta la sua dimensione dinamicamente,
 mentre nel secondo caso il file avrà la stessa grandezza del valore scelto qualche riga sopra (<code>size</code>).</p>
 
 <pre><code>#
@@ -225,7 +225,7 @@ passwd = 1
 #
 </code></pre>
 
-<p>Immettiamo noi quando creiamo le nostre macchine virtuali la password per l&#8217;utente root.</p>
+<p>Immettiamo noi quando creiamo le nostre macchine virtuali la password per l'utente root.</p>
 
 <p>Per le altre opzioni vi rimando alla doc.</p>
 
@@ -336,7 +336,7 @@ Ciò è possibile con i comandi <code>dd</code> e <code>resize2fs</code>:</p>
 $ resize2fs -f /etc/xen/domains/vm1/disk.img
 </code></pre>
 
-<p>Con questo comando abbiamo aggiunto 2 Gigabyte all&#8217;&ldquo;HD&rdquo; della macchina virtuale vm1.</p>
+<p>Con questo comando abbiamo aggiunto 2 Gigabyte all'&ldquo;HD&rdquo; della macchina virtuale vm1.</p>
 ]]></content>
   </entry>
   

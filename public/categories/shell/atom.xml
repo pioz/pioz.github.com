@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Categoria: shell | programmer@work]]></title>
-  <link href="http://pioz.github.com/categories/shell/atom.xml" rel="self"/>
-  <link href="http://pioz.github.com/"/>
-  <updated>2015-01-13T00:41:24+01:00</updated>
-  <id>http://pioz.github.com/</id>
+  <link href="http://blog.pioz.it/categories/shell/atom.xml" rel="self"/>
+  <link href="http://blog.pioz.it/"/>
+  <updated>2016-11-19T04:39:07+01:00</updated>
+  <id>http://blog.pioz.it/</id>
   <author>
     <name><![CDATA[Pioz]]></name>
     
@@ -15,9 +15,9 @@
   
   <entry>
     <title type="html"><![CDATA[Colori nella shell]]></title>
-    <link href="http://pioz.github.com/colori-nella-shell"/>
+    <link href="http://blog.pioz.it/colori-nella-shell"/>
     <updated>2012-07-27T21:43:00+02:00</updated>
-    <id>http://pioz.github.com/colori-nella-shell</id>
+    <id>http://blog.pioz.it/colori-nella-shell</id>
     <content type="html"><![CDATA[<p>Per colorare una string nella shell possiamo usare questo template:</p>
 
 <pre><code>\033[CODE1;CODE2;CODE3mTESTO\033[0m

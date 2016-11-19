@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[programmer@work]]></title>
-  <link href="http://pioz.github.com/atom.xml" rel="self"/>
-  <link href="http://pioz.github.com/"/>
-  <updated>2015-01-13T00:40:23+01:00</updated>
-  <id>http://pioz.github.com/</id>
+  <link href="http://blog.pioz.it/atom.xml" rel="self"/>
+  <link href="http://blog.pioz.it/"/>
+  <updated>2016-11-19T04:39:07+01:00</updated>
+  <id>http://blog.pioz.it/</id>
   <author>
     <name><![CDATA[Pioz]]></name>
     
@@ -14,10 +14,296 @@
 
   
   <entry>
+    <title type="html"><![CDATA[World of Warcraft leaderboards: is arena PvP balanced?]]></title>
+    <link href="http://blog.pioz.it/world-of-warcraft-leaderboards-is-arena-pvp-balanced"/>
+    <updated>2016-11-19T04:04:39+01:00</updated>
+    <id>http://blog.pioz.it/world-of-warcraft-leaderboards-is-arena-pvp-balanced</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve created a little script in Ruby to grab some data from the World of
+Warcraft 2v2 and 3v3 PvP leaderboards. On <a href="https://gist.github.com/pioz/479f6be0a53900f554b8d6a15828e040">Github</a>
+you can find the source code of the script:</p>
+
+<div><script src='https://gist.github.com/479f6be0a53900f554b8d6a15828e040.js'></script>
+<noscript><pre><code>require &#39;nokogiri&#39;
+require &#39;open-uri&#39;
+require &#39;gruff&#39;
+
+# Extend Pie chart class to set custom labels
+class LabeledPie &lt; Gruff::Pie
+  def data(name, data_points = [], options = {})
+    super(name, data_points, options[:color])
+    @data.each { |data_array| data_array &lt;&lt; options[:label] }
+  end
+  private
+  def slice_class
+    CustomLabeledSlice
+  end
+  class CustomLabeledSlice &lt; ::Gruff::Pie::PieSlice
+    def label
+      data_array[3] || super
+    end
+  end
+end
+
+# URL where we grab the data
+url = &#39;https://worldofwarcraft.com/en-gb/game/pvp/leaderboards&#39;
+
+# Wow Class colors
+COLORS = {
+    mage: &#39;#68ccef&#39;,
+    monk: &#39;#00ffba&#39;,
+    priest: &#39;#ffffff&#39;,
+    warlock: &#39;#9382c9&#39;,
+    deathknight: &#39;#c41e3b&#39;,
+    paladin: &#39;#f48cba&#39;,
+    warrior: &#39;#c69b6d&#39;,
+    rogue: &#39;#fff468&#39;,
+    shaman: &#39;#2359ff&#39;,
+    druid: &#39;#ff7c0a&#39;,
+    demonhunter: &#39;#a330c9&#39;,
+    hunter: &#39;#aad372&#39;
+  }
+
+%w(2v2 3v3).each do |arena|
+
+  # Plus 1 the counter when we found the wow class in the leaderboard
+  counters = {
+    mage: 0,
+    monk: 0,
+    priest: 0,
+    warlock: 0,
+    deathknight: 0,
+    paladin: 0,
+    warrior: 0,
+    rogue: 0,
+    shaman: 0,
+    druid: 0,
+    demonhunter: 0,
+    hunter: 0
+  }
+  tot = 0
+
+  # Parse the 10 pages of the leaderboard
+  10.times do |i|
+    doc = Nokogiri::HTML(open(&quot;#{url}/#{arena}?page=#{i+1}&quot;))
+    doc.search(&#39;a.Character&#39;).each do |row|
+      counters.each do |klass, count|
+        if row[:class].downcase.include?(klass.to_s)
+          counters[klass] += 1
+          tot += 1
+          break
+        end
+      end
+    end
+  end
+
+  # Sort counters
+  counters = counters.sort{|x, y| y[1] &lt;=&gt; x[1]}
+
+  # Generate pie graph
+  g = LabeledPie.new
+  g.title = &quot;Stats #{arena} updated at #{Time.now.strftime(&#39;%d/%m/%Y&#39;)} for\nthe first #{tot} best EU players&quot;
+  g.legend_font_size = 14
+  g.marker_font_size = 12
+  g.colors = []
+  counters.each { |klass, counter| g.colors &lt;&lt; COLORS[klass] }
+  counters.each do |klass, counter|
+    g.data(klass.to_s.capitalize, counter, label: &quot;#{klass.to_s.capitalize}: #{(counter*100.0/tot).round}% (#{counter})&quot;)
+  end
+  g.write(&quot;stats_#{arena}.png&quot;)
+
+end
+</code></pre></noscript></div>
+
+
+<p>This script parse these leaderboards pages
+<a href="https://worldofwarcraft.com/en-gb/game/pvp/leaderboards/2v2">https://worldofwarcraft.com/en-gb/game/pvp/leaderboards/2v2</a>
+and count for every class the number of players. Then generate a pie graph to
+see which classes are most frequent in the leaderboards.</p>
+
+<p>If you run the script with the command <code>ruby wowpvpstats.rb</code> after few seconds
+you can find two png images like these:</p>
+
+<p><img src="http://blog.pioz.it/images/posts/stats_2v2.png" alt="2v2 graph" /></p>
+
+<p>and</p>
+
+<p><img src="http://blog.pioz.it/images/posts/stats_3v3.png" alt="3v3 graph" /></p>
+
+<p>Now you can easily see which classes are more present in the leaderboards:
+<em>druids</em>, <em>shamans</em> and <em>monks</em> dominate the leaderboard while <em>mages</em> and
+<em>hunters</em> suck. So, what do you think? Is this PvP balanced?</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Il numero 666]]></title>
+    <link href="http://blog.pioz.it/il-numero-666"/>
+    <updated>2015-03-26T23:26:44+01:00</updated>
+    <id>http://blog.pioz.it/il-numero-666</id>
+    <content type="html"><![CDATA[<p>Oggi vi voglio parlare di qualcosa di diverso dall'informatica, qualcosa di
+carattere storico, biblico. Parliamo del famoso numero 666. Tanti lo
+associano al diavolo, ma in realtà si riferisce ad una persona.
+Vediamo questo breve passo dell'Apocalisse di San Giovanni (Ap 13,16-18):</p>
+
+<blockquote><p>Faceva sì che tutti, piccoli e grandi, ricchi e poveri, liberi e schiavi
+ricevessero un marchio sulla mano destra e sulla fronte; e che nessuno
+potesse comprare o vendere senza avere tale marchio, cioè il nome della
+bestia o il numero del suo nome. Qui sta la sapienza. Chi ha intelligenza
+calcoli il numero della bestia: essa rappresenta un nome d'uomo. E tal cifra
+è seicentosessantasei.</p></blockquote>
+
+<p>Parafrasando: quest'uomo faceva in modo che tutti, piccoli e grandi, ricchi
+e poveri, liberi e schiavi venissero plagiati nel lavoro e nella mente, nel
+pensiero; e che nessuno potesse vivere senza essere plagiato (nessuno è più
+libero). E qui sta la sapienza, nel capire chi è il male. Chi è intelligente
+calcoli il numero della bestia: questa bestia è un uomo malvagio. E questo
+numero è il 666.</p>
+
+<p>Si pensa che questo uomo sia l'imperatore romano Cesare Nerone che era al
+potere nei primi anni dopo la morte di Cristo; si pensa infatti che il
+numero 666 non sia altro che il multigramma di calaba ebraica, un modo per
+scrivere le lettere con i numeri; infatti come in greco antico, così anche
+in alfabeto ebraico i numeri venivano scritti usando le lettere, secondo,
+appunto la cabala ebraica. Prendendo dunque le consonanti del nome <strong>QeSaR
+NeRON</strong> (קסר נרון) si ha:</p>
+
+<pre><code>Q (qof)     = 100
+S (sameckh) = 60
+R (resh)    = 200
+N (nun)     = 50
+R (resh)    = 200
+O (waw)     = 6
+N (nun)     = 50
+</code></pre>
+
+<p>se sommiamo le cifre otteniamo il numero 666 (la vocale O è in realtà legata
+alla consonante W che è una <em>mater lectionis</em>, cioè una consonante che
+serviva a evitare equivoci nella lettura). Ovviamente questa è un'ipotesi
+degli studiosi, infatti la gematria (cioè l'utilizzo della corrispondenza
+fra numeri e lettere dell'alfabeto ebraico, greco o latino) può produrre
+molti risultati diversi e costituisce più un gioco intellettuale che uno
+strumento d'indagine.</p>
+
+<p>Comunque quello che mi preme dire è che Nerone era in quel tempo il capo
+dell'Impero Romano dove girava tutta l'economia e il denaro. Quindi mi vien
+da pensare che la &ldquo;bestia&rdquo;, il male, che solo i sapienti riusciranno a
+riconoscere, è il denaro.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby Module include vs prepend]]></title>
+    <link href="http://blog.pioz.it/ruby-module-include-vs-prepend"/>
+    <updated>2015-01-15T15:15:18+01:00</updated>
+    <id>http://blog.pioz.it/ruby-module-include-vs-prepend</id>
+    <content type="html"><![CDATA[<p>Oggi cerchiamo di capire un po' meglio la differenza tra i metodi <code>Module#include</code> e <code>Module#prepend</code>.
+Vediamo la differenza con un esempio mooolto semplice:</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+<span class='line-number'>4</span>
+<span class='line-number'>5</span>
+<span class='line-number'>6</span>
+<span class='line-number'>7</span>
+<span class='line-number'>8</span>
+<span class='line-number'>9</span>
+<span class='line-number'>10</span>
+<span class='line-number'>11</span>
+<span class='line-number'>12</span>
+<span class='line-number'>13</span>
+<span class='line-number'>14</span>
+<span class='line-number'>15</span>
+<span class='line-number'>16</span>
+<span class='line-number'>17</span>
+<span class='line-number'>18</span>
+<span class='line-number'>19</span>
+<span class='line-number'>20</span>
+<span class='line-number'>21</span>
+<span class='line-number'>22</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>class Person
+</span><span class='line'>  def name
+</span><span class='line'>    # return name here
+</span><span class='line'>    puts 'Call method name in class Person'
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>module Superhero
+</span><span class='line'>  def fly
+</span><span class='line'>    # fly here
+</span><span class='line'>    puts 'Call method fly in module Superhero'
+</span><span class='line'>  end
+</span><span class='line'>
+</span><span class='line'>  def name
+</span><span class='line'>    # return name here
+</span><span class='line'>    puts 'Call method name in module Superhero'
+</span><span class='line'>  end
+</span><span class='line'>end
+</span><span class='line'>
+</span><span class='line'>Person.include(Superhero)
+</span><span class='line'>
+</span><span class='line'>Person.new.name</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Cosa abbiamo fatto? Allora abbiamo la classe <code>Person</code> con un metodo <code>name</code>. Poi
+abbiamo il modulo <code>Superhero</code> con due metodi: <code>fly</code> e <code>name</code>. Notare a questo
+punto che sia la classe <code>Person</code> che il modulo <code>Superhero</code> hanno entrambi un
+metodo che si chiama <code>name</code>. Ora andiamo a mixare la classe <code>Person</code> con il
+modulo <code>Superhero</code> usando il metodo <code>include</code>. Se invochiamo il metodo <code>name</code> su
+un oggetto di tipo <code>Person</code> vedremo che viene chiamato il metodo definito dentro
+la classe <code>Person</code> e non quello definito nel modulo <code>Superhero</code>.   Questo ci
+potrebbe anche andare bene, ma a volte vorremmo che quando facciamo questo tipo
+di operazione i metodi del modulo che mixiamo sovrascrivessero (override) i
+metodi della classe, come succede quando estendiamo una classe. Per ottenere
+questo usiamo il metodo <code>prepend</code> al posto di <code>include</code> disponibile dalla
+versione 2 di Ruby.</p>
+
+<figure class='code'><div class="highlight"><table><tr><td class="gutter"><pre class="line-numbers"><span class='line-number'>1</span>
+<span class='line-number'>2</span>
+<span class='line-number'>3</span>
+</pre></td><td class='code'><pre><code class=''><span class='line'>Person.prepend(Superhero)
+</span><span class='line'>
+</span><span class='line'>Person.new.name</span></code></pre></td></tr></table></div></figure>
+
+
+<p>Adesso vediamo che viene invocato il metodo <code>name</code> definito nel modulo <code>Superhero</code>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Edit git last commit]]></title>
+    <link href="http://blog.pioz.it/edit-git-last-commit"/>
+    <updated>2015-01-13T14:44:28+01:00</updated>
+    <id>http://blog.pioz.it/edit-git-last-commit</id>
+    <content type="html"><![CDATA[<p>Oggi mi è capitato questa situazione mentre stavo fixando una issue di
+<a href="https://github.com/pioz/chess">Chess</a>, una mia gemma per Ruby su github: in
+pratica ho fixato il problema e ho fatto un commit <code>git commit -am "fix issue
+bla bla"</code>. Mi sono poi accorto che non ho aumentato il numero di versione della
+gemma e che quindi non potevo pusharla su Rubygems. A questo punto potevo
+modificare il numero di versione e fare un secondo commit, ma questo non mi
+andava, mi sarebbe piaciuto modificare l'ultimo commit e includere la modifica
+del file <code>version.rb</code>.<br/>
+Come fare? Facciamo la nostra modifica al file <code>version.rb</code> aumentando la
+versione della gemma e committiamo il tutto con il comando:</p>
+
+<pre><code>git commit -a --amend --no-edit
+</code></pre>
+
+<p>Bene! Abbiamo modificato l'ultimo commit. Ultima cosa da aggiungere: se avevate
+già fatto il push dell'ultimo commit lo SHA-1 di questo sarà cambiato dopo
+questa operazione e quindi bisognerà pushare le modifiche usando l'opzione
+<code>--force</code></p>
+
+<pre><code>git push -f  
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
     <title type="html"><![CDATA[Ruby's predefined variables: DATA]]></title>
-    <link href="http://pioz.github.com/rubys-predefined-variables-data"/>
+    <link href="http://blog.pioz.it/rubys-predefined-variables-data"/>
     <updated>2015-01-13T00:09:44+01:00</updated>
-    <id>http://pioz.github.com/rubys-predefined-variables-data</id>
+    <id>http://blog.pioz.it/rubys-predefined-variables-data</id>
     <content type="html"><![CDATA[<p>Ho scoperto da poco che tra le variabili predefiniti di Ruby ne esiste una che
 si chiama <code>DATA</code>. È molto interessante.<br/>
 In un file sorgente Ruby tutto quello che segue <code>__END__</code> diventa una specie
@@ -47,18 +333,18 @@ Ecco un esempio:</p>
   
   <entry>
     <title type="html"><![CDATA[Quanto grande è l'universo?]]></title>
-    <link href="http://pioz.github.com/quanto-grande-e-luniverso"/>
+    <link href="http://blog.pioz.it/quanto-grande-e-luniverso"/>
     <updated>2014-12-27T17:44:00+01:00</updated>
-    <id>http://pioz.github.com/quanto-grande-e-luniverso</id>
-    <content type="html"><![CDATA[<p>In certi momenti ci si riesce ad accorgere quanto sia enorme l&#8217;universo, anche
+    <id>http://blog.pioz.it/quanto-grande-e-luniverso</id>
+    <content type="html"><![CDATA[<p>In certi momenti ci si riesce ad accorgere quanto sia enorme l'universo, anche
 se facciamo fatica a concepirlo. Dalle stelle più vicine a vastissimi
 supergruppi di galassie, a distanze di miliardi di anni luce fino ai limiti di
-ciò che è possibile vedere. L&#8217;universo è grande&hellip; veramente grosso. Non avete
-idea di quanto enorme esso sia. L&#8217;universo comprende qualsiasi cosa che esiste,
+ciò che è possibile vedere. L'universo è grande&hellip; veramente grosso. Non avete
+idea di quanto enorme esso sia. L'universo comprende qualsiasi cosa che esiste,
 si pensa così. Sempre che ce ne siano altri, e il nostro è solo uno su trilioni,
 ma questo è un argomento per un altro articolo.</p>
 
-<h5>Davanti all&#8217;uscio di casa</h5>
+<h5>Davanti all'uscio di casa</h5>
 
 <p>Ok, quindi tutti sappiamo di vivere in una galassia chiamata la
 <a href="http://it.wikipedia.org/wiki/Via_Lattea">Via Lattea</a> che contiene qualche
@@ -76,10 +362,10 @@ a noi terrestri, ci mettereste tra i 70000 e 80000 anni per arrivare. Se
 avessimo scoperto il metodo per viaggiare alla velocità della luce, ci
 metteremmo comunque più di quattro anni e un quarto per raggiungere la
 destinazione. In altri termini, 9 anni e mezzo per un viaggio di andata e
-ritorno. Tutto ciò riguarda la nostra stella vicina di casa, dietro l&#8217;angolo.
-Niente a che fare con viaggi attraverso l&#8217;universo.<br/>
+ritorno. Tutto ciò riguarda la nostra stella vicina di casa, dietro l'angolo.
+Niente a che fare con viaggi attraverso l'universo.<br/>
 Se voleste attraversare la vostra spirale di casa, la Via Lattea da una parte
-all&#8217;altra, impieghereste niente meno di 100 mila anni. Tale durata è
+all'altra, impieghereste niente meno di 100 mila anni. Tale durata è
 approssimativamente 1250 vite medie umane. No, non confondete queste cifre
 legandole alle reali capacità dei nostri mezzi aerospaziali, queste tempistiche
 sono calcolate alla velocità della luce. Viaggiando così veloce, potreste
@@ -87,9 +373,9 @@ completare in un secondo 7 volte il giro della Terra.<br/>
 Che cosa succederebbe se voleste visitare la nostra galassia più vicina a questa
 velocità? Per raggiungere la galassia
 <a href="http://it.wikipedia.org/wiki/Galassia_di_Andromeda">Andromeda</a>, uscendo dalla
-Via Lattea, v&#8217;imbarchereste in un viaggio di 2 milioni e mezzo di anni.<br/>
-Possiamo mettere questi fatti sotto la giusta luce, l&#8217;universo è comunque
-un&#8217;entità intera e immensa, molto più grande, a  confronto di queste piccole
+Via Lattea, v'imbarchereste in un viaggio di 2 milioni e mezzo di anni.<br/>
+Possiamo mettere questi fatti sotto la giusta luce, l'universo è comunque
+un'entità intera e immensa, molto più grande, a  confronto di queste piccole
 galassie.</p>
 
 <h5>Gruppi e supergruppi galattici</h5>
@@ -98,7 +384,7 @@ galassie.</p>
 miliardi su miliardi di altre galassie in giro, proprio come la Via Lattea e
 Andromeda, ognuna con il proprio centinaio di miliardi di sistemi solari e i
 suoi trilioni di pianeti. Se uscite da questo perimetro e guardate a un contesto
-ulteriormente espanso, vedrete galassie che sembrano ammassate l&#8217;una sull&#8217;altra;
+ulteriormente espanso, vedrete galassie che sembrano ammassate l'una sull'altra;
 queste sono i
 <a href="http://it.wikipedia.org/wiki/Gruppi_e_ammassi_di_galassie">gruppi di galassie</a>.
 Sono collezioni di galassie che partono da 50 e arrivano fino a 1000. Si giunge
@@ -109,48 +395,48 @@ galattici. Questi ultimi sono le cose più grandi conosciute dalla razza umana,
 formati da gruppi di galassie e supergruppi che diventano enormi superstrutture
 cosmiche che occupano milioni di anni luce o persino miliardi di anni luce. Sono
 immaginabili come muri colossali, fogli e filamenti di galassie. Sono oggetti di
-proporzioni inimmaginabili, che occupano grandi sezioni dell&#8217;universo visibile.
+proporzioni inimmaginabili, che occupano grandi sezioni dell'universo visibile.
 Se ci inoltriamo ancora più fuori, i gruppi e supergruppi si formano intorno a
 zone di vuoto cosmico e assomigliano a strutture come una spugna o una pagnotta
-di pane. I gruppi galattici sono il pane e i vuoti sono le bolle d&#8217;aria.</p>
+di pane. I gruppi galattici sono il pane e i vuoti sono le bolle d'aria.</p>
 
 <h5>Tempo</h5>
 
-<p>Allora, quanto è grande l&#8217;intero universo? Beh, nessuno conosce la risposta
+<p>Allora, quanto è grande l'intero universo? Beh, nessuno conosce la risposta
 esatta. Possiamo solo osservare, il più lontano possibile, in tutte le direzioni
 ma, è proprio in quel momento che ci scontriamo con un muro solido di mattoni.
 La distanza non è il problema saliente quando puntiamo a osservare i limiti
-dell&#8217;universo, bensì il tempo. Al cosmo si attribuisce un&#8217;età pari a 13.7
+dell'universo, bensì il tempo. Al cosmo si attribuisce un'età pari a 13.7
 miliardi di anni e con la stessa misura si pensa a qualsiasi cosa che sia
 distante da noi 13.7 miliardi di anni luce. Dopo tale distanza è ragionevole
 pensare che qualsiasi informazione precedente al
 <a href="http://it.wikipedia.org/wiki/Big_Bang">Big Bang</a> che viaggia alla velocità
-della luce non ha ancora raggiunto il nostro pianeta. Tutto ciò rende l&#8217;universo
+della luce non ha ancora raggiunto il nostro pianeta. Tutto ciò rende l'universo
 visibile a noi una sfera con raggio di circa tredici miliardi di anni luce. Nel
-momento che sono stati scritti tali numeri, tredici miliardi d&#8217;anni luce sono la
+momento che sono stati scritti tali numeri, tredici miliardi d'anni luce sono la
 distanza della più lontana galassia mai vista.<br/>
-Ma che si dice della rapida espansione dell&#8217;universo e di quella misteriosa
-energia oscura che costantemente accellera l&#8217;espansione? ebbene questa
+Ma che si dice della rapida espansione dell'universo e di quella misteriosa
+energia oscura che costantemente accellera l'espansione? ebbene questa
 espansione ha allargato lo spazio nel frattempo e rende attualmente osservabile
 il nostro universo fino a 78 miliardi di anni luce ovvero una sfera osservabile
 larga 156 miliardi di anni luce. Semplicemente diciamo che una stella lontana
 13.7 miliardi di anni luce ha emesso un fotone (sebbene ciò sia impossibile
-perchè sarebbe successo all&#8217;inizio del tutto, prendiamo l&#8217;esempio per buono)
+perchè sarebbe successo all'inizio del tutto, prendiamo l'esempio per buono)
 dopo di che, ora che quel fotone raggiunge la Terra, il punto di partenza di
 quel fotone non è più distante 13.7 miliardi di anni luce bensì a 78 miliardi
 di anni luce. La luce non ha viaggiato attraverso 78 miliardi di anni luce, ma
 lo spazio tra noi e il punto di partenza si è allungato. Allora i fotoni di
 luce che vediamo da oggetti tanto distanti sono in realtà già più lontani
 rispetto al momento che la luce è stata emessa.<br/>
-C&#8217;è un punto dove è diventato impossibile viaggiare, per la luce o di
+C'è un punto dove è diventato impossibile viaggiare, per la luce o di
 qualsiasi altro tipo di radiazione; questo punto è più recente di 380 mila
 anni dopo il Big Bang. Astronomi non vedrebbero mai nessun tipo di luce da quel
 tempo: nessuna luce visibile o raggi gamma o ultravioletti e nemmeno segnali
 radio; niente che deriva dallo spettro elettromagnetico. Forse avete notato
 quello strano ammasso di blocchi blu e verdi (vedi sotto): quello si chiama la
 <a href="http://it.wikipedia.org/wiki/Radiazione_cosmica_di_fondo">radiazione cosmica di fondo</a>.
-In altri termini è l&#8217;alone di luce residua del Big Bang e la radiazione di
-sfondo a microonde cosmiche segna il punto laddove l&#8217;universo divenne
+In altri termini è l'alone di luce residua del Big Bang e la radiazione di
+sfondo a microonde cosmiche segna il punto laddove l'universo divenne
 trasparente alle radiazioni. Appariva opaco prima di quel momento, opaco come il
 centro di una stella.</p>
 
@@ -170,12 +456,12 @@ che porta un raggio di 78 miliardi di anni luce, ma persino questa ampiezza
 rappresenta probabilmente una minuscola parte di ciò che potrebbe veramente
 esistere. Nessuno lo sà per certo ma gli scienziati stimano che questa porzione
 corrisponda a circa un decimillesimo di ciò che potrebbe esserci là fuori.<br/>
-Come sarebbe l&#8217;universo oltre questa barriera? Sarebbe lo stesso ovunque oppure
+Come sarebbe l'universo oltre questa barriera? Sarebbe lo stesso ovunque oppure
 le leggi fisiche cambierebbero? Quali mondi e altre civiltà si nascondono là
-fuori ma permanentemente fuori dalla nostra portata? Prosegue all&#8217;infinito o
-altrimenti ha un bordo? Pare che gran parte dell&#8217;universo stia oltre i nostri
+fuori ma permanentemente fuori dalla nostra portata? Prosegue all'infinito o
+altrimenti ha un bordo? Pare che gran parte dell'universo stia oltre i nostri
 telescopi, la nostra comprensione e forse persino la nostra immaginazione. E se
-prima del Big Bang c&#8217;era il nulla, cosa o chi ha scatenato quella scintilla che
+prima del Big Bang c'era il nulla, cosa o chi ha scatenato quella scintilla che
 ha dato origine al nostro universo? Forse Dio?</p>
 
 <p>Fonte: <a href="http://getprismatic.com/story/1419368520134">http://getprismatic.com/story/1419368520134</a></p>
@@ -184,15 +470,15 @@ ha dato origine al nostro universo? Forse Dio?</p>
   
   <entry>
     <title type="html"><![CDATA[ALSA: Switch audio output to USB headset]]></title>
-    <link href="http://pioz.github.com/alsa-switch-audio-output-to-usb-headset"/>
+    <link href="http://blog.pioz.it/alsa-switch-audio-output-to-usb-headset"/>
     <updated>2014-09-17T13:31:00+02:00</updated>
-    <id>http://pioz.github.com/alsa-switch-audio-output-to-usb-headset</id>
+    <id>http://blog.pioz.it/alsa-switch-audio-output-to-usb-headset</id>
     <content type="html"><![CDATA[<p>Ho acquistato delle cuffie wireless USB, per essere preciso esattamente queste:
 <a href="http://www.amazon.it/gp/product/B005FY61MM">http://www.amazon.it/gp/product/B005FY61MM</a> . Sono molto comode e funzionano su
 Debian out-of-the-box ovvero senza installare alcun driver.</p>
 
 <p>Adesso nella mia Debian ho questo problema: vorrei che quando inserisco il
-ricevitore USB in automatico l&#8217;output di ALSA cambi dalla scheda audio integrata
+ricevitore USB in automatico l'output di ALSA cambi dalla scheda audio integrata
 alle cuffie wireless.</p>
 
 <p>Questo può essere fatto usando le regole di udev (udev è il gestore dei
@@ -217,7 +503,7 @@ creiamo; aggiungiamo le seguenti regole:</p>
 uno script per cambiare il file <code>/etc/asound.conf</code> cambiando il device di output
 con quello delle cuffie appena inserite.</p>
 
-<p>L&#8217;unica pecca è che quando viene cambiato l&#8217;output di ALSA tutti i programmi che
+<p>L'unica pecca è che quando viene cambiato l'output di ALSA tutti i programmi che
 stanno usando ALSA devono essere riavviti. Se trovate un modo per risolvere
 questo problema fatemi sarepe!</p>
 ]]></content>
@@ -225,37 +511,37 @@ questo problema fatemi sarepe!</p>
   
   <entry>
     <title type="html"><![CDATA[A che altezza appendere un quadro?]]></title>
-    <link href="http://pioz.github.com/a-che-altezza-appendere-un-quadro"/>
+    <link href="http://blog.pioz.it/a-che-altezza-appendere-un-quadro"/>
     <updated>2014-07-22T14:57:00+02:00</updated>
-    <id>http://pioz.github.com/a-che-altezza-appendere-un-quadro</id>
+    <id>http://blog.pioz.it/a-che-altezza-appendere-un-quadro</id>
     <content type="html"><![CDATA[<p>Per appendere i quadri mi piace molto seguire lo stile della <em>linea mediana</em>.
 In pratica si traccia una linea immaginaria sulla parete che sta a 5/8
-dell&#8217;altezza della parete stessa. Una volta che abbiamo a mente questa linea
+dell'altezza della parete stessa. Una volta che abbiamo a mente questa linea
 i quadri vanno appesi con i 3/8 della loro altezza sopra la linea mediana.</p>
 
-<p>Quindi la formula per calcolare l&#8217;altezza dove appendere un quadro è:</p>
+<p>Quindi la formula per calcolare l'altezza dove appendere un quadro è:</p>
 
 <pre><code>h = (H*5 + q*3) / 8
 </code></pre>
 
-<p>dove <code>H</code> è l&#8217;altezza della parete dove volete appendere il quadro e <code>q</code> è
-l&#8217;altezza del quadro stesso.</p>
+<p>dove <code>H</code> è l'altezza della parete dove volete appendere il quadro e <code>q</code> è
+l'altezza del quadro stesso.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Configurare più monitor con scheda video NVidia e Xorg]]></title>
-    <link href="http://pioz.github.com/configurare-piu-monitor-con-scheda-video-nvidia-e-xorg"/>
+    <link href="http://blog.pioz.it/configurare-piu-monitor-con-scheda-video-nvidia-e-xorg"/>
     <updated>2014-01-25T13:04:00+01:00</updated>
-    <id>http://pioz.github.com/configurare-piu-monitor-con-scheda-video-nvidia-e-xorg</id>
-    <content type="html"><![CDATA[<p>L&#8217;altro giorno mi sono trovato a configurare un dual monitor più connessione alla TV sul mio
+    <id>http://blog.pioz.it/configurare-piu-monitor-con-scheda-video-nvidia-e-xorg</id>
+    <content type="html"><![CDATA[<p>L'altro giorno mi sono trovato a configurare un dual monitor più connessione alla TV sul mio
 pc fisso che monta una Debian con una scheda video NVidia GeForce GTX 650.</p>
 
 <p>La configurazione che ho fatto è questa:</p>
 
 <ul>
-<li>monitor Samsung 24&#8221; come principale</li>
-<li>monitor QBel 19&#8221; a destra del monitor principale</li>
+<li>monitor Samsung 24" come principale</li>
+<li>monitor QBel 19" a destra del monitor principale</li>
 <li>TV che clona il monitor principale</li>
 </ul>
 
@@ -344,7 +630,7 @@ DVI-D-0 connected primary 1920x1080+0+0 (normal left inverted right x axis y axi
 DVI-D-1 disconnected (normal left inverted right x axis y axis)
 </code></pre>
 
-<p>In questo caso <code>DVI-D-0</code> è il monitor principale (24&#8221; Samsung), <code>VGA-0</code> è il monitor secondario (19&#8221; QBel) e <code>HDMI-0</code> è la TV.</p>
+<p>In questo caso <code>DVI-D-0</code> è il monitor principale (24" Samsung), <code>VGA-0</code> è il monitor secondario (19" QBel) e <code>HDMI-0</code> è la TV.</p>
 
 <p>Con questi dati possiamo iniziare a modificare il file <code>xorg.conf</code>. Nella sezione <code>Screen</code> aggiungiamo:</p>
 
@@ -357,13 +643,13 @@ Option         "metamodes" "DVI-D-0: nvidia-auto-select +0+0, VGA-0: 1280x1024 +
 <ul>
 <li>Ovvero abilitiamo il TwinView della nostra scheda NVidia.</li>
 <li>Diciamo che lo standard della TV è il PAL-B.</li>
-<li>Diciamo che il monitor principale è il <code>DVI-D-0</code>, ovvero il Samsung da 24&#8221;.</li>
+<li>Diciamo che il monitor principale è il <code>DVI-D-0</code>, ovvero il Samsung da 24".</li>
 <li>Disponiamo i vari monitor:
 
 <ul>
-<li>Il monitor <code>DVI-D-0</code> avrà risoluzione auto calcolata (1920x1080) e l&#8217;angolo top-left avrà coordinate 0,0</li>
-<li>Il monitor <code>VGA-0</code> avrà risoluzione 1280x1024 e l&#8217;angolo top-left avrà coordinate 1920,0 ovvero a destra del monitor principale infatti la larghezza del monitor principale (risoluzione orizzontale) è di 1920 pixel, quando termina inizia il monitor secondario.</li>
-<li>La TV invece <code>HDMI-0</code> avrà risoluzione 720x480 e l&#8217;angono top-left avrà coordinate 600,300 ovvero più o meno al centro del monitor principale.</li>
+<li>Il monitor <code>DVI-D-0</code> avrà risoluzione auto calcolata (1920x1080) e l'angolo top-left avrà coordinate 0,0</li>
+<li>Il monitor <code>VGA-0</code> avrà risoluzione 1280x1024 e l'angolo top-left avrà coordinate 1920,0 ovvero a destra del monitor principale infatti la larghezza del monitor principale (risoluzione orizzontale) è di 1920 pixel, quando termina inizia il monitor secondario.</li>
+<li>La TV invece <code>HDMI-0</code> avrà risoluzione 720x480 e l'angono top-left avrà coordinate 600,300 ovvero più o meno al centro del monitor principale.</li>
 </ul>
 </li>
 </ul>
@@ -375,9 +661,9 @@ Option         "metamodes" "DVI-D-0: nvidia-auto-select +0+0, VGA-0: 1280x1024 +
   
   <entry>
     <title type="html"><![CDATA[Add an 'acts_as' method to Active Record]]></title>
-    <link href="http://pioz.github.com/add-an-acts-as-method-to-active-record"/>
+    <link href="http://blog.pioz.it/add-an-acts-as-method-to-active-record"/>
     <updated>2013-06-14T16:03:00+02:00</updated>
-    <id>http://pioz.github.com/add-an-acts-as-method-to-active-record</id>
+    <id>http://blog.pioz.it/add-an-acts-as-method-to-active-record</id>
     <content type="html"><![CDATA[<p>Vediamo oggi come aggiungere i famosi metodi magici <em>acts_as</em> alle classi ActiveRecord.</p>
 
 <p>La cosa da fare è create un modulo (magari dentro <code>lib</code>) con il nome del nostro acts_as:</p>
@@ -415,26 +701,26 @@ end
 ActiveRecord::Base.send(:include, Ciccio) # optional
 </code></pre>
 
-<p>Caricando questo modulo all&#8217;avvio di Rails, tutte le vostre classi che derivano da <code>ActiveRecord::Base</code>
+<p>Caricando questo modulo all'avvio di Rails, tutte le vostre classi che derivano da <code>ActiveRecord::Base</code>
 avranno i metodi di classe che sono definiti dentro il modulo <code>Ciccio::ClassMethods</code> e i metodi di istanza
 che sono definiti dentro <code>Ciccio::InstanceMethods</code> o dentro <code>Ciccio</code>.
 Nel nostro esempio inoltre possiamo aggiungere ad una classe i metodi di istanza dentro <code>Ciccio::InstanceMethods2</code>
-solo se invochiamo il metodo di classe <code>acts_as_ciccio(add_power: true)</code> passando l&#8217;opzione <code>add_power</code> a true.</p>
+solo se invochiamo il metodo di classe <code>acts_as_ciccio(add_power: true)</code> passando l'opzione <code>add_power</code> a true.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Mini guida su Xen e Debian]]></title>
-    <link href="http://pioz.github.com/mini-guida-su-xen-e-debian"/>
+    <link href="http://blog.pioz.it/mini-guida-su-xen-e-debian"/>
     <updated>2013-03-27T21:12:00+01:00</updated>
-    <id>http://pioz.github.com/mini-guida-su-xen-e-debian</id>
+    <id>http://blog.pioz.it/mini-guida-su-xen-e-debian</id>
     <content type="html"><![CDATA[<p><img src="http://www.debian.org/Pics/openlogo-50.png" alt="image" />
 Su questo post vedremo una mini guida su come installare una macchina virtuale con Xen
 in ambiente GNU/Linux Debian.</p>
 
 <p>Xen è un monitor di macchine virtuali open source rilasciato sotto licenza GPL per piattaforma
 x86 e compatibili (al momento sono in corso dei port per x86-64 e per IA-64) sviluppato
-presso il Computer Laboratory dell&#8217;Università di Cambridge.</p>
+presso il Computer Laboratory dell'Università di Cambridge.</p>
 
 <p>Per chiarezza ricordo che la macchina fisica di solito viene identificata con il
 nome <code>dom0</code> (domain 0), mentre le macchine virtuali con il nome <code>domU</code>.</p>
@@ -536,7 +822,7 @@ il network routing tra la la dom0 e le nostre domU commentando le seguenti righe
 (vif-script     vif-route)
 </code></pre>
 
-<p>Le altre opzioni vanno bene così come sono, ma se volte approfondire c&#8217;è sempre la doc.</p>
+<p>Le altre opzioni vanno bene così come sono, ma se volte approfondire c'è sempre la doc.</p>
 
 <p>Il secondo file <code>/etc/xen-tools/xen-tools.conf</code> serve per gestire la configurazione con
 cui vengono create le macchine virtuali. Vediamo alcune opzioni:</p>
@@ -557,7 +843,7 @@ dir = /var/xen
 
 <p>Specifica la directory dove verranno salvate le immagini delle macchine virtuali.
 In pratica i file che sono a tutti gli effetti gli HD delle vostre macchine virtuali.
-Infatti se volete fare un backup di un&#8217;intera macchina virtuale salvatevi il suo file
+Infatti se volete fare un backup di un'intera macchina virtuale salvatevi il suo file
 immagine.</p>
 
 <pre><code>#
@@ -602,7 +888,7 @@ install-method = debootstrap
 
 <p>In questa sezione di decice in quale modo il sistema operativo delle vostre macchine
 virtuali verrà installato. Ci sono diversi modi, ma il più comune e semplice è quello di
-usare l&#8217;utility <code>debootstrap</code> che viene usato per creare un sistema Debian da zero,
+usare l'utility <code>debootstrap</code> che viene usato per creare un sistema Debian da zero,
 senza la necessità di dpkg o apt. Per fare questo, vengono scaricati i file .deb da
 un sito mirror e vengono spacchettati in una directory su cui è eventualmente
 possibile fare il chroot.</p>
@@ -623,8 +909,8 @@ image  = sparse   # Specify sparse vs. full disk images.
 
 <p>Molto intuitivo, un commento solo alle ultime due opzioni: <code>dist</code> specifica se
 installare la versione stable, testing o unstable. Mentre <code>image</code> il tipo di immagine
-da usare come file system: possiamo scegliere tra un&#8217;immagine <em>sparse</em> oppure tra
-un&#8217;immagine <em>full disk</em>. Nel primo caso il file aumenta la sua dimensione dinamicamente,
+da usare come file system: possiamo scegliere tra un'immagine <em>sparse</em> oppure tra
+un'immagine <em>full disk</em>. Nel primo caso il file aumenta la sua dimensione dinamicamente,
 mentre nel secondo caso il file avrà la stessa grandezza del valore scelto qualche riga sopra (<code>size</code>).</p>
 
 <pre><code>#
@@ -635,7 +921,7 @@ passwd = 1
 #
 </code></pre>
 
-<p>Immettiamo noi quando creiamo le nostre macchine virtuali la password per l&#8217;utente root.</p>
+<p>Immettiamo noi quando creiamo le nostre macchine virtuali la password per l'utente root.</p>
 
 <p>Per le altre opzioni vi rimando alla doc.</p>
 
@@ -746,18 +1032,18 @@ Ciò è possibile con i comandi <code>dd</code> e <code>resize2fs</code>:</p>
 $ resize2fs -f /etc/xen/domains/vm1/disk.img
 </code></pre>
 
-<p>Con questo comando abbiamo aggiunto 2 Gigabyte all&#8217;&ldquo;HD&rdquo; della macchina virtuale vm1.</p>
+<p>Con questo comando abbiamo aggiunto 2 Gigabyte all'&ldquo;HD&rdquo; della macchina virtuale vm1.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Gestire differenti versioni di gcc su OSX]]></title>
-    <link href="http://pioz.github.com/gestire-differenti-versioni-di-gcc-su-osx"/>
+    <link href="http://blog.pioz.it/gestire-differenti-versioni-di-gcc-su-osx"/>
     <updated>2013-03-27T20:56:00+01:00</updated>
-    <id>http://pioz.github.com/gestire-differenti-versioni-di-gcc-su-osx</id>
+    <id>http://blog.pioz.it/gestire-differenti-versioni-di-gcc-su-osx</id>
     <content type="html"><![CDATA[<p>Vediamo in questo post come gestire differenti versioni di gcc su Mac OS X con port.</p>
 
-<p>La storia è molto semplice grazie all&#8217;utility <code>gcc_select</code> che installiamo nel seguente modo:</p>
+<p>La storia è molto semplice grazie all'utility <code>gcc_select</code> che installiamo nel seguente modo:</p>
 
 <pre><code>$ sudo port install gcc_select
 </code></pre>
@@ -784,9 +1070,9 @@ Selecting 'llvm-gcc42' for 'gcc' succeeded. 'llvm-gcc42' is now active.
   
   <entry>
     <title type="html"><![CDATA[Chiamate ricorsive Ruby vs Python]]></title>
-    <link href="http://pioz.github.com/chiamate-ricorsive-ruby-vs-python"/>
+    <link href="http://blog.pioz.it/chiamate-ricorsive-ruby-vs-python"/>
     <updated>2012-08-03T21:27:00+02:00</updated>
-    <id>http://pioz.github.com/chiamate-ricorsive-ruby-vs-python</id>
+    <id>http://blog.pioz.it/chiamate-ricorsive-ruby-vs-python</id>
     <content type="html"><![CDATA[<p>Facciamo un piccolo test: calcoliamo Fibonacci ricorsivamente in Ruby (v2.0.0) e in Python (v2.7.2) e vediamo chi vince in termini di tempo</p>
 
 <p>Ruby Fibonacci code (<code>f.rb</code>)</p>
@@ -869,9 +1155,9 @@ sys   0m0.003s
   
   <entry>
     <title type="html"><![CDATA[Colori nella shell]]></title>
-    <link href="http://pioz.github.com/colori-nella-shell"/>
+    <link href="http://blog.pioz.it/colori-nella-shell"/>
     <updated>2012-07-27T21:43:00+02:00</updated>
-    <id>http://pioz.github.com/colori-nella-shell</id>
+    <id>http://blog.pioz.it/colori-nella-shell</id>
     <content type="html"><![CDATA[<p>Per colorare una string nella shell possiamo usare questo template:</p>
 
 <pre><code>\033[CODE1;CODE2;CODE3mTESTO\033[0m
@@ -929,9 +1215,9 @@ echo -e "\033[1;35;47mQUESTO TESTO SARA STAMPATO IN GROSSETTO E COLOR MAGENTA SU
   
   <entry>
     <title type="html"><![CDATA[init.d script to run Apache SOLR]]></title>
-    <link href="http://pioz.github.com/script-run-apache-solr"/>
+    <link href="http://blog.pioz.it/script-run-apache-solr"/>
     <updated>2011-02-25T21:40:00+01:00</updated>
-    <id>http://pioz.github.com/script-run-apache-solr</id>
+    <id>http://blog.pioz.it/script-run-apache-solr</id>
     <content type="html"><![CDATA[<p>Copiate il seguente script in <code>/etc/init.d/solr</code></p>
 
 <pre><code>#!/bin/sh
@@ -990,49 +1276,49 @@ exit 0
   
   <entry>
     <title type="html"><![CDATA[Configurare i tasti HOME e END nel terminale di OSX]]></title>
-    <link href="http://pioz.github.com/tasti-home-end-terminale-osx"/>
+    <link href="http://blog.pioz.it/tasti-home-end-terminale-osx"/>
     <updated>2010-07-21T21:35:00+02:00</updated>
-    <id>http://pioz.github.com/tasti-home-end-terminale-osx</id>
-    <content type="html"><![CDATA[<p>Per usare i tasti HOME ed END nel modo classico (HOME va all&#8217;inizio della riga, END alla fine) guardate l&#8217;immagine qua sotto:</p>
+    <id>http://blog.pioz.it/tasti-home-end-terminale-osx</id>
+    <content type="html"><![CDATA[<p>Per usare i tasti HOME ed END nel modo classico (HOME va all'inizio della riga, END alla fine) guardate l'immagine qua sotto:</p>
 
 <p><img src="http://i.imgur.com/Bdged.png" alt="image" /></p>
 
 <p>Per generare la string <code>\005</code> premere ctrl+e, mentre per la string <code>\001</code> ctrl+a.<br/>
-A questo punto usando option+RIGHT e option+LEFT ci muoviamo all&#8217;inizio o alla fine della riga.</p>
+A questo punto usando option+RIGHT e option+LEFT ci muoviamo all'inizio o alla fine della riga.</p>
 ]]></content>
   </entry>
   
   <entry>
     <title type="html"><![CDATA[Youtube flv 2 mp3]]></title>
-    <link href="http://pioz.github.com/youtube2flv"/>
+    <link href="http://blog.pioz.it/youtube2flv"/>
     <updated>2010-06-08T21:24:00+02:00</updated>
-    <id>http://pioz.github.com/youtube2flv</id>
+    <id>http://blog.pioz.it/youtube2flv</id>
     <content type="html"><![CDATA[<p>Vediamo come convertire un video flv di Youtube in mp3 usando ffmpeg.</p>
 
-<p>Per prima cosa dobbiamo ottenere l&#8217;URL esatto del video per poter scaricare l&#8217;flv.
+<p>Per prima cosa dobbiamo ottenere l'URL esatto del video per poter scaricare l'flv.
 Per far ciò ci serve un token che cambia nel tempo ma che possiamo ottenere dal file <code>video_info</code>; scarichiamolo:</p>
 
 <pre><code>http://www.youtube.com/get_video_info?video_id=VugK063j0Zo
 </code></pre>
 
-<p>Questo file contiene una serie di valori in stile parametri http. A noi serve quello con chiave <strong>token</strong>: nell&#8217;esempio <code>token=vjVQa1PpcFNk6LFs5OQXj-teHu8POPhx7isbKGtGbOc%3D</code>.</p>
+<p>Questo file contiene una serie di valori in stile parametri http. A noi serve quello con chiave <strong>token</strong>: nell'esempio <code>token=vjVQa1PpcFNk6LFs5OQXj-teHu8POPhx7isbKGtGbOc%3D</code>.</p>
 
-<p>A questo punto abbiamo tutto il necessario per generare l&#8217;url per il download diretto del video flv:</p>
+<p>A questo punto abbiamo tutto il necessario per generare l'url per il download diretto del video flv:</p>
 
 <pre><code>http://www.youtube.com/get_video?video_id=VIDEOID&amp;t=TOKEN
 </code></pre>
 
-<p>nell&#8217;esempio:</p>
+<p>nell'esempio:</p>
 
 <pre><code>http://www.youtube.com/get_video?video_id=VugK063j0Zo&amp;t=vjVQa1PpcFNk6LFs5OQXj-teHu8POPhx7isbKGtGbOc%3D
 </code></pre>
 
-<p>Bene, ora possiamo con ffmpeg ottenere direttamente l&#8217;audio del video in formato mp3 con il seguente comando:</p>
+<p>Bene, ora possiamo con ffmpeg ottenere direttamente l'audio del video in formato mp3 con il seguente comando:</p>
 
 <pre><code>ffmpeg -i 'URL DIRETTO DEL VIDEO' -acodec libmp3lame -ac 2 -ab 128kb -vn -y file_output.mp3
 </code></pre>
 
-<p>Nell&#8217;esempio</p>
+<p>Nell'esempio</p>
 
 <pre><code>ffmpeg -i 'http://www.youtube.com/get_video?video_id=VugK063j0Zo&amp;t=vjVQa1PpcFMpsZHHpcVB1lB6w_EvoJYGbZTNi4KQ2g4%3D' -acodec libmp3lame -ac 2 -ab 128kb -vn -y magically_magical.mp3
 </code></pre>
@@ -1043,10 +1329,10 @@ Per far ciò ci serve un token che cambia nel tempo ma che possiamo ottenere dal
   
   <entry>
     <title type="html"><![CDATA[Streaming di Radio 105 e Virgin radio]]></title>
-    <link href="http://pioz.github.com/streaming-radio-105-virgin-radio"/>
+    <link href="http://blog.pioz.it/streaming-radio-105-virgin-radio"/>
     <updated>2010-02-24T21:22:00+01:00</updated>
-    <id>http://pioz.github.com/streaming-radio-105-virgin-radio</id>
-    <content type="html"><![CDATA[<p>L&#8217;URL per ascoltare in streaming Radio 105 è</p>
+    <id>http://blog.pioz.it/streaming-radio-105-virgin-radio</id>
+    <content type="html"><![CDATA[<p>L'URL per ascoltare in streaming Radio 105 è</p>
 
 <pre><code>http://shoutcast.unitedradio.it:1101
 </code></pre>
@@ -1060,14 +1346,14 @@ Per far ciò ci serve un token che cambia nel tempo ma che possiamo ottenere dal
   
   <entry>
     <title type="html"><![CDATA[Configurare un multi domain mail server con Postfix, Dovecot e autenticazione sicura]]></title>
-    <link href="http://pioz.github.com/configurare-multi-domain-mail-server-postfix-dovecot"/>
+    <link href="http://blog.pioz.it/configurare-multi-domain-mail-server-postfix-dovecot"/>
     <updated>2009-12-11T10:22:00+01:00</updated>
-    <id>http://pioz.github.com/configurare-multi-domain-mail-server-postfix-dovecot</id>
+    <id>http://blog.pioz.it/configurare-multi-domain-mail-server-postfix-dovecot</id>
     <content type="html"><![CDATA[<p>Allora in questa guida vedremo come installare e configurare un mail server professionale.
 Il tutto è stato testato in una <a href="http://www.debian.org">Debian</a> 5.0 stable.</p>
 
 <p>Con questo server mail sarà possibile gestire più domini e quindi per esempio allo stesso tempo mantenere mail del tipo <em>@pioz.it</em> e <em>@barison.org</em>.
-Il tutto avverrà dando la possibilità all&#8217;utente se utilizzare comunicazioni criptate (come SSL o TLS) o in chiaro, se utilizzare autenticazione in chiaro (PLAIN) o criptata (CRAM-MD5 o DIGEST-MD5). Dando la possibilità di usare protocollo IMAP o POP3.</p>
+Il tutto avverrà dando la possibilità all'utente se utilizzare comunicazioni criptate (come SSL o TLS) o in chiaro, se utilizzare autenticazione in chiaro (PLAIN) o criptata (CRAM-MD5 o DIGEST-MD5). Dando la possibilità di usare protocollo IMAP o POP3.</p>
 
 <p>Il necessario:</p>
 
@@ -1091,7 +1377,7 @@ $ apt-get install libsasl2 sasl2-bin libsasl2-modules
 
 <p>Per capirci meglio usiamo le seguenti convenzioni: il dominio associato al mail server sarà <code>ciccio.com</code>, mentre i domini che hosteremo saranno <code>pippo.it</code> e <code>pluto.com</code>.</p>
 
-<p>Questo significa che tutti e tre i domini dovranno avere un record MX nel DNS chiamato mail.nomedominio che punterà all&#8217;IP del nostro server mail.</p>
+<p>Questo significa che tutti e tre i domini dovranno avere un record MX nel DNS chiamato mail.nomedominio che punterà all'IP del nostro server mail.</p>
 
 <p>Inoltre dato che useremo anche SSL per il trasferimento dei dati tra server e client è necessario avere un certificato (valido) per il dominio <code>mail.ciccio.com</code>.</p>
 
@@ -1135,21 +1421,21 @@ mysql&gt; quit;
 <p>Vediamo, prima di proseguire, i campi della tabella <code>user</code>:</p>
 
 <ul>
-<li><strong>domain</strong>: il dominio dell&#8217;indirizzo mail (per esempio <a href="&#109;&#x61;&#x69;&#108;&#116;&#x6f;&#58;&#x6c;&#x75;&#99;&#x61;&#x40;&#112;&#x69;&#112;&#112;&#111;&#x2e;&#105;&#116;">&#x6c;&#x75;&#x63;&#97;&#x40;&#x70;&#x69;&#x70;&#112;&#111;&#46;&#105;&#116;</a> ha dominio pippo.it).</li>
-<li><strong>username</strong>: lo username per accedere alla casella di posta, nel nostro caso, <strong>IMPORTANTE</strong>, è l&#8217;intero indirizzo mail (quindi non luca, ma <a href="&#x6d;&#x61;&#105;&#x6c;&#x74;&#x6f;&#58;&#x6c;&#117;&#99;&#x61;&#x40;&#112;&#105;&#x70;&#x70;&#111;&#x2e;&#105;&#x74;">&#108;&#117;&#99;&#97;&#x40;&#x70;&#105;&#112;&#112;&#111;&#46;&#x69;&#x74;</a>). Questo perchè avendo mail con domini diversi dobbiano distinguerle in modo univoco.</li>
+<li><strong>domain</strong>: il dominio dell'indirizzo mail (per esempio <a href="&#109;&#97;&#x69;&#108;&#116;&#x6f;&#x3a;&#x6c;&#117;&#x63;&#97;&#x40;&#112;&#105;&#112;&#x70;&#x6f;&#x2e;&#x69;&#x74;">&#x6c;&#x75;&#x63;&#97;&#64;&#112;&#x69;&#x70;&#112;&#111;&#x2e;&#x69;&#x74;</a> ha dominio pippo.it).</li>
+<li><strong>username</strong>: lo username per accedere alla casella di posta, nel nostro caso, <strong>IMPORTANTE</strong>, è l'intero indirizzo mail (quindi non luca, ma <a href="&#109;&#x61;&#x69;&#108;&#116;&#x6f;&#58;&#x6c;&#x75;&#x63;&#x61;&#64;&#112;&#x69;&#x70;&#x70;&#111;&#46;&#105;&#x74;">&#108;&#x75;&#x63;&#97;&#64;&#112;&#105;&#x70;&#x70;&#x6f;&#46;&#105;&#116;</a>). Questo perchè avendo mail con domini diversi dobbiano distinguerle in modo univoco.</li>
 <li><strong>password</strong>: la password per accedere alla casella di posta. Vedremo che sarà criptata con AES.</li>
 <li><strong>quota</strong>: quota casella di posta.</li>
-<li><strong>active</strong>: l&#8217;account mail è attivo o disattivo.</li>
-<li><strong>admin</strong>: campo utile per verificare, magari da qualche app esterna, se l&#8217;utente può creare altri account.</li>
+<li><strong>active</strong>: l'account mail è attivo o disattivo.</li>
+<li><strong>admin</strong>: campo utile per verificare, magari da qualche app esterna, se l'utente può creare altri account.</li>
 </ul>
 
 
 <p>I campi della tabella <code>alias</code>:</p>
 
 <ul>
-<li><strong>address</strong>: indirizzo mail dell&#8217;alias.</li>
+<li><strong>address</strong>: indirizzo mail dell'alias.</li>
 <li><strong>goto</strong>: è alias di.</li>
-<li><strong>active</strong>: l&#8217;alias è attivo o disattivo.</li>
+<li><strong>active</strong>: l'alias è attivo o disattivo.</li>
 </ul>
 
 
@@ -1164,7 +1450,7 @@ $ chmod 770 /var/vmail
 $ chown mail.mail /var/vmail
 </code></pre>
 
-<p>Bene, in pratica la casella di posta per <a href="&#109;&#97;&#105;&#x6c;&#x74;&#x6f;&#x3a;&#x6c;&#x75;&#99;&#x61;&#x40;&#x70;&#105;&#x70;&#x70;&#111;&#46;&#x69;&#116;">&#x6c;&#x75;&#x63;&#97;&#x40;&#x70;&#105;&#112;&#x70;&#111;&#x2e;&#x69;&#116;</a> sarà in <code>/var/vmail/luca@pippo.it</code>. Essa verrà creata in automatico al primo login.</p>
+<p>Bene, in pratica la casella di posta per <a href="&#x6d;&#97;&#x69;&#108;&#116;&#111;&#58;&#108;&#117;&#99;&#97;&#x40;&#x70;&#x69;&#x70;&#x70;&#111;&#46;&#x69;&#x74;">&#x6c;&#x75;&#x63;&#x61;&#64;&#112;&#105;&#x70;&#112;&#111;&#46;&#105;&#116;</a> sarà in <code>/var/vmail/luca@pippo.it</code>. Essa verrà creata in automatico al primo login.</p>
 
 <h2>PASSO 3: configurazione Dovecot</h2>
 
@@ -1260,16 +1546,16 @@ auth default {
 <p>Adesso non entriamo nel dettaglio in quanto non ho voglia di star qua a scrivere, comunque due cosette sulle cose principali:</p>
 
 <ul>
-<li>La prima riga specifica i protocolli che vogliamo usare. Gli abilitiamo tutti per dare libertà totale ai nostri utenti. Mi raccomando di avere il certificato per il vostro dominio, nell&#8217;esempio per <code>mail.ciccio.com</code>.</li>
-<li><code>first_valid_uid</code> deve coincidere con uid dell&#8217;utente <code>mail</code>, solitamente 8. Per verificare lanciate il comando &ldquo;<code>id mail</code>&rdquo;.</li>
+<li>La prima riga specifica i protocolli che vogliamo usare. Gli abilitiamo tutti per dare libertà totale ai nostri utenti. Mi raccomando di avere il certificato per il vostro dominio, nell'esempio per <code>mail.ciccio.com</code>.</li>
+<li><code>first_valid_uid</code> deve coincidere con uid dell'utente <code>mail</code>, solitamente 8. Per verificare lanciate il comando &ldquo;<code>id mail</code>&rdquo;.</li>
 <li>Importante è la riga &ldquo;<code>mechanisms = login plain digest-md5 cram-md5
 </code>&rdquo; che specifica i meccanismi di autenticazione. Noi li abilitiamo tutti, sia quelli in chiaro che criptati in modo da permettere anche a client poco sofisticati (ad esempio quelli dei cellulari) di connettersi al nostro server. Mentre per client completi dare la possibilità di usare autenticazione cifrata (ad esempio Mozilla Thunderbird).</li>
-<li><code>userdb</code> e <code>passdb</code> vengono recuperati dall&#8217;altro file di configurazione.</li>
+<li><code>userdb</code> e <code>passdb</code> vengono recuperati dall'altro file di configurazione.</li>
 <li>Infine fondamentale la sezione <code>socket listen</code> che apre una socket per permettere ad altri programmi di usare il sistema di autenticazione di Dovecot, nel nostro caso Postfix.</li>
 </ul>
 
 
-<p>L&#8217;altro file di configurazione per il recupero degli utenti e delle password risulta essere una cosa del genere:</p>
+<p>L'altro file di configurazione per il recupero degli utenti e delle password risulta essere una cosa del genere:</p>
 
 <pre><code>driver = mysql
 connect = host=127.0.0.1 dbname=mail user=postfix password=password
@@ -1283,9 +1569,9 @@ password_query = SELECT username AS user, AES_DECRYPT(UNHEX(password),'AESKEY') 
 <ul>
 <li><code>driver</code> specifica che il database è MySQL.</li>
 <li><code>connect</code> info per la connessione al database.</li>
-<li><code>default_pass_scheme</code> usiamo PLAIN, infatti se diamo la possibilità di usare meccanismi di autenticazione in chiaro e non in chiaro (es plain e cram-md5) non c&#8217;è alternativa, non possiamo salvare la password in modo criptato per meccanismo PLAIN. Comunque niente paura, la password non sarà salvata in chiaro ma criptata con la funzione AES di mysql e trasformata da binario a text con la funzione HEX.</li>
-<li><code>user_query</code> è la query per recuperare l&#8217;utente. Da notare che uid e gid devono essere lo stesso dell&#8217;utente <code>mail</code> (<code>id mail</code>). Questa in realtà deve recuperare il path della maildir dell&#8217;utente, per questo c&#8217;è il <code>concat</code>.</li>
-<li><code>user_password</code> è la query per recuperare le password decriptandole usando una chiave (nell&#8217;esempio AESKEY).</li>
+<li><code>default_pass_scheme</code> usiamo PLAIN, infatti se diamo la possibilità di usare meccanismi di autenticazione in chiaro e non in chiaro (es plain e cram-md5) non c'è alternativa, non possiamo salvare la password in modo criptato per meccanismo PLAIN. Comunque niente paura, la password non sarà salvata in chiaro ma criptata con la funzione AES di mysql e trasformata da binario a text con la funzione HEX.</li>
+<li><code>user_query</code> è la query per recuperare l'utente. Da notare che uid e gid devono essere lo stesso dell'utente <code>mail</code> (<code>id mail</code>). Questa in realtà deve recuperare il path della maildir dell'utente, per questo c'è il <code>concat</code>.</li>
+<li><code>user_password</code> è la query per recuperare le password decriptandole usando una chiave (nell'esempio AESKEY).</li>
 </ul>
 
 
@@ -1392,7 +1678,7 @@ dovecot   unix  -       n       n       -       -       pipe
   flags=DRhu user=mail argv=/usr/lib/dovecot/deliver -n -f ${sender} -d ${recipient}
 </code></pre>
 
-<p>Non commentiamo, è molto simile a quello di default a parte un paio di modifiche, tra cui l&#8217;abilitazione del wrapper SSL su TLS.</p>
+<p>Non commentiamo, è molto simile a quello di default a parte un paio di modifiche, tra cui l'abilitazione del wrapper SSL su TLS.</p>
 
 <p>Il main.cf (2):</p>
 

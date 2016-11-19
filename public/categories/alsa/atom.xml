@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Categoria: alsa | programmer@work]]></title>
-  <link href="http://pioz.github.com/categories/alsa/atom.xml" rel="self"/>
-  <link href="http://pioz.github.com/"/>
-  <updated>2015-01-13T00:41:24+01:00</updated>
-  <id>http://pioz.github.com/</id>
+  <link href="http://blog.pioz.it/categories/alsa/atom.xml" rel="self"/>
+  <link href="http://blog.pioz.it/"/>
+  <updated>2016-11-19T04:39:07+01:00</updated>
+  <id>http://blog.pioz.it/</id>
   <author>
     <name><![CDATA[Pioz]]></name>
     
@@ -15,15 +15,15 @@
   
   <entry>
     <title type="html"><![CDATA[ALSA: Switch audio output to USB headset]]></title>
-    <link href="http://pioz.github.com/alsa-switch-audio-output-to-usb-headset"/>
+    <link href="http://blog.pioz.it/alsa-switch-audio-output-to-usb-headset"/>
     <updated>2014-09-17T13:31:00+02:00</updated>
-    <id>http://pioz.github.com/alsa-switch-audio-output-to-usb-headset</id>
+    <id>http://blog.pioz.it/alsa-switch-audio-output-to-usb-headset</id>
     <content type="html"><![CDATA[<p>Ho acquistato delle cuffie wireless USB, per essere preciso esattamente queste:
 <a href="http://www.amazon.it/gp/product/B005FY61MM">http://www.amazon.it/gp/product/B005FY61MM</a> . Sono molto comode e funzionano su
 Debian out-of-the-box ovvero senza installare alcun driver.</p>
 
 <p>Adesso nella mia Debian ho questo problema: vorrei che quando inserisco il
-ricevitore USB in automatico l&#8217;output di ALSA cambi dalla scheda audio integrata
+ricevitore USB in automatico l'output di ALSA cambi dalla scheda audio integrata
 alle cuffie wireless.</p>
 
 <p>Questo può essere fatto usando le regole di udev (udev è il gestore dei
@@ -31,7 +31,7 @@ dispositivi per il kernel Linux e amministra dinamicamente i dispositivi a
 blocchi per ogni periferica rilevata nel sistema).
 Iniziamo: apriamo il file <code>/etc/udev/rules.d/00-local.rules</code> e se non esiste lo
 creiamo; aggiungiamo le seguenti regole:
-&#8220;`</p>
+```</p>
 
 <h1>Set USB headset as default sound card when plugged in</h1>
 
@@ -45,7 +45,7 @@ In pratica quando viene inserito il ricevitore USB udev lo detecta e lancia
 uno script per cambiare il file</code>/etc/asound.conf` cambiando il device di output
 con quello delle cuffie appena inserite.</p>
 
-<p>L&#8217;unica pecca è che quando viene cambiato l&#8217;output di ALSA tutti i programmi che
+<p>L'unica pecca è che quando viene cambiato l'output di ALSA tutti i programmi che
 stanno usando ALSA devono essere riavviti. Se trovate un modo per risolvere
 questo problema fatemi sarepe!</p>
 ]]></content>

@@ -19,7 +19,7 @@ pc fisso che monta una Debian con una scheda video &hellip;">
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   
-  <link rel="canonical" href="http://pioz.github.com/configurare-piu-monitor-con-scheda-video-nvidia-e-xorg">
+  <link rel="canonical" href="http://blog.pioz.it/configurare-piu-monitor-con-scheda-video-nvidia-e-xorg">
   <link href="/favicon.png" rel="icon">
   <link href="/stylesheets/screen.css" media="screen, projection" rel="stylesheet" type="text/css">
   <link href="/atom.xml" rel="alternate" title="programmer@work" type="application/atom+xml">
@@ -65,7 +65,7 @@ pc fisso che monta una Debian con una scheda video &hellip;">
   
 <form action="http://google.com/search" method="get">
   <fieldset role="search">
-    <input type="hidden" name="sitesearch" value="pioz.github.com">
+    <input type="hidden" name="sitesearch" value="blog.pioz.it">
     <input class="search" type="text" name="q" results="0" placeholder="Search"/>
   </fieldset>
 </form>
@@ -101,14 +101,14 @@ pc fisso che monta una Debian con una scheda video &hellip;">
   </header>
 
 
-<div class="entry-content"><p>L&#8217;altro giorno mi sono trovato a configurare un dual monitor più connessione alla TV sul mio
+<div class="entry-content"><p>L'altro giorno mi sono trovato a configurare un dual monitor più connessione alla TV sul mio
 pc fisso che monta una Debian con una scheda video NVidia GeForce GTX 650.</p>
 
 <p>La configurazione che ho fatto è questa:</p>
 
 <ul>
-<li>monitor Samsung 24&#8221; come principale</li>
-<li>monitor QBel 19&#8221; a destra del monitor principale</li>
+<li>monitor Samsung 24" come principale</li>
+<li>monitor QBel 19" a destra del monitor principale</li>
 <li>TV che clona il monitor principale</li>
 </ul>
 
@@ -197,7 +197,7 @@ DVI-D-0 connected primary 1920x1080+0+0 (normal left inverted right x axis y axi
 DVI-D-1 disconnected (normal left inverted right x axis y axis)
 </code></pre>
 
-<p>In questo caso <code>DVI-D-0</code> è il monitor principale (24&#8221; Samsung), <code>VGA-0</code> è il monitor secondario (19&#8221; QBel) e <code>HDMI-0</code> è la TV.</p>
+<p>In questo caso <code>DVI-D-0</code> è il monitor principale (24" Samsung), <code>VGA-0</code> è il monitor secondario (19" QBel) e <code>HDMI-0</code> è la TV.</p>
 
 <p>Con questi dati possiamo iniziare a modificare il file <code>xorg.conf</code>. Nella sezione <code>Screen</code> aggiungiamo:</p>
 
@@ -210,13 +210,13 @@ Option         "metamodes" "DVI-D-0: nvidia-auto-select +0+0, VGA-0: 1280x1024 +
 <ul>
 <li>Ovvero abilitiamo il TwinView della nostra scheda NVidia.</li>
 <li>Diciamo che lo standard della TV è il PAL-B.</li>
-<li>Diciamo che il monitor principale è il <code>DVI-D-0</code>, ovvero il Samsung da 24&#8221;.</li>
+<li>Diciamo che il monitor principale è il <code>DVI-D-0</code>, ovvero il Samsung da 24".</li>
 <li>Disponiamo i vari monitor:
 
 <ul>
-<li>Il monitor <code>DVI-D-0</code> avrà risoluzione auto calcolata (1920x1080) e l&#8217;angolo top-left avrà coordinate 0,0</li>
-<li>Il monitor <code>VGA-0</code> avrà risoluzione 1280x1024 e l&#8217;angolo top-left avrà coordinate 1920,0 ovvero a destra del monitor principale infatti la larghezza del monitor principale (risoluzione orizzontale) è di 1920 pixel, quando termina inizia il monitor secondario.</li>
-<li>La TV invece <code>HDMI-0</code> avrà risoluzione 720x480 e l&#8217;angono top-left avrà coordinate 600,300 ovvero più o meno al centro del monitor principale.</li>
+<li>Il monitor <code>DVI-D-0</code> avrà risoluzione auto calcolata (1920x1080) e l'angolo top-left avrà coordinate 0,0</li>
+<li>Il monitor <code>VGA-0</code> avrà risoluzione 1280x1024 e l'angolo top-left avrà coordinate 1920,0 ovvero a destra del monitor principale infatti la larghezza del monitor principale (risoluzione orizzontale) è di 1920 pixel, quando termina inizia il monitor secondario.</li>
+<li>La TV invece <code>HDMI-0</code> avrà risoluzione 720x480 e l'angono top-left avrà coordinate 600,300 ovvero più o meno al centro del monitor principale.</li>
 </ul>
 </li>
 </ul>
@@ -246,7 +246,7 @@ Option         "metamodes" "DVI-D-0: nvidia-auto-select +0+0, VGA-0: 1280x1024 +
     
       <div class="sharing">
   
-  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://pioz.github.com/configurare-piu-monitor-con-scheda-video-nvidia-e-xorg" data-via="pioz" data-counturl="http://pioz.github.com/configurare-piu-monitor-con-scheda-video-nvidia-e-xorg" >Tweet</a>
+  <a href="//twitter.com/share" class="twitter-share-button" data-url="http://blog.pioz.it/configurare-piu-monitor-con-scheda-video-nvidia-e-xorg" data-via="pioz" data-counturl="http://blog.pioz.it/configurare-piu-monitor-con-scheda-video-nvidia-e-xorg" >Tweet</a>
   
   
   
@@ -257,7 +257,7 @@ Option         "metamodes" "DVI-D-0: nvidia-auto-select +0+0, VGA-0: 1280x1024 +
     
     <p class="meta">
       
-        <a class="basic-alignment left" href="/add-an-acts-as-method-to-active-record" title="Previous Post: Add an 'acts_as' method to Active Record">&laquo; Add an &#8216;acts_as&#8217; method to Active Record</a>
+        <a class="basic-alignment left" href="/add-an-acts-as-method-to-active-record" title="Previous Post: Add an 'acts_as' method to Active Record">&laquo; Add an 'acts_as' method to Active Record</a>
       
       
         <a class="basic-alignment right" href="/a-che-altezza-appendere-un-quadro" title="Next Post: A che altezza appendere un quadro?">A che altezza appendere un quadro? &raquo;</a>
@@ -275,23 +275,23 @@ Option         "metamodes" "DVI-D-0: nvidia-auto-select +0+0, VGA-0: 1280x1024 +
   <ul id="recent_posts">
     
       <li class="post">
-        <a href="/rubys-predefined-variables-data">Ruby&#8217;s predefined variables: DATA</a>
+        <a href="/world-of-warcraft-leaderboards-is-arena-pvp-balanced">World of Warcraft leaderboards: is arena PvP balanced?</a>
       </li>
     
       <li class="post">
-        <a href="/quanto-grande-e-luniverso">Quanto grande è l&#8217;universo?</a>
+        <a href="/il-numero-666">Il numero 666</a>
       </li>
     
       <li class="post">
-        <a href="/alsa-switch-audio-output-to-usb-headset">ALSA: Switch audio output to USB headset</a>
+        <a href="/ruby-module-include-vs-prepend">Ruby Module include vs prepend</a>
       </li>
     
       <li class="post">
-        <a href="/a-che-altezza-appendere-un-quadro">A che altezza appendere un quadro?</a>
+        <a href="/edit-git-last-commit">Edit git last commit</a>
       </li>
     
       <li class="post">
-        <a href="/configurare-piu-monitor-con-scheda-video-nvidia-e-xorg">Configurare più monitor con scheda video NVidia e Xorg</a>
+        <a href="/rubys-predefined-variables-data">Ruby's predefined variables: DATA</a>
       </li>
     
   </ul>
@@ -300,7 +300,7 @@ Option         "metamodes" "DVI-D-0: nvidia-auto-select +0+0, VGA-0: 1280x1024 +
 <section>
   <h1>GitHub Repos</h1>
   <ul id="gh_repos">
-    <li class="loading">Status updating&#8230;</li>
+    <li class="loading">Status updating...</li>
   </ul>
   
   <a href="https://github.com/pioz">@pioz</a> on GitHub
@@ -345,7 +345,7 @@ Option         "metamodes" "DVI-D-0: nvidia-auto-select +0+0, VGA-0: 1280x1024 +
     </div>
   </div>
   <footer role="contentinfo"><p>
-  Copyright &copy; 2015 - Pioz -
+  Copyright &copy; 2016 - Pioz -
   <span class="credit">Powered by <a href="http://octopress.org">Octopress</a></span>
 </p>
 

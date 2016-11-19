@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Categoria: streaming | programmer@work]]></title>
-  <link href="http://pioz.github.com/categories/streaming/atom.xml" rel="self"/>
-  <link href="http://pioz.github.com/"/>
-  <updated>2015-01-13T00:41:24+01:00</updated>
-  <id>http://pioz.github.com/</id>
+  <link href="http://blog.pioz.it/categories/streaming/atom.xml" rel="self"/>
+  <link href="http://blog.pioz.it/"/>
+  <updated>2016-11-19T04:39:07+01:00</updated>
+  <id>http://blog.pioz.it/</id>
   <author>
     <name><![CDATA[Pioz]]></name>
     
@@ -15,10 +15,10 @@
   
   <entry>
     <title type="html"><![CDATA[Streaming di Radio 105 e Virgin radio]]></title>
-    <link href="http://pioz.github.com/streaming-radio-105-virgin-radio"/>
+    <link href="http://blog.pioz.it/streaming-radio-105-virgin-radio"/>
     <updated>2010-02-24T21:22:00+01:00</updated>
-    <id>http://pioz.github.com/streaming-radio-105-virgin-radio</id>
-    <content type="html"><![CDATA[<p>L&#8217;URL per ascoltare in streaming Radio 105 è</p>
+    <id>http://blog.pioz.it/streaming-radio-105-virgin-radio</id>
+    <content type="html"><![CDATA[<p>L'URL per ascoltare in streaming Radio 105 è</p>
 
 <pre><code>http://shoutcast.unitedradio.it:1101
 </code></pre>

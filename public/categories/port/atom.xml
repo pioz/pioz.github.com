@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
 
   <title><![CDATA[Categoria: port | programmer@work]]></title>
-  <link href="http://pioz.github.com/categories/port/atom.xml" rel="self"/>
-  <link href="http://pioz.github.com/"/>
-  <updated>2015-01-13T00:41:24+01:00</updated>
-  <id>http://pioz.github.com/</id>
+  <link href="http://blog.pioz.it/categories/port/atom.xml" rel="self"/>
+  <link href="http://blog.pioz.it/"/>
+  <updated>2016-11-19T04:39:07+01:00</updated>
+  <id>http://blog.pioz.it/</id>
   <author>
     <name><![CDATA[Pioz]]></name>
     
@@ -15,12 +15,12 @@
   
   <entry>
     <title type="html"><![CDATA[Gestire differenti versioni di gcc su OSX]]></title>
-    <link href="http://pioz.github.com/gestire-differenti-versioni-di-gcc-su-osx"/>
+    <link href="http://blog.pioz.it/gestire-differenti-versioni-di-gcc-su-osx"/>
     <updated>2013-03-27T20:56:00+01:00</updated>
-    <id>http://pioz.github.com/gestire-differenti-versioni-di-gcc-su-osx</id>
+    <id>http://blog.pioz.it/gestire-differenti-versioni-di-gcc-su-osx</id>
     <content type="html"><![CDATA[<p>Vediamo in questo post come gestire differenti versioni di gcc su Mac OS X con port.</p>
 
-<p>La storia è molto semplice grazie all&#8217;utility <code>gcc_select</code> che installiamo nel seguente modo:</p>
+<p>La storia è molto semplice grazie all'utility <code>gcc_select</code> che installiamo nel seguente modo:</p>
 
 <pre><code>$ sudo port install gcc_select
 </code></pre>
