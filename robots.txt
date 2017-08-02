@@ -1,4 +1,4 @@
 User-agent: *
 Disallow: 
 
-Sitemap: http://pioz.github.com/sitemap.xml 
+Sitemap: http://blog.pioz.it/sitemap.xml 

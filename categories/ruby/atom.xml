@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Categoria: ruby | programmer@work]]></title>
+  <link href="http://blog.pioz.it/categories/ruby/atom.xml" rel="self"/>
+  <link href="http://blog.pioz.it/"/>
+  <updated>2017-08-02T22:39:46+02:00</updated>
+  <id>http://blog.pioz.it/</id>
+  <author>
+    <name><![CDATA[Pioz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby Module include vs prepend]]></title>
+    <link href="http://blog.pioz.it/ruby-module-include-vs-prepend"/>
+    <updated>2015-01-15T15:15:18+01:00</updated>
+    <id>http://blog.pioz.it/ruby-module-include-vs-prepend</id>
+    <content type="html"><![CDATA[<p>Oggi cerchiamo di capire un po' meglio la differenza tra i metodi <code>Module#include</code> e <code>Module#prepend</code>.
+Vediamo la differenza con un esempio mooolto semplice:</p>
+
+<pre><code>class Person
+  def name
+    # return name here
+    puts 'Call method name in class Person'
+  end
+end
+
+module Superhero
+  def fly
+    # fly here
+    puts 'Call method fly in module Superhero'
+  end
+
+  def name
+    # return name here
+    puts 'Call method name in module Superhero'
+  end
+end
+
+Person.include(Superhero)
+
+Person.new.name
+</code></pre>
+
+<p>Cosa abbiamo fatto? Allora abbiamo la classe <code>Person</code> con un metodo <code>name</code>. Poi
+abbiamo il modulo <code>Superhero</code> con due metodi: <code>fly</code> e <code>name</code>. Notare a questo
+punto che sia la classe <code>Person</code> che il modulo <code>Superhero</code> hanno entrambi un
+metodo che si chiama <code>name</code>. Ora andiamo a mixare la classe <code>Person</code> con il
+modulo <code>Superhero</code> usando il metodo <code>include</code>. Se invochiamo il metodo <code>name</code> su
+un oggetto di tipo <code>Person</code> vedremo che viene chiamato il metodo definito dentro
+la classe <code>Person</code> e non quello definito nel modulo <code>Superhero</code>.   Questo ci
+potrebbe anche andare bene, ma a volte vorremmo che quando facciamo questo tipo
+di operazione i metodi del modulo che mixiamo sovrascrivessero (override) i
+metodi della classe, come succede quando estendiamo una classe. Per ottenere
+questo usiamo il metodo <code>prepend</code> al posto di <code>include</code> disponibile dalla
+versione 2 di Ruby.</p>
+
+<pre><code>Person.prepend(Superhero)
+
+Person.new.name
+</code></pre>
+
+<p>Adesso vediamo che viene invocato il metodo <code>name</code> definito nel modulo <code>Superhero</code>.</p>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby's predefined variables: DATA]]></title>
+    <link href="http://blog.pioz.it/rubys-predefined-variables-data"/>
+    <updated>2015-01-13T00:09:44+01:00</updated>
+    <id>http://blog.pioz.it/rubys-predefined-variables-data</id>
+    <content type="html"><![CDATA[<p>Ho scoperto da poco che tra le variabili predefiniti di Ruby ne esiste una che
+si chiama <code>DATA</code>. È molto interessante.<br/>
+In un file sorgente Ruby tutto quello che segue <code>__END__</code> diventa una specie
+di file virtuale e può essere letto appunto tramite la variabile predefinita
+<code>DATA</code>.
+Ecco un esempio:</p>
+
+<pre><code>puts DATA.read.split("\n")
+__END__
+tomatoes
+potatoes
+milk
+beer
+salt
+beer again
+</code></pre>
+]]></content>
+  </entry>
+  
+  <entry>
+    <title type="html"><![CDATA[Chiamate ricorsive Ruby vs Python]]></title>
+    <link href="http://blog.pioz.it/chiamate-ricorsive-ruby-vs-python"/>
+    <updated>2012-08-03T21:27:00+02:00</updated>
+    <id>http://blog.pioz.it/chiamate-ricorsive-ruby-vs-python</id>
+    <content type="html"><![CDATA[<p>Facciamo un piccolo test: calcoliamo Fibonacci ricorsivamente in Ruby (v2.0.0) e in Python (v2.7.2) e vediamo chi vince in termini di tempo</p>
+
+<p>Ruby Fibonacci code (<code>f.rb</code>)</p>
+
+<pre><code>def fib(n)
+  if n == 0 || n == 1
+    n
+  else
+    fib(n-1) + fib(n-2)
+  end
+end
+
+36.times { |i| fib(i) }
+</code></pre>
+
+<p>Python Fibonacci code (<code>f.py</code>)</p>
+
+<pre><code>def fib(n):
+  if n == 0 or n == 1:
+    return n
+  else:
+    return fib(n-1) + fib(n-2)
+
+for i in range(36):
+  fib(i)
+</code></pre>
+
+<p>Ora lanciamo i due programmi nel seguente modo:</p>
+
+<pre><code>$ time ruby f.rb &amp;&amp; time python f.py
+real  0m4.795s
+user  0m4.787s
+sys   0m0.007s
+
+real  0m12.935s
+user  0m12.849s
+sys   0m0.049s
+</code></pre>
+
+<p>Ecco Ruby impiega <strong>4.795</strong> secondi mentre Python <strong>12.935</strong> secondi!</p>
+
+<p><strong>Ruby vince nettamente su Python!!</strong></p>
+
+<p>Oh beh provate però questo codice in C (<code>f.c</code>):</p>
+
+<pre><code>int
+fib (int n)
+{
+  if (n == 0 || n == 1)
+    return n;
+  else
+    return fib (n-1) + fib (n-2);
+}
+
+int
+main ()
+{
+  int i;
+  for (i = 0; i &lt; 36; i++)
+    fib (i);
+}
+</code></pre>
+
+<p>Compiliamo:</p>
+
+<pre><code> gcc f.c
+</code></pre>
+
+<p>Ed eseguiamo:</p>
+
+<pre><code>$ time ./a.out
+real  0m0.232s
+user  0m0.229s
+sys   0m0.003s
+</code></pre>
+
+<p>0.232 secondi!</p>
+]]></content>
+  </entry>
+  
+</feed>

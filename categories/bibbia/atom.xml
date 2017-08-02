@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Categoria: bibbia | programmer@work]]></title>
+  <link href="http://blog.pioz.it/categories/bibbia/atom.xml" rel="self"/>
+  <link href="http://blog.pioz.it/"/>
+  <updated>2017-08-02T22:39:46+02:00</updated>
+  <id>http://blog.pioz.it/</id>
+  <author>
+    <name><![CDATA[Pioz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Il numero 666]]></title>
+    <link href="http://blog.pioz.it/il-numero-666"/>
+    <updated>2015-03-26T23:26:44+01:00</updated>
+    <id>http://blog.pioz.it/il-numero-666</id>
+    <content type="html"><![CDATA[<p>Oggi vi voglio parlare di qualcosa di diverso dall'informatica, qualcosa di
+carattere storico, biblico. Parliamo del famoso numero 666. Tanti lo
+associano al diavolo, ma in realtà si riferisce ad una persona.
+Vediamo questo breve passo dell'Apocalisse di San Giovanni (Ap 13,16-18):</p>
+
+<blockquote><p>Faceva sì che tutti, piccoli e grandi, ricchi e poveri, liberi e schiavi
+ricevessero un marchio sulla mano destra e sulla fronte; e che nessuno
+potesse comprare o vendere senza avere tale marchio, cioè il nome della
+bestia o il numero del suo nome. Qui sta la sapienza. Chi ha intelligenza
+calcoli il numero della bestia: essa rappresenta un nome d'uomo. E tal cifra
+è seicentosessantasei.</p></blockquote>
+
+<p>Parafrasando: quest'uomo faceva in modo che tutti, piccoli e grandi, ricchi
+e poveri, liberi e schiavi venissero plagiati nel lavoro e nella mente, nel
+pensiero; e che nessuno potesse vivere senza essere plagiato (nessuno è più
+libero). E qui sta la sapienza, nel capire chi è il male. Chi è intelligente
+calcoli il numero della bestia: questa bestia è un uomo malvagio. E questo
+numero è il 666.</p>
+
+<p>Si pensa che questo uomo sia l'imperatore romano Cesare Nerone che era al
+potere nei primi anni dopo la morte di Cristo; si pensa infatti che il
+numero 666 non sia altro che il multigramma di calaba ebraica, un modo per
+scrivere le lettere con i numeri; infatti come in greco antico, così anche
+in alfabeto ebraico i numeri venivano scritti usando le lettere, secondo,
+appunto la cabala ebraica. Prendendo dunque le consonanti del nome <strong>QeSaR
+NeRON</strong> (קסר נרון) si ha:</p>
+
+<pre><code>Q (qof)     = 100
+S (sameckh) = 60
+R (resh)    = 200
+N (nun)     = 50
+R (resh)    = 200
+O (waw)     = 6
+N (nun)     = 50
+</code></pre>
+
+<p>se sommiamo le cifre otteniamo il numero 666 (la vocale O è in realtà legata
+alla consonante W che è una <em>mater lectionis</em>, cioè una consonante che
+serviva a evitare equivoci nella lettura). Ovviamente questa è un'ipotesi
+degli studiosi, infatti la gematria (cioè l'utilizzo della corrispondenza
+fra numeri e lettere dell'alfabeto ebraico, greco o latino) può produrre
+molti risultati diversi e costituisce più un gioco intellettuale che uno
+strumento d'indagine.</p>
+
+<p>Comunque quello che mi preme dire è che Nerone era in quel tempo il capo
+dell'Impero Romano dove girava tutta l'economia e il denaro. Quindi mi vien
+da pensare che la &ldquo;bestia&rdquo;, il male, che solo i sapienti riusciranno a
+riconoscere, è il denaro.</p>
+]]></content>
+  </entry>
+  
+</feed>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Categoria: git | programmer@work]]></title>
+  <link href="http://blog.pioz.it/categories/git/atom.xml" rel="self"/>
+  <link href="http://blog.pioz.it/"/>
+  <updated>2017-08-02T22:39:46+02:00</updated>
+  <id>http://blog.pioz.it/</id>
+  <author>
+    <name><![CDATA[Pioz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Edit git last commit]]></title>
+    <link href="http://blog.pioz.it/edit-git-last-commit"/>
+    <updated>2015-01-13T14:44:28+01:00</updated>
+    <id>http://blog.pioz.it/edit-git-last-commit</id>
+    <content type="html"><![CDATA[<p>Oggi mi è capitato questa situazione mentre stavo fixando una issue di
+<a href="https://github.com/pioz/chess">Chess</a>, una mia gemma per Ruby su github: in
+pratica ho fixato il problema e ho fatto un commit <code>git commit -am "fix issue
+bla bla"</code>. Mi sono poi accorto che non ho aumentato il numero di versione della
+gemma e che quindi non potevo pusharla su Rubygems. A questo punto potevo
+modificare il numero di versione e fare un secondo commit, ma questo non mi
+andava, mi sarebbe piaciuto modificare l'ultimo commit e includere la modifica
+del file <code>version.rb</code>.<br/>
+Come fare? Facciamo la nostra modifica al file <code>version.rb</code> aumentando la
+versione della gemma e committiamo il tutto con il comando:</p>
+
+<pre><code>git commit -a --amend --no-edit
+</code></pre>
+
+<p>Bene! Abbiamo modificato l'ultimo commit. Ultima cosa da aggiungere: se avevate
+già fatto il push dell'ultimo commit lo SHA-1 di questo sarà cambiato dopo
+questa operazione e quindi bisognerà pushare le modifiche usando l'opzione
+<code>--force</code></p>
+
+<pre><code>git push -f  
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

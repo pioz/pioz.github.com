@@ -1,81 +1,196 @@
-<?xml version='1.0' encoding='UTF-8'?>
-<urlset xmlns='http://www.sitemaps.org/schemas/sitemap/0.9'>
-    <url>
-        <loc>
-            http://pioz.github.com/blog/2009/12/11/configurare-multi-domain-mail-server-postfix-dovecot/
-        </loc>
-        <lastmod>2014-01-25T13:02:30+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://pioz.github.com/blog/2010/02/24/streaming-radio-105-virgin-radio/</loc>
-        <lastmod>2014-01-25T13:02:30+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://pioz.github.com/blog/2010/06/08/youtube2flv/</loc>
-        <lastmod>2014-01-25T13:02:30+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://pioz.github.com/blog/2010/07/21/tasti-home-end-terminale-osx/</loc>
-        <lastmod>2014-01-25T13:02:30+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://pioz.github.com/blog/2011/02/25/script-run-apache-solr/</loc>
-        <lastmod>2014-01-25T13:02:30+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://pioz.github.com/blog/2012/07/27/colori-nella-shell/</loc>
-        <lastmod>2014-01-25T13:02:30+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://pioz.github.com/blog/2012/08/03/chiamate-ricorsive-ruby-vs-python/</loc>
-        <lastmod>2014-01-25T13:02:30+01:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://pioz.github.com/blog/2013/03/27/gestire-differenti-versioni-di-gcc-su-osx/
-        </loc>
-        <lastmod>2014-01-25T13:02:30+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://pioz.github.com/blog/2013/03/27/mini-guida-su-xen-e-debian/</loc>
-        <lastmod>2014-01-25T13:02:30+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://pioz.github.com/blog/2013/06/14/add-an-acts-as-method-to-active-record/</loc>
-        <lastmod>2014-12-27T17:41:44+01:00</lastmod>
-    </url>
-    <url>
-        <loc>
-            http://pioz.github.com/blog/2014/01/25/configurare-piu-monitor-con-scheda-video-nvidia-e-xorg/
-        </loc>
-        <lastmod>2014-01-25T13:52:19+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://pioz.github.com/blog/2014/07/22/a-che-altezza-appendere-un-quadro/</loc>
-        <lastmod>2014-12-27T17:41:44+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://pioz.github.com/blog/2014/09/17/alsa-switch-audio-output-to-usb-headset/</loc>
-        <lastmod>2014-12-27T17:41:44+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://pioz.github.com/blog/2014/12/27/quanto-grande-e-luniverso/</loc>
-        <lastmod>2014-12-28T01:31:36+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://pioz.github.com/about/</loc>
-        <lastmod>2014-01-25T13:02:30+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://pioz.github.com/blog/archives/</loc>
-        <lastmod>2014-12-28T01:31:36+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://pioz.github.com/</loc>
-        <lastmod>2014-12-28T01:31:36+01:00</lastmod>
-    </url>
-    <url>
-        <loc>http://pioz.github.com/robots.txt</loc>
-        <lastmod>2014-01-25T13:02:30+01:00</lastmod>
-    </url>
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+<url>
+<loc>http://blog.pioz.it/world-of-warcraft-leaderboards-is-arena-pvp-balanced</loc>
+<lastmod>2016-11-19T04:04:39+01:00</lastmod>
+</url>
+<url>
+<loc>http://blog.pioz.it/il-numero-666</loc>
+<lastmod>2015-03-26T23:26:44+01:00</lastmod>
+</url>
+<url>
+<loc>http://blog.pioz.it/ruby-module-include-vs-prepend</loc>
+<lastmod>2015-01-15T15:15:18+01:00</lastmod>
+</url>
+<url>
+<loc>http://blog.pioz.it/edit-git-last-commit</loc>
+<lastmod>2015-01-13T14:44:28+01:00</lastmod>
+</url>
+<url>
+<loc>http://blog.pioz.it/rubys-predefined-variables-data</loc>
+<lastmod>2015-01-13T00:09:44+01:00</lastmod>
+</url>
+<url>
+<loc>http://blog.pioz.it/quanto-grande-e-luniverso</loc>
+<lastmod>2014-12-27T17:44:00+01:00</lastmod>
+</url>
+<url>
+<loc>http://blog.pioz.it/alsa-switch-audio-output-to-usb-headset</loc>
+<lastmod>2014-09-17T13:31:00+02:00</lastmod>
+</url>
+<url>
+<loc>http://blog.pioz.it/a-che-altezza-appendere-un-quadro</loc>
+<lastmod>2014-07-22T14:57:00+02:00</lastmod>
+</url>
+<url>
+<loc>http://blog.pioz.it/configurare-piu-monitor-con-scheda-video-nvidia-e-xorg</loc>
+<lastmod>2014-01-25T13:04:00+01:00</lastmod>
+</url>
+<url>
+<loc>http://blog.pioz.it/add-an-acts-as-method-to-active-record</loc>
+<lastmod>2013-06-14T16:03:00+02:00</lastmod>
+</url>
+<url>
+<loc>http://blog.pioz.it/mini-guida-su-xen-e-debian</loc>
+<lastmod>2013-03-27T21:12:00+01:00</lastmod>
+</url>
+<url>
+<loc>http://blog.pioz.it/gestire-differenti-versioni-di-gcc-su-osx</loc>
+<lastmod>2013-03-27T20:56:00+01:00</lastmod>
+</url>
+<url>
+<loc>http://blog.pioz.it/chiamate-ricorsive-ruby-vs-python</loc>
+<lastmod>2012-08-03T21:27:00+02:00</lastmod>
+</url>
+<url>
+<loc>http://blog.pioz.it/colori-nella-shell</loc>
+<lastmod>2012-07-27T21:43:00+02:00</lastmod>
+</url>
+<url>
+<loc>http://blog.pioz.it/script-run-apache-solr</loc>
+<lastmod>2011-02-25T21:40:00+01:00</lastmod>
+</url>
+<url>
+<loc>http://blog.pioz.it/tasti-home-end-terminale-osx</loc>
+<lastmod>2010-07-21T21:35:00+02:00</lastmod>
+</url>
+<url>
+<loc>http://blog.pioz.it/youtube2flv</loc>
+<lastmod>2010-06-08T21:24:00+02:00</lastmod>
+</url>
+<url>
+<loc>http://blog.pioz.it/streaming-radio-105-virgin-radio</loc>
+<lastmod>2010-02-24T21:22:00+01:00</lastmod>
+</url>
+<url>
+<loc>http://blog.pioz.it/configurare-multi-domain-mail-server-postfix-dovecot</loc>
+<lastmod>2009-12-11T10:22:00+01:00</lastmod>
+</url>
+<url>
+<loc>http://blog.pioz.it/archives/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/blog/archives/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/about/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/mail/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/mailserver/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/debian/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/linux/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/mysql/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/dovecot/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/postfix/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/streaming/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/youtube/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/flv/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/convert/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/osx/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/apache/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/daemon/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/solr/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/shell/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/ruby/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/python/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/c/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/gcc/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/port/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/xen/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/vm/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/macchine-virtuali/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/os/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/home/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/alsa/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/universe/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/questions/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/git/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/modules/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/bibbia/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/altro/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/games/</loc>
+</url>
+<url>
+<loc>http://blog.pioz.it/categories/world-of-warcraft/</loc>
+</url>
 </urlset>

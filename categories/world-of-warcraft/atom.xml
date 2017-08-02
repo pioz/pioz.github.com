@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Categoria: world of warcraft | programmer@work]]></title>
+  <link href="http://blog.pioz.it/categories/world-of-warcraft/atom.xml" rel="self"/>
+  <link href="http://blog.pioz.it/"/>
+  <updated>2017-08-02T22:39:46+02:00</updated>
+  <id>http://blog.pioz.it/</id>
+  <author>
+    <name><![CDATA[Pioz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[World of Warcraft leaderboards: is arena PvP balanced?]]></title>
+    <link href="http://blog.pioz.it/world-of-warcraft-leaderboards-is-arena-pvp-balanced"/>
+    <updated>2016-11-19T04:04:39+01:00</updated>
+    <id>http://blog.pioz.it/world-of-warcraft-leaderboards-is-arena-pvp-balanced</id>
+    <content type="html"><![CDATA[<p>I&rsquo;ve created a little script in Ruby to grab some data from the World of
+Warcraft 2v2 and 3v3 PvP leaderboards. On <a href="https://gist.github.com/pioz/479f6be0a53900f554b8d6a15828e040">Github</a>
+you can find the source code of the script:</p>
+
+<p><div><script src='https://gist.github.com/479f6be0a53900f554b8d6a15828e040.js'></script>
+<noscript><pre><code>require &#39;nokogiri&#39;
+require &#39;open-uri&#39;
+require &#39;gruff&#39;
+
+# Extend Pie chart class to set custom labels
+class LabeledPie &lt; Gruff::Pie
+  def data(name, data_points = [], options = {})
+    super(name, data_points, options[:color])
+    @data.each { |data_array| data_array &lt;&lt; options[:label] }
+  end
+  private
+  def slice_class
+    CustomLabeledSlice
+  end
+  class CustomLabeledSlice &lt; ::Gruff::Pie::PieSlice
+    def label
+      data_array[3] || super
+    end
+  end
+end
+
+# URL where we grab the data
+url = &#39;https://worldofwarcraft.com/en-gb/game/pvp/leaderboards&#39;
+
+# Wow Class colors
+COLORS = {
+    mage: &#39;#68ccef&#39;,
+    monk: &#39;#00ffba&#39;,
+    priest: &#39;#ffffff&#39;,
+    warlock: &#39;#9382c9&#39;,
+    deathknight: &#39;#c41e3b&#39;,
+    paladin: &#39;#f48cba&#39;,
+    warrior: &#39;#c69b6d&#39;,
+    rogue: &#39;#fff468&#39;,
+    shaman: &#39;#2359ff&#39;,
+    druid: &#39;#ff7c0a&#39;,
+    demonhunter: &#39;#a330c9&#39;,
+    hunter: &#39;#aad372&#39;
+  }
+
+%w(2v2 3v3).each do |arena|
+
+  # Plus 1 the counter when we found the wow class in the leaderboard
+  counters = {
+    mage: 0,
+    monk: 0,
+    priest: 0,
+    warlock: 0,
+    deathknight: 0,
+    paladin: 0,
+    warrior: 0,
+    rogue: 0,
+    shaman: 0,
+    druid: 0,
+    demonhunter: 0,
+    hunter: 0
+  }
+  tot = 0
+
+  # Parse the 10 pages of the leaderboard
+  10.times do |i|
+    doc = Nokogiri::HTML(open(&quot;#{url}/#{arena}?page=#{i+1}&quot;))
+    doc.search(&#39;a.Character&#39;).each do |row|
+      counters.each do |klass, count|
+        if row[:class].downcase.include?(klass.to_s)
+          counters[klass] += 1
+          tot += 1
+          break
+        end
+      end
+    end
+  end
+
+  # Sort counters
+  counters = counters.sort{|x, y| y[1] &lt;=&gt; x[1]}
+
+  # Generate pie graph
+  g = LabeledPie.new
+  g.title = &quot;Stats #{arena} updated at #{Time.now.strftime(&#39;%d/%m/%Y&#39;)} for\nthe first #{tot} best EU players&quot;
+  g.legend_font_size = 14
+  g.marker_font_size = 12
+  g.colors = []
+  counters.each { |klass, counter| g.colors &lt;&lt; COLORS[klass] }
+  counters.each do |klass, counter|
+    g.data(klass.to_s.capitalize, counter, label: &quot;#{klass.to_s.capitalize}: #{(counter*100.0/tot).round}% (#{counter})&quot;)
+  end
+  g.write(&quot;stats_#{arena}.png&quot;)
+
+end
+</code></pre></noscript></div>
+</p>
+
+<p>This script parse these leaderboards pages
+<a href="https://worldofwarcraft.com/en-gb/game/pvp/leaderboards/2v2">https://worldofwarcraft.com/en-gb/game/pvp/leaderboards/2v2</a>
+and count for every class the number of players. Then generate a pie graph to
+see which classes are most frequent in the leaderboards.</p>
+
+<p>If you run the script with the command <code>ruby wowpvpstats.rb</code> after few seconds
+you can find two png images like these:</p>
+
+<p><img src="/images/posts/stats_2v2.png" alt="2v2 graph" /></p>
+
+<p>and</p>
+
+<p><img src="/images/posts/stats_3v3.png" alt="3v3 graph" /></p>
+
+<p>Now you can easily see which classes are more present in the leaderboards:
+<em>druids</em>, <em>shamans</em> and <em>monks</em> dominate the leaderboard while <em>mages</em> and
+<em>hunters</em> suck. So, what do you think? Is this PvP balanced?</p>
+]]></content>
+  </entry>
+  
+</feed>

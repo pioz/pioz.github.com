@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Categoria: shell | programmer@work]]></title>
+  <link href="http://blog.pioz.it/categories/shell/atom.xml" rel="self"/>
+  <link href="http://blog.pioz.it/"/>
+  <updated>2017-08-02T22:39:46+02:00</updated>
+  <id>http://blog.pioz.it/</id>
+  <author>
+    <name><![CDATA[Pioz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Colori nella shell]]></title>
+    <link href="http://blog.pioz.it/colori-nella-shell"/>
+    <updated>2012-07-27T21:43:00+02:00</updated>
+    <id>http://blog.pioz.it/colori-nella-shell</id>
+    <content type="html"><![CDATA[<p>Per colorare una string nella shell possiamo usare questo template:</p>
+
+<pre><code>\033[CODE1;CODE2;CODE3mTESTO\033[0m
+</code></pre>
+
+<p>CODE1 possono essere una serie di valori che alterano lo stile del testo, di seguito una tabella:</p>
+
+<ul>
+<li><code>0</code> Normal Characters</li>
+<li><code>1</code> Bold Characters</li>
+<li><code>4</code> Underlined Characters</li>
+<li><code>5</code> Blinking Characters</li>
+<li><code>7</code> Reverse video Characters</li>
+</ul>
+
+
+<p>CODE2 invece rappresenta il colore, di seguito una tabella:</p>
+
+<ul>
+<li><code>30</code> Black</li>
+<li><code>31</code> Red</li>
+<li><code>32</code> Green</li>
+<li><code>33</code> Yellow</li>
+<li><code>34</code> Blue</li>
+<li><code>35</code> Magenta</li>
+<li><code>36</code> Cyan</li>
+<li><code>37</code> White</li>
+</ul>
+
+
+<p>CODE3 rappresenta il colore di sfondo del testo, di seguito una tabella:</p>
+
+<ul>
+<li><code>40</code> Black</li>
+<li><code>41</code> Red</li>
+<li><code>42</code> Green</li>
+<li><code>43</code> Yellow</li>
+<li><code>44</code> Blue</li>
+<li><code>45</code> Magenta</li>
+<li><code>46</code> Cyan</li>
+<li><code>47</code> White</li>
+</ul>
+
+
+<p>Per resettare il testo allo stile di default usare il carattere <code>\033[0m</code>.</p>
+
+<p>Alcuni esempi:</p>
+
+<pre><code>echo -e "\033[31mQUESTO TESTO SARA STAMPATO IN ROSSO\033[0m"
+echo -e "\033[1;36mQUESTO TESTO SARA STAMPATO IN GROSSETTO E COLOR CIANO\033[0m"
+echo -e "\033[1;35;47mQUESTO TESTO SARA STAMPATO IN GROSSETTO E COLOR MAGENTA SU SFONDO BIANCO\033[0m"
+</code></pre>
+]]></content>
+  </entry>
+  
+</feed>

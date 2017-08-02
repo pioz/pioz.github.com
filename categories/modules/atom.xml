@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+  <title><![CDATA[Categoria: modules | programmer@work]]></title>
+  <link href="http://blog.pioz.it/categories/modules/atom.xml" rel="self"/>
+  <link href="http://blog.pioz.it/"/>
+  <updated>2017-08-02T22:39:46+02:00</updated>
+  <id>http://blog.pioz.it/</id>
+  <author>
+    <name><![CDATA[Pioz]]></name>
+    
+  </author>
+  <generator uri="http://octopress.org/">Octopress</generator>
+
+  
+  <entry>
+    <title type="html"><![CDATA[Ruby Module include vs prepend]]></title>
+    <link href="http://blog.pioz.it/ruby-module-include-vs-prepend"/>
+    <updated>2015-01-15T15:15:18+01:00</updated>
+    <id>http://blog.pioz.it/ruby-module-include-vs-prepend</id>
+    <content type="html"><![CDATA[<p>Oggi cerchiamo di capire un po' meglio la differenza tra i metodi <code>Module#include</code> e <code>Module#prepend</code>.
+Vediamo la differenza con un esempio mooolto semplice:</p>
+
+<pre><code>class Person
+  def name
+    # return name here
+    puts 'Call method name in class Person'
+  end
+end
+
+module Superhero
+  def fly
+    # fly here
+    puts 'Call method fly in module Superhero'
+  end
+
+  def name
+    # return name here
+    puts 'Call method name in module Superhero'
+  end
+end
+
+Person.include(Superhero)
+
+Person.new.name
+</code></pre>
+
+<p>Cosa abbiamo fatto? Allora abbiamo la classe <code>Person</code> con un metodo <code>name</code>. Poi
+abbiamo il modulo <code>Superhero</code> con due metodi: <code>fly</code> e <code>name</code>. Notare a questo
+punto che sia la classe <code>Person</code> che il modulo <code>Superhero</code> hanno entrambi un
+metodo che si chiama <code>name</code>. Ora andiamo a mixare la classe <code>Person</code> con il
+modulo <code>Superhero</code> usando il metodo <code>include</code>. Se invochiamo il metodo <code>name</code> su
+un oggetto di tipo <code>Person</code> vedremo che viene chiamato il metodo definito dentro
+la classe <code>Person</code> e non quello definito nel modulo <code>Superhero</code>.   Questo ci
+potrebbe anche andare bene, ma a volte vorremmo che quando facciamo questo tipo
+di operazione i metodi del modulo che mixiamo sovrascrivessero (override) i
+metodi della classe, come succede quando estendiamo una classe. Per ottenere
+questo usiamo il metodo <code>prepend</code> al posto di <code>include</code> disponibile dalla
+versione 2 di Ruby.</p>
+
+<pre><code>Person.prepend(Superhero)
+
+Person.new.name
+</code></pre>
+
+<p>Adesso vediamo che viene invocato il metodo <code>name</code> definito nel modulo <code>Superhero</code>.</p>
+]]></content>
+  </entry>
+  
+</feed>
